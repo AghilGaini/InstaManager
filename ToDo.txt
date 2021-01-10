@@ -1,3 +1,12 @@
 1-Save UserName in lower case
 2-Profile Picture
 3-Reade All Words from reasource
+4-Complete Design of Default page
+5-Profile picture to show in default page
+6-Login with instagram service(in web)
+7-Set Cockies for remeber pages and Login Session
+8-
+
+Ali:
+1-if user Change his Password what happend ? 
+2-Password and UserName Save Clear Text!

@@ -1,0 +1,28 @@
+.LoginPanelStyle {
+    margin-top: 5%;
+    margin-left: 5%;
+    margin-right: 5%;
+}
+.LoginPanelInputColumnStyle {
+    padding-left: 10%;
+    padding-right: 10%;
+}
+.LoginPanelInputRowStyle {
+    margin-top: 1%;
+}
+.LoginPanelSubmitRow {
+    margin-top: 2%;
+    padding-left: 9%;
+    padding-right: 9%;
+}
+.LoginPanelSubmitColumn{
+    text-align:center;
+}
+.LoginPanelTitle {
+    padding-left: 50%;
+}
+.LoginPanelSubmitButton{
+    width:20%;
+    padding:1% 1%;
+}
+

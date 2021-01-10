@@ -4,11 +4,12 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <title>Login</title>
+    <title>ورود</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" href="~/Styles/bootstrap.min.css" />
     <link rel="stylesheet" href="~/Styles/toastr.min.css" />
     <link rel="stylesheet" href="~/Styles/style.css" />
+    <link rel="stylesheet" href="~/Styles/LoginPanel.css" />
 
     <script type="text/javascript">
 
@@ -46,25 +47,25 @@
 
         <div class="container">
 
-            <div class="panel panel-primary CustomMargin">
-                <div class="panel-heading">ورود</div>
+            <div class="panel panel-primary LoginPanelStyle">
+                <div class="panel-heading LoginPanelTitle">اطلاعات</div>
                 <div class="panel-body">
 
-                    <div class="row FieldMargin">
-                        <div class="col-lg-8 col-md-8 col-sm-8">
+                    <div class="row LoginPanelInputRowStyle">
+                        <div class="col-lg-12 col-md-12 col-sm-12 LoginPanelInputColumnStyle">
                             <input type="text" class="form-control" id="txtUsername" placeholder="نام کاربری" />
                         </div>
                     </div>
 
-                    <div class="row FieldMargin">
-                        <div class="col-lg-8 col-md-8 col-sm-8">
+                    <div class="row LoginPanelInputRowStyle">
+                        <div class="col-lg-12 col-md-12 col-sm-12 LoginPanelInputColumnStyle">
                             <input type="password" class="form-control" id="txtPassword" placeholder="رمز عبور" />
                         </div>
                     </div>
 
-                    <div class="row CustomMargin">
-                        <div class="col-lg-8 col-md-8 col-sm-8">
-                            <button type="button" class="btn btn-primary" onclick="CheckLogin()">ورود</button>
+                    <div class="row LoginPanelSubmitRow">
+                        <div class="col-lg-12 col-md-12 col-sm-12 LoginPanelSubmitColumn">
+                            <button type="button" class="btn btn-primary LoginPanelSubmitButton" onclick="CheckLogin()">ثبت</button>
                         </div>
                     </div>
 
