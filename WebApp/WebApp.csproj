@@ -87,6 +87,7 @@
     <Content Include="Scripts\jquery.min.js" />
     <Content Include="Styles\bootstrap.min.css" />
     <Content Include="Styles\Fonts\fontiran.css" />
+    <Content Include="Styles\LoginPanel.css" />
     <Content Include="Styles\style.css" />
     <Content Include="Styles\toastr.min.css" />
     <Content Include="Web.config" />
