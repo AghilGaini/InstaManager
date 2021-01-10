@@ -1,0 +1,23 @@
+@import url(Fonts/fontiran.css);
+
+body {
+    font-family: IRANSans;
+}
+
+.CustomMargin {
+    margin-top: 2%;
+}
+
+.CustomPanel {
+    margin-top: 2%;
+    display: none;
+}
+
+.FieldMargin {
+    margin-top: 0.5%;
+}
+
+.FieldTitle {
+    font-weight: 100;
+}
+

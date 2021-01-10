@@ -1,0 +1,108 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="SiteMaster.master.cs" Inherits="WebApp.SiteMaster" %>
+
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+    <title>اتوماسیون اداری</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="Styles/bootstrap.min.css" />
+    <link rel="stylesheet" href="Styles/toastr.min.css" />
+    <link rel="stylesheet" href="Styles/style.css" />
+
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <form id="form1" runat="server">
+
+        <nav class="navbar navbar-inverse ">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href='<%= ResolveUrl("~") %>Pages/Login.aspx'>خروج</a>
+                </div>
+                <div class="collapse navbar-collapse" id="myNavbar">
+
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a href='<%= ResolveUrl("~") %>Default.aspx'>مدیریت اینستاگرام</a></li>
+                    </ul>
+
+                    <ul class="nav navbar-nav navbar-right">
+
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#" gid="B815D05D-76F2-491C-AC75-3DB80C0371ED">مدیریت پست<span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a gref="B815D05D-76F2-491C-AC75-3DB80C0371ED" gid="652696C3-CF52-444C-B731-3787D0E0EFC7" href='<%= ResolveUrl("~") %>Pages/UploadPost.aspx'>آپلود پست</a></li>
+                            </ul>
+                        </li>
+
+                    </ul>
+
+                    <ul class="nav navbar-nav navbar-right">
+
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#" gid="C8C83C74-C989-47F2-9B81-77A3DB2C5EB3">امنیت<span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a gref="C8C83C74-C989-47F2-9B81-77A3DB2C5EB3" gid="0DC6B854-3E62-4666-8081-94C8551B81A9" href='<%= ResolveUrl("~") %>Pages/Users.aspx'>کاربران</a></li>
+                                <li><a gref="C8C83C74-C989-47F2-9B81-77A3DB2C5EB3" gid="16A8A08C-4325-4EDD-B568-6A26C0DC9087" href='<%= ResolveUrl("~") %>Pages/Roles.aspx'>نقش ها</a></li>
+                                <li><a gref="C8C83C74-C989-47F2-9B81-77A3DB2C5EB3" gid="7D22C403-3EC3-4B94-B3BB-DF880D82CC6B" href='<%= ResolveUrl("~") %>Pages/Levels.aspx'>سطوح</a></li>
+                                <li><a gref="C8C83C74-C989-47F2-9B81-77A3DB2C5EB3" gid="C4FAC00C-7613-43B9-805E-7C0A1750DA8B" href='<%= ResolveUrl("~") %>Pages/ChangeInfo.aspx'>تغییر مشخصات</a></li>
+                                <li><a gref="C8C83C74-C989-47F2-9B81-77A3DB2C5EB3" gid="51097CED-DDE7-4FEA-B274-1C9915FB91A3" href='<%= ResolveUrl("~") %>Pages/ChangePassword.aspx'>تغییر رمز</a></li>
+                            </ul>
+                        </li>
+
+                    </ul>
+
+                    <ul class="nav navbar-nav navbar-right">
+
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#" gid="6E4A466B-0BB7-4179-95DC-B7A3AD0B7827">اطلاعات پایه<span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a gref="6E4A466B-0BB7-4179-95DC-B7A3AD0B7827" gid="A5F88A38-3C62-4B1A-819E-75DDDA24E1E4" href='<%= ResolveUrl("~") %>Pages/RequestType.aspx'>نوع درخواست</a></li>
+                            </ul>
+                        </li>
+
+                    </ul>
+
+                    <ul class="nav navbar-nav navbar-right">
+
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#" gid="A226246D-C7EB-49D4-AE4D-78C505DC5FE9">درخواست<span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a gref="A226246D-C7EB-49D4-AE4D-78C505DC5FE9" gid="4022C2BE-5509-4C54-9A17-51E9FB10AD45" href='<%= ResolveUrl("~") %>Pages/SubmitRequest.aspx'>ثبت درخواست</a></li>
+                            </ul>
+                        </li>
+
+                    </ul>
+
+                </div>
+            </div>
+        </nav>
+
+        <div class="container">
+            <asp:ContentPlaceHolder ID="body" runat="server">
+            </asp:ContentPlaceHolder>
+        </div>
+
+        <Ins:HiddenField ID="hdn" ClientInstanceName="hdn" runat="server" />
+        
+        <div>
+            <script type="text/javascript" src='<%= ResolveUrl("~") %>Scripts/jquery.min.js'></script>
+            <script type="text/javascript" src='<%= ResolveUrl("~") %>Scripts/bootstrap.min.js'></script>
+            <script type="text/javascript" src='<%= ResolveUrl("~") %>Scripts/toastr.min.js'></script>
+            <script type="text/javascript" src='<%= ResolveUrl("~") %>Scripts/script.js'></script>
+            <script type="text/javascript" src='<%= ResolveUrl("~") %>Scripts/security.js'></script>
+            <asp:ContentPlaceHolder ID="script" runat="server">
+            </asp:ContentPlaceHolder>
+            <asp:ScriptManager ID="ScriptManager1" runat="server" ScriptMode="Release" EnablePageMethods="true">
+            </asp:ScriptManager>
+        </div>
+
+    </form>
+</body>
+</html>
