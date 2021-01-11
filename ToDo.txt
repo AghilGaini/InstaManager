@@ -5,7 +5,7 @@
 5-Profile picture to show in default page
 6-Login with instagram service(in web)
 7-Set Cockies for remeber pages and Login Session
-8-
+8-Craete Local mdf file t o work wth that
 
 Ali:
 1-if user Change his Password what happend ? 
