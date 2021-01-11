@@ -1,0 +1,5 @@
+https://developer.mozilla.org/en-US/docs/Web/API/FormData
+
+http://www.binaryintellect.net/articles/f2a2f1ee-e18a-416b-893e-883c800f83f4.aspx
+
+About "DOM element"
