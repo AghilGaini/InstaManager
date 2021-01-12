@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using Utilities;
@@ -31,12 +32,15 @@ namespace WebApp.Classes.Handlers
 
                     if (FileOut[0] == "1")
                     {
-
-                        context.Response.Write("Path : " + FileOut[1]);
+                        Res.Success = true;
+                        Res.Result = FileOut[1];
+                        context.Response.Write(Res.ToJson());
                     }
                     else
                     {
-                        context.Response.Write("Error : " + FileOut[1]);
+                        Res.Success = false;
+                        Res.Result = FileOut[1];
+                        context.Response.Write(Res.ToJson());
                     }
                     return;
                 }
@@ -64,11 +68,14 @@ namespace WebApp.Classes.Handlers
 
                 for (int i = 0; i < Files.Count; i++)
                 {
-                    HttpPostedFile File = Files[i];
-                    string[] FileNameSegments = File.FileName.Split('.');
+                    HttpPostedFile CurrentFile = Files[i];
+                    string[] FileNameSegments = CurrentFile.FileName.Split('.');
 
-                    Path = string.Format("{0}{1}{2}", Constants.UploadPost.NormalPost.TempPath, Guid.NewGuid().ToString(), FileNameSegments[1]);
-                    File.SaveAs(Path);
+                    if (!Directory.Exists(Constants.UploadPost.NormalPost.TempPath))
+                        Directory.CreateDirectory(Constants.UploadPost.NormalPost.TempPath);
+
+                    Path = string.Format("{0}{1}.{2}", Constants.UploadPost.NormalPost.TempPath, Guid.NewGuid().ToString(), FileNameSegments[FileNameSegments.Length-1]);
+                    CurrentFile.SaveAs(Path);
                 }
 
                 return new string[2] { "1", Path };

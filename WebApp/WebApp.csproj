@@ -100,6 +100,7 @@
       <DependentUpon>FileUploadHandler.ashx</DependentUpon>
     </Compile>
     <Compile Include="Classes\Pages\Login.cs" />
+    <Compile Include="Classes\Pages\UploadPost.cs" />
     <Compile Include="Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
