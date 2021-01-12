@@ -1,5 +1,5 @@
 ﻿<%@ Page Title="آپلود پست" Language="C#" MasterPageFile="~/SiteMaster.Master" AutoEventWireup="true" CodeBehind="UploadPost.aspx.cs" Inherits="WebApp.Pages.UploadPost"
-    gref="B815D05D-76F2-491C-AC75-3DB80C0371ED" gid="652696C3-CF52-444C-B731-3787D0E0EFC7" NeedLogin="false" %>
+    gref="B815D05D-76F2-491C-AC75-3DB80C0371ED" gid="652696C3-CF52-444C-B731-3787D0E0EFC7" NeedLogin="true" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
@@ -29,15 +29,9 @@
 
     <script type="text/javascript">
 
-        var UploadPath = "";
-
         Res = {};
 
-
         $("#btnUpload").click(function () {
-
-            alert('ok');
-
             UploadFile1();
         });
 
@@ -73,16 +67,15 @@
             })
         }
 
-        function test(res) {
-            alert(res);
-        }
+        function SavePost1(res) {
+            debugger;
+            var data = JSON.parse(res);
+            var entity = {};
+            entity.Path = data.Result;
+            entity.Tags = $("#txtPostMentions").val();
+            entity.Description = $("#txtPostDescription").val();
 
-        function SavePost(res) {
-
-            var etity = {};
-            entity.Path = res.Result;
-            entity.Tags = $("#txtPostDescription").val();
-            entity.Description = $("#txtPostMentions").val();
+            entity = JSON.stringify(entity);
 
             $.ajax({
                 type: 'POST',

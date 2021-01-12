@@ -16,9 +16,9 @@ namespace Utilities
 
                 public static string TempPath = string.Format("{0}//{1}//", BasePath, "Temp"); 
 
-                public static string UploadedPath(long UserID, string FileName)
+                public static string ReadyPath(long UserID)
                 {
-                    return string.Format("{0}//{1}//{2}", BasePath, UserID.ToString(), FileName);
+                    return string.Format("{0}//{1}", BasePath, UserID.ToString());
                 }
 
 

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Services;
@@ -30,6 +31,19 @@ namespace WebApp.Pages
 
                 if (values.Description.IsNull() || values.Path.IsNull())
                     throw new Exception("EnterRquierdValues");
+
+                string[] Tags = values.Tags.Split(',');
+
+                if (!Directory.Exists(Constants.UploadPost.NormalPost.ReadyPath(CurrentUser.ID)))
+                    Directory.CreateDirectory(Constants.UploadPost.NormalPost.ReadyPath(CurrentUser.ID));
+
+                if (File.Exists(values.Path))
+                {
+                    var FileName = Path.GetFileName(values.Path);
+                    File.Move(values.Path, Constants.UploadPost.NormalPost.ReadyPath(CurrentUser.ID) + "//" + FileName);
+                }
+                else
+                    throw new Exception("File Not Found");
 
                 return new string[2] { "1", "Success" };
             }
