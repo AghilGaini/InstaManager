@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography;
@@ -195,6 +196,17 @@ namespace Utilities
                     builder.Append(bytes[i].ToString("x2"));
                 }
                 return builder.ToString();
+            }
+        }
+        public static string ToJson(this object o)
+        {
+            try
+            {
+                return JsonConvert.SerializeObject(o);
+            }
+            catch
+            {
+                throw;
             }
         }
     }

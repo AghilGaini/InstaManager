@@ -2,68 +2,59 @@
     gref="B815D05D-76F2-491C-AC75-3DB80C0371ED" gid="652696C3-CF52-444C-B731-3787D0E0EFC7" NeedLogin="false"%>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
-
-    <script type="text/javascript">
-
-        function onFileUploadComplete(s, e) {
-            debugger;
-            var callbackData = e.callbackData.split("|"),
-                uploadedFileName = callbackData[0],
-                isSubmissionExpired = callbackData[1] === "True";
-            uploadedFiles.push(uploadedFileName);
-            if (e.errorText.length > 0 || !e.isValid)
-                uploadErrorOccurred = true;
-            if (isSubmissionExpired && UploadedFilesTokenBox.GetText().length > 0) {
-                var removedAfterTimeoutFiles = UploadedFilesTokenBox.GetTokenCollection().join("\n");
-                alert("The following files have been removed from the server due to the defined 5 minute timeout: \n\n" + removedAfterTimeoutFiles);
-                UploadedFilesTokenBox.ClearTokenCollection();
-            }
-        }
-        function onFileUploadStart(s, e) {
-            debugger;
-            uploadInProgress = true;
-            uploadErrorOccurred = false;
-            UploadedFilesTokenBox.SetIsValid(true);
-        }
-
-    </script>
-
-
 </asp:Content>
+
 <asp:Content ID="Content2" ContentPlaceHolderID="body" runat="server">
 
-
-    <div class="well">
-
-        <%--<Ins:UploadControl runat="server" ID="test" ClientInstanceName="test"
-            ShowProgressPanel="true" ShowUploadButton="true"
-            ClientSideEvents-FileUploadStart="Start()" ClientSideEvents-FilesUploadComplete="End()" OnFilesUploadComplete="test_FilesUploadComplete">
-        </Ins:UploadControl>--%>
-
-
-        <Ins:UploadControl runat="server" ID="DocumentsUploadControl" ClientInstanceName="DocumentsUploadControl" 
-            AutoStartUpload="true" ShowProgressPanel="True" ShowTextBox="false" BrowseButton-Text="Add documents" FileUploadMode="OnPageLoad" 
-            ClientSideEvents-FileUploadComplete="onFileUploadComplete" ClientSideEvents-FileUploadStart="onFileUploadStart" >
-
-        </Ins:UploadControl>
-
-
-    </div>
-    <div>
-        <button type="button" class="btn btn-primary" onclick="UploadPost()">ثبت</button>
-    </div>
+    <input type="file" id="fileUpload" />
+    <br />
+    <button class="btn btn-primary" id="btnUpload">Upload</button>
 
 </asp:Content>
+
 <asp:Content ID="Content3" ContentPlaceHolderID="script" runat="server">
 
     <script type="text/javascript">
 
-        function UploadPost() {
-            alert('ok');
-        }
+        var UploadPath = "";
 
+        $(document).ready(function () {
+            $("#btnUpload").click(function (evt) {
 
+                UploadPath = "";
 
+                debugger;
+                var fileUpload = $("#fileUpload").get(0);
+
+                if (fileUpload == 'undefined')
+                    return;
+
+                var files = fileUpload.files;
+                if (files.length == 0)
+                    return;
+
+                var data = new FormData();
+                for (var i = 0; i < files.length; i++) {
+                    data.append(files[i].name, files[i]);
+                }
+
+                var options = {};
+                options.url = '<%= ResolveUrl("~")%>Classes/Handlers/FileUploadHandler.ashx';
+                options.type = "POST";
+                options.data = data;
+                options.contentType = false;
+                options.processData = false;
+                options.success = function (result) {
+                    UploadPath = result;
+                    alert(UploadPath);
+                };
+                options.error = function (err) { alert(err.statusText); };
+
+                $.ajax(options);
+
+                evt.preventDefault();
+            });
+        });
     </script>
 
 </asp:Content>

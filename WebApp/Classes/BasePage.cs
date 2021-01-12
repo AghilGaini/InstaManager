@@ -49,7 +49,7 @@ namespace WebApp.Classes
         {
             get
             {
-                if (HttpContext.Current.Session["USER_ID"].IsNull() || HttpContext.Current.Session.IsNull())
+                if (HttpContext.Current.Session.IsNull() || HttpContext.Current.Session["USER_ID"].IsNull() )
                     return null;
                 var ID = HttpContext.Current.Session["USER_ID"].ToLong();
                 return DataBusiness.FacadeInstaManagerBusiness.GetUserTable().GetByID(ID);
