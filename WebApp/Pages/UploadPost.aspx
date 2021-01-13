@@ -21,7 +21,7 @@
             </div>
         </div>
         <br />
-        <input type="file" id="fileUpload" />
+        <input type="file" id="fileUpload" accept=".jpg,.gif,.png,.jpeg" />
         <br />
         <button class="btn btn-primary" id="btnUpload">Upload</button>
 
@@ -33,14 +33,14 @@
 
     <script type="text/javascript">
 
-        Res = {};
-
+        
         $("#btnUpload").click(function () {
             UploadFile();
         });
 
 
         function UploadFile() {
+            debugger;
             var fileUpload = $("#fileUpload").get(0);
             if (fileUpload == 'undefined')
                 return;
@@ -51,8 +51,14 @@
 
             var fileData = new FormData();
             for (var i = 0; i < files.length; i++) {
+
+                if (files[i].type != 'image/jpeg')
+                    continue;
+
                 fileData.append(files[i].name, files[i]);
             }
+
+            return;
 
             $.ajax({
                 type: 'POST',
