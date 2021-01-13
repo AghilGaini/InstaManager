@@ -28,8 +28,12 @@ namespace DataBusiness
         }
     }
 
-    public class InstaManager<T> : BaseBusiness<T>
+    public class InstaManagerBase<T> : BaseBusiness<T>
     {
         public override string _ConnectionStringName => "InstaManager";
+    }
+    public class InstaCRBase<T> : BaseBusiness<T>
+    {
+        public override string _ConnectionStringName => "InstaCR";
     }
 }

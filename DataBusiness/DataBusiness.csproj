@@ -43,6 +43,7 @@
   <ItemGroup>
     <Compile Include="BaseBusiness.cs" />
     <Compile Include="FacadeBusiness.cs" />
+    <Compile Include="InstaCR\robot\ActionQueueTable.cs" />
     <Compile Include="InstaManager\dbo\UserTable.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

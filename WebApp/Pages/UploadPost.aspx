@@ -6,22 +6,26 @@
 
 <asp:Content ID="Content2" ContentPlaceHolderID="body" runat="server">
 
-    <div class="row LoginPanelInputRowStyle">
-        <div class="col-lg-12 col-md-12 col-sm-12 LoginPanelInputColumnStyle">
-            <input type="text" class="form-control" id="txtPostDescription" placeholder="متن پست" />
-        </div>
-    </div>
-    <br />
+    <div class="well well-lg">
 
-    <div class="row LoginPanelInputRowStyle">
-        <div class="col-lg-12 col-md-12 col-sm-12 LoginPanelInputColumnStyle">
-            <input type="text" class="form-control" id="txtPostMentions" placeholder="تگ ها" />
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 ">
+                <textarea class="form-control" rows="5" placeholder="متن پست" id="txtPostCaption"></textarea>
+            </div>
         </div>
+        <br />
+
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 ">
+                <input type="text" class="form-control" id="txtPostMentions" placeholder="تگ ها" />
+            </div>
+        </div>
+        <br />
+        <input type="file" id="fileUpload" />
+        <br />
+        <button class="btn btn-primary" id="btnUpload">Upload</button>
+
     </div>
-    <br />
-    <input type="file" id="fileUpload" />
-    <br />
-    <button class="btn btn-primary" id="btnUpload">Upload</button>
 
 </asp:Content>
 
@@ -32,11 +36,11 @@
         Res = {};
 
         $("#btnUpload").click(function () {
-            UploadFile1();
+            UploadFile();
         });
 
 
-        function UploadFile1() {
+        function UploadFile() {
             var fileUpload = $("#fileUpload").get(0);
             if (fileUpload == 'undefined')
                 return;
@@ -55,7 +59,7 @@
                 data: fileData,
                 contentType: false,
                 processData: false,
-                async : false,
+                async: false,
                 url: '<%= ResolveUrl("~")%>Classes/Handlers/FileUploadHandler.ashx',
                 success: function (data) {
                     Res = data;
@@ -67,13 +71,13 @@
             })
         }
 
-        function SavePost1(res) {
+        function SavePost(res) {
             debugger;
             var data = JSON.parse(res);
             var entity = {};
             entity.Path = data.Result;
             entity.Tags = $("#txtPostMentions").val();
-            entity.Description = $("#txtPostDescription").val();
+            entity.Description = $("#txtPostCaption").val();
 
             entity = JSON.stringify(entity);
 
@@ -92,35 +96,6 @@
             })
         }
 
-        function SavePost(path) {
-            debugger;
-
-            var etity = {};
-            entity.Path = path;
-            entity.Tags = $("#txtPostDescription").val();
-            entity.Description = $("#txtPostMentions").val();
-
-            var options = {};
-            options.url = '<%= ResolveUrl("~")%>Pages/UploadPost.aspx/SavePost';
-            options.type = "POST";
-            options.data = JSON.stringify({ info: entity });
-            options.contentType = false;
-            options.processData = false;
-            options.success = function (result) {
-                if (result.d[0] == 1) {
-                    alert('Success');
-                }
-                else {
-                    alert("Has Error : " + result.d[1]);
-                }
-            };
-            options.error = function (err) { alert(err.statusText); };
-
-            $.ajax(options);
-        }
-
-        //$(document).ready(function () {
-        //});
     </script>
 
 </asp:Content>

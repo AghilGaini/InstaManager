@@ -23,6 +23,10 @@ namespace Utilities
 
 
             }
+
+            public static int TagLength = 20;
         }
+
+
     }
 }

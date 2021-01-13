@@ -7,7 +7,7 @@ using DataLayer.Models.Generated.InstaManager;
 
 namespace DataBusiness.InstaManager.dbo
 {
-    public class UserTable : InstaManager<User>
+    public class UserTable : InstaManagerBase<User>
     {
         public User GetByID(long ID)
         {

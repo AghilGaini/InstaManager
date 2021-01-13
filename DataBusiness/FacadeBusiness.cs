@@ -13,4 +13,12 @@ namespace DataBusiness
             return new DataBusiness.InstaManager.dbo.UserTable();
         }
     }
+
+    public static class FacadeInstaCRBusiness
+    {
+        public static DataBusiness.InstaCR.robot.ActionQueueTable GetActionQueueTable()
+        {
+            return new InstaCR.robot.ActionQueueTable();
+        }
+    }
 }

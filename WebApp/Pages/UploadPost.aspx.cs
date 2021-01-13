@@ -32,7 +32,13 @@ namespace WebApp.Pages
                 if (values.Description.IsNull() || values.Path.IsNull())
                     throw new Exception("EnterRquierdValues");
 
-                string[] Tags = values.Tags.Split(',');
+                var Tags = values.Tags.Split(',').ToList();
+
+                for(int i =0; i<Tags.Count;i++)
+                {
+                    if (Tags[i].Length > Constants.UploadPost.TagLength)
+                        Tags.RemoveAt(i);
+                }
 
                 if (!Directory.Exists(Constants.UploadPost.NormalPost.ReadyPath(CurrentUser.ID)))
                     Directory.CreateDirectory(Constants.UploadPost.NormalPost.ReadyPath(CurrentUser.ID));
@@ -40,7 +46,33 @@ namespace WebApp.Pages
                 if (File.Exists(values.Path))
                 {
                     var FileName = Path.GetFileName(values.Path);
-                    File.Move(values.Path, Constants.UploadPost.NormalPost.ReadyPath(CurrentUser.ID) + "//" + FileName);
+                    var DestPath = Constants.UploadPost.NormalPost.ReadyPath(CurrentUser.ID) + "//" + FileName;
+                    File.Move(values.Path, DestPath);
+
+                    var Params = new { filepath = DestPath, caption = values.Description, user_tags = Tags };
+
+                    var ActionQueueRecord = new DataLayer.Models.Generated.InstaCR.ActionQueue()
+                    {
+                        ActionTypeID = 3,
+                        LoginAccountID = 4,
+                        Title = "1",
+                        Description = "2",
+                        Params = Params.ToJson(),
+                        CreationDate = DateTime.Now,
+                        Schedule = DateTime.Now.AddMinutes(5),
+                        NumberOfExecutions = 1,
+                        ErrorCode = 0,
+                        //ErrorDescription = null,
+                        //DoneAt = null,
+                        IsActive = true,
+                        ReserveNumber = -1,
+                        //JsonValue = null,
+                        //Val = null
+                    };
+
+                    ActionQueueRecord.Save();
+
+
                 }
                 else
                     throw new Exception("File Not Found");
