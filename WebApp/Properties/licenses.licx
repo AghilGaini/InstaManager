@@ -1,3 +1,5 @@
+WebComponent.GridView, WebComponent, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+WebComponent.Button, WebComponent, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
 DevExpress.Web.ASPxUploadControl.ASPxUploadControl, DevExpress.Web.v13.2, Version=13.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a
 WebComponent.UploadControl, WebComponent, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
 WebComponent.HiddenField, WebComponent, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null

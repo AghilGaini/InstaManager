@@ -61,20 +61,10 @@
                     <ul class="nav navbar-nav navbar-right">
 
                         <li class="dropdown">
-                            <a class="dropdown-toggle" data-toggle="dropdown" href="#" gid="6E4A466B-0BB7-4179-95DC-B7A3AD0B7827">اطلاعات پایه<span class="caret"></span></a>
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#" gid="8CBF69B8-983A-4B24-A950-F7440CFDD42D">WebComponent<span class="caret"></span></a>
                             <ul class="dropdown-menu">
-                                <li><a gref="6E4A466B-0BB7-4179-95DC-B7A3AD0B7827" gid="A5F88A38-3C62-4B1A-819E-75DDDA24E1E4" href='<%= ResolveUrl("~") %>Pages/RequestType.aspx'>نوع درخواست</a></li>
-                            </ul>
-                        </li>
-
-                    </ul>
-
-                    <ul class="nav navbar-nav navbar-right">
-
-                        <li class="dropdown">
-                            <a class="dropdown-toggle" data-toggle="dropdown" href="#" gid="A226246D-C7EB-49D4-AE4D-78C505DC5FE9">درخواست<span class="caret"></span></a>
-                            <ul class="dropdown-menu">
-                                <li><a gref="A226246D-C7EB-49D4-AE4D-78C505DC5FE9" gid="4022C2BE-5509-4C54-9A17-51E9FB10AD45" href='<%= ResolveUrl("~") %>Pages/SubmitRequest.aspx'>ثبت درخواست</a></li>
+                                <li><a gref="8CBF69B8-983A-4B24-A950-F7440CFDD42D" gid="15F25352-1A63-4333-BD9F-D8581CBCA7B0" href='<%= ResolveUrl("~") %>Pages/WebComponent/GridViewComponent.aspx'>GridViewComponent</a></li>
+                                <li><a gref="8CBF69B8-983A-4B24-A950-F7440CFDD42D" gid="94FF4C66-86F7-45B4-A690-4DF10BB9D169" href='<%= ResolveUrl("~") %>Pages/WebComponent/ComboBoxComponent.aspx'>ComboBoxComponent</a></li>
                             </ul>
                         </li>
 

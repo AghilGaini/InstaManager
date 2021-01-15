@@ -7,29 +7,20 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace WebApp.Pages
+namespace WebApp.Pages.WebComponent
 {
 
 
-    public partial class Test
+    public partial class GridViewComponent
     {
 
         /// <summary>
-        /// cmbTest control.
+        /// grd control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::WebComponent.ComboBox cmbTest;
-
-        /// <summary>
-        /// grdTest control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::WebComponent.GridView grdTest;
+        protected global::WebComponent.GridView grd;
     }
 }

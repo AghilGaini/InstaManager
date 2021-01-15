@@ -9,5 +9,9 @@ namespace WebComponent
 {
     public class Button : ASPxButton
     {
+        public Button()
+        {
+            this.AutoPostBack = false;
+        }
     }
 }

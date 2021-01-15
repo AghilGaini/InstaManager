@@ -9,5 +9,16 @@ namespace WebComponent
 {
     public class ComboBox : ASPxComboBox
     {
+        public ComboBox()
+        {
+            this.NullText = "انتخاب";
+
+        }
+        protected override void OnPreRender(EventArgs e)
+        {
+            this.Items.Add(new ListEditItem() { Text = "انتخاب", Value = 0 });
+
+            base.OnPreRender(e);
+        }
     }
 }
