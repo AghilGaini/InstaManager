@@ -82,13 +82,16 @@
     <Content Include="Pages\UploadPost.aspx" />
     <Content Include="Pages\WebComponent\ComboBoxComponent.aspx" />
     <Content Include="Pages\WebComponent\GridViewComponent.aspx" />
+    <Content Include="Scripts\dx.all.js" />
+    <Content Include="Scripts\dx.aspnet.data.js" />
     <Content Include="Scripts\script.js" />
     <Content Include="Scripts\myToastr.js" />
     <Content Include="Scripts\toastr.min.js" />
     <Content Include="Scripts\security.js" />
-    <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\jquery.min.js" />
     <Content Include="Styles\bootstrap.min.css" />
+    <Content Include="Styles\dx.common.css" />
+    <Content Include="Styles\dx.light.css" />
     <Content Include="Styles\Fonts\fontiran.css" />
     <Content Include="Styles\LoginPanel.css" />
     <Content Include="Styles\style.css" />

@@ -34,23 +34,6 @@ namespace WebApp.Pages.WebComponent
 
         #endregion
 
-        #region grd
-        protected void grd_CustomCallback(object sender, DevExpress.Web.ASPxGridView.ASPxGridViewCustomCallbackEventArgs e)
-        {
-            grd.DataSource = _persons;
-            grd.DataBind();
-        }
-
-        protected void grd_BeforeColumnSortingGrouping(object sender, DevExpress.Web.ASPxGridView.ASPxGridViewBeforeColumnGroupingSortingEventArgs e)
-        {
-            grd_CustomCallback(null, null);
-        }
-
-        protected void grd_PageIndexChanged(object sender, EventArgs e)
-        {
-            grd_CustomCallback(null, null);
-        }
-
-        #endregion
+       
     }
 }
