@@ -82,6 +82,8 @@
     <Content Include="Pages\UploadPost.aspx" />
     <Content Include="Pages\WebComponent\ComboBoxComponent.aspx" />
     <Content Include="Pages\WebComponent\GridViewComponent.aspx" />
+    <Content Include="Scripts\basicInfo.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\dx.all.js" />
     <Content Include="Scripts\dx.aspnet.data.js" />
     <Content Include="Scripts\script.js" />

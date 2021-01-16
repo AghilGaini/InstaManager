@@ -87,6 +87,7 @@
             <script type="text/javascript" src='<%= ResolveUrl("~") %>Scripts/toastr.min.js'></script>
             <script type="text/javascript" src='<%= ResolveUrl("~") %>Scripts/script.js'></script>
             <script type="text/javascript" src='<%= ResolveUrl("~") %>Scripts/security.js'></script>
+            <script type="text/javascript" src='<%= ResolveUrl("~") %>Scripts/basicInfo.js'></script>
             <asp:ContentPlaceHolder ID="script" runat="server">
             </asp:ContentPlaceHolder>
             <asp:ScriptManager ID="ScriptManager1" runat="server" ScriptMode="Release" EnablePageMethods="true">

@@ -6,13 +6,21 @@
 
     <link rel="stylesheet" type="text/css" href="../../Styles/dx.common.css" />
     <link rel="stylesheet" type="text/css" href="../../Styles/dx.light.css" />
+    <link rel="stylesheet" type="text/css" href="../../Styles/DevExpressTheme/Blue-Dark-Theme.css" />
+
+
+    <style>
+        #exportButton {
+            margin-bottom: 10px;
+        }
+    </style>
 
     <script type="text/javascript">
 
         function FillData() {
             $.ajax({
                 type: 'GET',
-                url: 'http://10.1.1.154/InstaManagerApi/api/webcomponent/gridview',
+                url: BaseApiURL + '/webcomponent/gridview',
                 contentType: "application/json; charset=utf-8",
                 dataType: "json"
             }).then(
@@ -37,8 +45,13 @@
                     showPageSizeSelector: true,
                     allowedPageSizes: [2, 4, 6],
                     showInfo: true,
-                    infoText : 'صفحه {0} از {1} - تعداد کل {2}'
+                    infoText: 'صفحه {0} از {1} - تعداد کل {2}'
                 },
+                showColumnLines: true,
+                showRowLines: true,
+                showBorders: true,
+                rowAlternationEnabled: true,
+                focusedRowEnabled: true,
                 columns: ["ID", "Name", "Family",
                     {
                         dataField: "Picture",
@@ -54,9 +67,11 @@
                     }
 
                 ],
-                showBorders: true,
-                focusedRowEnabled: true
             });
+        }
+
+        function Export() {
+
         }
 
     </script>
@@ -67,14 +82,13 @@
 
     <div class="dx-viewport">
 
-
-        <%--<img src="../../Images/DefaultAccountPic.png" width="50" height="50" />--%>
-
         <input type="button" class="btn btn-success" value="search" onclick="FillData()" />
         <br />
+        <input type="button" class="btn btn-success" value="Export" onclick="Export()" />
         <br />
 
-        <div class="demo-container">
+        <div class="demo-container dx-swatch-Blue-Dark-Theme">
+            <div id="exportButton"></div>
             <div id="grid"></div>
         </div>
     </div>
@@ -88,6 +102,22 @@
 
     <script type="text/javascript">
         $(document).ready(function () {
+
+            $('#exportButton').dxButton({
+                icon: 'exportpdf',
+                text: 'Export to PDF',
+                onClick: function () {
+                    debugger;
+                    const doc = new jsPDF();
+                    DevExpress.pdfExporter.exportDataGrid({
+                        jsPDFDocument: doc,
+                        component: dataGrid
+                    }).then(function () {
+                        doc.save('Customers.pdf');
+                    });
+                }
+            });
+
             $("#grid").dxDataGrid({
                 dataSource: null,
                 paging: {
