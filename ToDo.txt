@@ -6,6 +6,9 @@
 6-Login with instagram service(in web)
 7-Set Cockies for remeber pages and Login Session
 8-Craete Local mdf file t o work wth that
+9-GridView in Mobile Size view
+10-GridView Events when change page
+10-Upload File with api
 
 Ali:
 1-if user Change his Password what happend ? 

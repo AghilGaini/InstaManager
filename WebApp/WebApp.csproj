@@ -82,6 +82,8 @@
     <Content Include="Pages\UploadPost.aspx" />
     <Content Include="Pages\WebComponent\ComboBoxComponent.aspx" />
     <Content Include="Pages\WebComponent\GridViewComponent.aspx" />
+    <Content Include="Pages\WebComponent\TreeListComponent.aspx" />
+    <Content Include="Pages\WebComponent\UploadFile.aspx" />
     <Content Include="Scripts\basicInfo.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\dx.all.js" />
@@ -92,6 +94,7 @@
     <Content Include="Scripts\security.js" />
     <Content Include="Scripts\jquery.min.js" />
     <Content Include="Styles\bootstrap.min.css" />
+    <Content Include="Styles\DevExpressTheme\Blue-Dark-Theme.css" />
     <Content Include="Styles\dx.common.css" />
     <Content Include="Styles\dx.light.css" />
     <Content Include="Styles\Fonts\fontiran.css" />
@@ -151,6 +154,20 @@
     </Compile>
     <Compile Include="Pages\WebComponent\GridViewComponent.aspx.designer.cs">
       <DependentUpon>GridViewComponent.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\WebComponent\TreeListComponent.aspx.cs">
+      <DependentUpon>TreeListComponent.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\WebComponent\TreeListComponent.aspx.designer.cs">
+      <DependentUpon>TreeListComponent.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\WebComponent\UploadFile.aspx.cs">
+      <DependentUpon>UploadFile.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\WebComponent\UploadFile.aspx.designer.cs">
+      <DependentUpon>UploadFile.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SiteMaster.Master.cs">

@@ -61,10 +61,12 @@
                     <ul class="nav navbar-nav navbar-right">
 
                         <li class="dropdown">
-                            <a class="dropdown-toggle" data-toggle="dropdown" href="#" gid="8CBF69B8-983A-4B24-A950-F7440CFDD42D">WebComponent<span class="caret"></span></a>
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#" gid="8CBF69B8-983A-4B24-A950-F7440CFDD42D">وب کامپوننت<span class="caret"></span></a>
                             <ul class="dropdown-menu">
-                                <li><a gref="8CBF69B8-983A-4B24-A950-F7440CFDD42D" gid="15F25352-1A63-4333-BD9F-D8581CBCA7B0" href='<%= ResolveUrl("~") %>Pages/WebComponent/GridViewComponent.aspx'>GridViewComponent</a></li>
-                                <li><a gref="8CBF69B8-983A-4B24-A950-F7440CFDD42D" gid="94FF4C66-86F7-45B4-A690-4DF10BB9D169" href='<%= ResolveUrl("~") %>Pages/WebComponent/ComboBoxComponent.aspx'>ComboBoxComponent</a></li>
+                                <li><a gref="8CBF69B8-983A-4B24-A950-F7440CFDD42D" gid="15F25352-1A63-4333-BD9F-D8581CBCA7B0" href='<%= ResolveUrl("~") %>Pages/WebComponent/GridViewComponent.aspx'>گرید ویو</a></li>
+                                <li><a gref="8CBF69B8-983A-4B24-A950-F7440CFDD42D" gid="082D4178-0A06-4A98-B129-5DAF324241F9" href='<%= ResolveUrl("~") %>Pages/WebComponent/UploadFile.aspx'>آپلود فایل</a></li>
+                                <li><a gref="8CBF69B8-983A-4B24-A950-F7440CFDD42D" gid="94FF4C66-86F7-45B4-A690-4DF10BB9D169" href='<%= ResolveUrl("~") %>Pages/WebComponent/ComboBoxComponent.aspx'>کمبو باکس</a></li>
+                                <li><a gref="8CBF69B8-983A-4B24-A950-F7440CFDD42D" gid="48A7015B-D8F4-4A0C-B046-D063FCBB55CD" href='<%= ResolveUrl("~") %>Pages/WebComponent/TreeListComponent.aspx'>تری لیست</a></li>
                             </ul>
                         </li>
 
@@ -85,6 +87,7 @@
             <script type="text/javascript" src='<%= ResolveUrl("~") %>Scripts/jquery.min.js'></script>
             <script type="text/javascript" src='<%= ResolveUrl("~") %>Scripts/bootstrap.min.js'></script>
             <script type="text/javascript" src='<%= ResolveUrl("~") %>Scripts/toastr.min.js'></script>
+            <script type="text/javascript" src='<%= ResolveUrl("~") %>Scripts/myToastr.js'></script>
             <script type="text/javascript" src='<%= ResolveUrl("~") %>Scripts/script.js'></script>
             <script type="text/javascript" src='<%= ResolveUrl("~") %>Scripts/security.js'></script>
             <script type="text/javascript" src='<%= ResolveUrl("~") %>Scripts/basicInfo.js'></script>

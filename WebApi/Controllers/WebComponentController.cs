@@ -24,5 +24,20 @@ namespace WebApi.Controllers
 
         }
 
+        [HttpGet]
+        public IHttpActionResult TreeList()
+        {
+            var Res = new Models.TreeListModel().InsideList;
+
+            return Ok(new
+            {
+                code = 200,
+                message = "success",
+                count = Res.Count,
+                payload = Res
+            });
+
+        }
+
     }
 }
