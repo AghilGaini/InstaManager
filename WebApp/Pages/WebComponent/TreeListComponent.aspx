@@ -19,7 +19,7 @@
                 dataType: "json"
             }).then(
                 function (data) {
-                    FillTreeList(data);
+                    FillTreeList(data.payload);
                 },
                 function (data) {
                     ShowError("data: " + data.d, "عدم برقراری ارتباط");
@@ -28,18 +28,8 @@
         }
 
         function FillTreeList(data) {
-            debugger;
-            $("#treeList").dxTreeList({
-                dataSource: data.payload,
-                rootValue: -1,
-                keyExpr: "gid",
-                parentIdExpr: "gref",
-                columns: ["Name", "Family", "gid", "gref"],
-                expandedRowKeys: [1],
-                showRowLines: true,
-                showBorders: true,
-                columnAutoWidth: true
-            });
+            var columns = ["Name", "Family", "gid", "gref"];
+            CreateTreeList('treeList', data, 'gid', 'gref', true, true, true, true, columns);
         }
 
     </script>
@@ -62,5 +52,11 @@
 
     <script src="../../Scripts/dx.all.js"></script>
     <script src="../../Scripts/dx.aspnet.data.js"></script>
+    <script src="../../Scripts/CreateDevepressComponents.js"></script>
+    <script type="text/javascript">
+
+        FillTreeList(null);
+
+    </script>
 
 </asp:Content>

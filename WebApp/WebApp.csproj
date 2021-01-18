@@ -84,6 +84,7 @@
     <Content Include="Pages\WebComponent\GridViewComponent.aspx" />
     <Content Include="Pages\WebComponent\TreeListComponent.aspx" />
     <Content Include="Pages\WebComponent\UploadFile.aspx" />
+    <Content Include="Scripts\CreateDevepressComponents.js" />
     <Content Include="Scripts\basicInfo.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\dx.all.js" />
@@ -202,6 +203,12 @@
     <Content Include="Styles\Fonts\woff\IRANSansWeb_Light.woff" />
     <Content Include="Styles\Fonts\woff\IRANSansWeb_Medium.woff" />
     <Content Include="Styles\Fonts\woff\IRANSansWeb_UltraLight.woff" />
+    <Content Include="Styles\icons\dxicons.ttf" />
+    <Content Include="Styles\icons\dxicons.woff" />
+    <Content Include="Styles\icons\dxicons.woff2" />
+    <Content Include="Styles\icons\dxiconsmaterial.ttf" />
+    <Content Include="Styles\icons\dxiconsmaterial.woff" />
+    <Content Include="Styles\icons\dxiconsmaterial.woff2" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

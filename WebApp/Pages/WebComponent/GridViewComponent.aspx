@@ -18,7 +18,7 @@
                 dataType: "json"
             }).then(
                 function (data) {
-                    FillGrid(data);
+                    FillGrid(data.payload);
                 },
                 function (data) {
                     ShowError("data: " + data.d, "عدم برقراری ارتباط");
@@ -26,59 +26,29 @@
             )
         }
 
-        function FillGrid(data) {
-            debugger;
-            $("#grid").dxDataGrid({
-                dataSource: data.payload,
-                keyExpr: "ID",
-                selection: {
-                   mode: "single"
-                },
-                paging: {
-                    pageSize: 4
-                },
-                pager: {
-                    showPageSizeSelector: true,
-                    allowedPageSizes: [2, 4, 6],
-                    showInfo: true,
-                    infoText: 'صفحه {0} از {1} - تعداد کل {2}'
-                },
-                //hoverStateEnabled: true,
-                showColumnLines: true,
-                showRowLines: true,
-                showBorders: true,
-                rowAlternationEnabled: true,
-                focusedRowEnabled: true,
-                allowColumnResizing: true,
-                columnResizingMode: "nextColumn",
-                columnAutoWidth: true,
-                columns: [  {dataField : "ID", caption : "شناسه"}, 
-                            {dataField : "Name",caption:"نام"}, 
-                            {dataField : "Family",caption:"نام خانوادگی"},
-                            {
-                                dataField: "Picture",
-                                caption : "تصویر",
-                                width: 80,
-                                height: 50,
-                                allowFiltering: false,
-                                allowSorting: false,
-                                cellTemplate: function (container, options) {
-                                    $("<div>")
-                                        .append($("<img>", { "src": options.value, "width": "50", "height": "50" }))
-                                        .appendTo(container);
-                            }
-                    }
 
-                ],
-                onSelectionChanged: function (selectedItems) {
-                            debugger;
-                            var data = selectedItems.selectedRowsData[0];
-                            if(data) {
-                                var message = 'نام : ' + data.Name + ' نام خانوادگی :  ' + data.Family;
-                                ShowSuccess(message , 'اطلاعات فرد انتخاب شده');
-                            }
+        function FillGrid(data) {
+            var columns = [
+                { dataField: "ID", caption: "شناسه" },
+                { dataField: "Name", caption: "نام" },
+                { dataField: "Family", caption: "نام خانوادگی" },
+                {
+                    dataField: "Picture",
+                    caption: "تصویر",
+                    width: 80,
+                    height: 50,
+                    allowFiltering: false,
+                    allowSorting: false,
+                    cellTemplate: function (container, options) {
+                        $("<div>")
+                            .append($("<img>", { "src": options.value, "width": "50", "height": "50" }))
+                            .appendTo(container);
                     }
-            });
+                }
+            ];
+            var allowedPageSizes = [5, 10, 15];
+
+            CreateGridView('grid', data, "ID", true, 5, allowedPageSizes, true, true, true, true, true, true, true, true, columns);
         }
 
     </script>
@@ -89,7 +59,7 @@
 
     <div class="dx-viewport">
 
-        <input type="button" class="btn btn-success" value="search" onclick="FillData()" style="margin:10px 0px;" />
+        <input type="button" class="btn btn-success" value="search" onclick="FillData()" style="margin: 10px 0px;" />
         <br />
 
         <div class="demo-container dx-swatch-Blue-Dark-Theme">
@@ -104,27 +74,12 @@
 
     <script src="../../Scripts/dx.all.js"></script>
     <script src="../../Scripts/dx.aspnet.data.js"></script>
+    <script src="../../Scripts/CreateDevepressComponents.js"></script>
 
     <script type="text/javascript">
-        $(document).ready(function () {
 
-            $("#grid").dxDataGrid({
-                dataSource: null,
-                paging: {
-                    pageSize: 4
-                },
-                pager: {
-                    showPageSizeSelector: true,
-                    allowedPageSizes: [2, 4, 6],
-                    showInfo: true
-                },
-                columns: [{dataField : "ID", caption : "شناسه"}, 
-                            {dataField : "Name",caption:"نام"}, 
-                            {dataField : "Family",caption:"نام خانوادگی"},
-                            {dataField : "Picture",caption : "تصویر"}],
-                showBorders: true
-            });
-        });
+        FillGrid(null)
+
     </script>
 
 </asp:Content>
