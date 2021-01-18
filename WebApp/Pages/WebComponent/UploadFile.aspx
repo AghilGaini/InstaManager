@@ -21,7 +21,6 @@
         });
 
         function UploadFile() {
-            debugger;
             var fileUpload = $("#fileUpload").get(0);
             if (fileUpload == 'undefined')
                 return;

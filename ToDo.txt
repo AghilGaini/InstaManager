@@ -8,7 +8,8 @@
 8-Craete Local mdf file t o work wth that
 9-GridView in Mobile Size view
 10-GridView Events when change page
-10-Upload File with api
+11-Upload File with api
+12-Upload File with General JS
 
 Ali:
 1-if user Change his Password what happend ? 

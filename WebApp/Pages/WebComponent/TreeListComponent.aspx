@@ -52,7 +52,7 @@
 
     <script src="../../Scripts/dx.all.js"></script>
     <script src="../../Scripts/dx.aspnet.data.js"></script>
-    <script src="../../Scripts/CreateDevepressComponents.js"></script>
+    <script src="../../Scripts/CreateWebComponentComponents.js"></script>
     <script type="text/javascript">
 
         FillTreeList(null);

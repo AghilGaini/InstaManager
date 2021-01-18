@@ -53,3 +53,36 @@ function CreateTreeList(treeListID, data, keyField, parentField, showRowLines, s
     });
 }
 
+//function UploadFile(fileUploadID,filesCount,AfterSave) {
+//    var fileUpload = $("#" + fileUploadID).get(0);
+//    if (fileUpload == 'undefined')
+//        return;
+
+//    var files = fileUpload.files;
+//    if (files.length != filesCount)
+//        return;
+
+//    var fileData = new FormData();
+//    for (var i = 0; i < files.length; i++) {
+
+//        if (files[i].type != 'image/jpeg')
+//            continue;
+
+//        fileData.append(files[i].name, files[i]);
+//    }
+
+//    $.ajax({
+//        type: 'POST',
+//        data: fileData,
+//        contentType: false,
+//        processData: false,
+//        async: false,
+//        url: '<%= ResolveUrl("~")%>Classes/Handlers/FileUploadHandler.ashx',
+//        success: function (data) {
+//            AfterSave(Res);
+//        },
+//        error: function (data) {
+//            alert('Server Connection');
+//        }
+//    })
+//}
