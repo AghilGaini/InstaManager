@@ -12,12 +12,6 @@ namespace WebApp.Pages.WebComponent
         #region PageMethods
         protected void Page_Load(object sender, EventArgs e)
         {
-            cmb.DataSource = new Classes.Models.Persons().PersonList;
-            cmb.TextField = "Name";
-            cmb.ValueField = "ID";
-            cmb.ValueType = typeof(long);
-            cmb.DataBind();
-
         }
         #endregion
     }

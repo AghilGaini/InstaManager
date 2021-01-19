@@ -84,7 +84,7 @@
     <Content Include="Pages\WebComponent\GridViewComponent.aspx" />
     <Content Include="Pages\WebComponent\TreeListComponent.aspx" />
     <Content Include="Pages\WebComponent\UploadFile.aspx" />
-    <Content Include="Scripts\CreateDevepressComponents.js" />
+    <Content Include="Scripts\CreateWebComponentComponents.js" />
     <Content Include="Scripts\basicInfo.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\dx.all.js" />

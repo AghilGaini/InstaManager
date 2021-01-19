@@ -31,7 +31,7 @@
 
 }
 
-function CreateTreeList(treeListID, data, keyField, parentField, showRowLines, showBorders, columnAutoWidth,allowColumnResizing,columns) {
+function CreateTreeList(treeListID, data, keyField, parentField, showRowLines, showBorders, columnAutoWidth, allowColumnResizing, columns) {
     $("#" + treeListID).dxTreeList({
         dataSource: data,
         rootValue: -1,
@@ -53,36 +53,22 @@ function CreateTreeList(treeListID, data, keyField, parentField, showRowLines, s
     });
 }
 
-//function UploadFile(fileUploadID,filesCount,AfterSave) {
-//    var fileUpload = $("#" + fileUploadID).get(0);
-//    if (fileUpload == 'undefined')
-//        return;
+function CreateComboBox(ComboBoxID, data, key, displayExpr, valueExpr, showClearButton, rtlEnabled, placeholder) {
+    $("#" + ComboBoxID).dxSelectBox({
+        dataSource: new DevExpress.data.ArrayStore({
+            data: data,
+            key: key
+        }),
+        displayExpr: displayExpr,
+        valueExpr: valueExpr,
+        showClearButton: showClearButton,
+        rtlEnabled: rtlEnabled,
+        placeholder: placeholder == null ? "انتخاب" : placeholder,
+        noDataText: "داده ای برای نمایش وجود ندارد",
+        onValueChanged: function (selectedItems) {
+            hdn.Set(ComboBoxID, selectedItems.value);
+        }
+    });
+}
 
-//    var files = fileUpload.files;
-//    if (files.length != filesCount)
-//        return;
 
-//    var fileData = new FormData();
-//    for (var i = 0; i < files.length; i++) {
-
-//        if (files[i].type != 'image/jpeg')
-//            continue;
-
-//        fileData.append(files[i].name, files[i]);
-//    }
-
-//    $.ajax({
-//        type: 'POST',
-//        data: fileData,
-//        contentType: false,
-//        processData: false,
-//        async: false,
-//        url: '<%= ResolveUrl("~")%>Classes/Handlers/FileUploadHandler.ashx',
-//        success: function (data) {
-//            AfterSave(Res);
-//        },
-//        error: function (data) {
-//            alert('Server Connection');
-//        }
-//    })
-//}

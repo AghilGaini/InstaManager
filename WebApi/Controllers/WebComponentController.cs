@@ -39,5 +39,19 @@ namespace WebApi.Controllers
 
         }
 
+        [HttpGet]
+        public IHttpActionResult ComboBox()
+        {
+            var Res = new Models.GridViewModel().InsideList;
+
+            return Ok(new
+            {
+                code = 200,
+                message = "success",
+                count = Res.Count,
+                payload = Res
+            });
+        }
+
     }
 }
