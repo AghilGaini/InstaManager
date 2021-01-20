@@ -46,27 +46,13 @@
                     <ul class="nav navbar-nav navbar-right">
 
                         <li class="dropdown">
-                            <a class="dropdown-toggle" data-toggle="dropdown" href="#" gid="C8C83C74-C989-47F2-9B81-77A3DB2C5EB3">امنیت<span class="caret"></span></a>
-                            <ul class="dropdown-menu">
-                                <li><a gref="C8C83C74-C989-47F2-9B81-77A3DB2C5EB3" gid="0DC6B854-3E62-4666-8081-94C8551B81A9" href='<%= ResolveUrl("~") %>Pages/Users.aspx'>کاربران</a></li>
-                                <li><a gref="C8C83C74-C989-47F2-9B81-77A3DB2C5EB3" gid="16A8A08C-4325-4EDD-B568-6A26C0DC9087" href='<%= ResolveUrl("~") %>Pages/Roles.aspx'>نقش ها</a></li>
-                                <li><a gref="C8C83C74-C989-47F2-9B81-77A3DB2C5EB3" gid="7D22C403-3EC3-4B94-B3BB-DF880D82CC6B" href='<%= ResolveUrl("~") %>Pages/Levels.aspx'>سطوح</a></li>
-                                <li><a gref="C8C83C74-C989-47F2-9B81-77A3DB2C5EB3" gid="C4FAC00C-7613-43B9-805E-7C0A1750DA8B" href='<%= ResolveUrl("~") %>Pages/ChangeInfo.aspx'>تغییر مشخصات</a></li>
-                                <li><a gref="C8C83C74-C989-47F2-9B81-77A3DB2C5EB3" gid="51097CED-DDE7-4FEA-B274-1C9915FB91A3" href='<%= ResolveUrl("~") %>Pages/ChangePassword.aspx'>تغییر رمز</a></li>
-                            </ul>
-                        </li>
-
-                    </ul>
-
-                    <ul class="nav navbar-nav navbar-right">
-
-                        <li class="dropdown">
                             <a class="dropdown-toggle" data-toggle="dropdown" href="#" gid="8CBF69B8-983A-4B24-A950-F7440CFDD42D">وب کامپوننت<span class="caret"></span></a>
                             <ul class="dropdown-menu">
                                 <li><a gref="8CBF69B8-983A-4B24-A950-F7440CFDD42D" gid="15F25352-1A63-4333-BD9F-D8581CBCA7B0" href='<%= ResolveUrl("~") %>Pages/WebComponent/GridViewComponent.aspx'>گرید ویو</a></li>
                                 <li><a gref="8CBF69B8-983A-4B24-A950-F7440CFDD42D" gid="082D4178-0A06-4A98-B129-5DAF324241F9" href='<%= ResolveUrl("~") %>Pages/WebComponent/UploadFile.aspx'>آپلود فایل</a></li>
                                 <li><a gref="8CBF69B8-983A-4B24-A950-F7440CFDD42D" gid="94FF4C66-86F7-45B4-A690-4DF10BB9D169" href='<%= ResolveUrl("~") %>Pages/WebComponent/ComboBoxComponent.aspx'>کمبو باکس</a></li>
                                 <li><a gref="8CBF69B8-983A-4B24-A950-F7440CFDD42D" gid="48A7015B-D8F4-4A0C-B046-D063FCBB55CD" href='<%= ResolveUrl("~") %>Pages/WebComponent/TreeListComponent.aspx'>تری لیست</a></li>
+                                <li><a gref="8CBF69B8-983A-4B24-A950-F7440CFDD42D" gid="9383F62E-14B4-4282-BECB-FE15FC697F15" href='<%= ResolveUrl("~") %>Pages/WebComponent/TextBoxComponent.aspx'>تکست باکس</a></li>
                             </ul>
                         </li>
 

@@ -53,8 +53,8 @@ function CreateTreeList(treeListID, data, keyField, parentField, showRowLines, s
     });
 }
 
-function CreateComboBox(ComboBoxID, data, key, displayExpr, valueExpr, showClearButton, rtlEnabled, placeholder) {
-    $("#" + ComboBoxID).dxSelectBox({
+function CreateComboBox(comboBoxID, data, key, displayExpr, valueExpr, showClearButton, rtlEnabled, placeholder) {
+    $("#" + comboBoxID).dxSelectBox({
         dataSource: new DevExpress.data.ArrayStore({
             data: data,
             key: key
@@ -66,7 +66,21 @@ function CreateComboBox(ComboBoxID, data, key, displayExpr, valueExpr, showClear
         placeholder: placeholder == null ? "انتخاب" : placeholder,
         noDataText: "داده ای برای نمایش وجود ندارد",
         onValueChanged: function (selectedItems) {
-            hdn.Set(ComboBoxID, selectedItems.value);
+            hdn.Set(comboBoxID, selectedItems.value);
+        }
+    });
+}
+
+function CreateTextBox(textBoxID, placeholder, showClearButton, value, mask, maskInvalidMessage, maskRules) {
+    $("#" + textBoxID).dxTextBox({
+        placeholder: (!placeholder ? null : placeholder  ),
+        showClearButton: showClearButton,
+        value: (!value ? null : value ),
+        mask: (!mask ?  null : mask ),
+        maskInvalidMessage: (!maskInvalidMessage ? null : maskInvalidMessage ),
+        maskRules: (!maskRules ? null : maskRules ),
+        onValueChanged: function (selectedItems) {
+            hdn.Set(textBoxID, selectedItems.value);
         }
     });
 }
