@@ -9,6 +9,7 @@
     <link rel="stylesheet" type="text/css" href="../../Styles/DevExpressTheme/Blue-Dark-Theme.css" />
 
     <script type="text/javascript">
+
 </script>
 
 </asp:Content>
@@ -21,13 +22,15 @@
             <div class="dx-field-value">
                 <div id="txt1"></div>
             </div>
-        </div>
 
-        <div class="dx-field">
             <div class="dx-field-label">Password textbox </div>
             <div class="dx-field-value">
                 <div id="txt2"></div>
             </div>
+
+        </div>
+
+        <div class="dx-field">
         </div>
 
         <div class="dx-field">
@@ -59,9 +62,23 @@
         </div>
 
         <div class="dx-field">
+            <div class="dx-field-label">new numberic</div>
+            <div class="dx-field-value">
+                <div id="nuTxt3"></div>
+            </div>
+        </div>
+
+        <div class="dx-field">
             <div class="dx-field-label">Synchronize text areas </div>
             <div class="dx-field-value">
                 <div id="areatxt"></div>
+            </div>
+        </div>
+
+        <div class="dx-field">
+            <div class="dx-field-label">new area text</div>
+            <div class="dx-field-value">
+                <div id="areatxt1"></div>
             </div>
         </div>
 
@@ -114,6 +131,7 @@
             showSpinButtons: true,
         });
 
+
         $("#areatxt").dxTextArea({
             value: "Test Address",
             placeholder: "Address",
@@ -122,6 +140,10 @@
         });
 
         CreateTextBox('txt4', 'placeholder', true, 'default value', null, null, null);
+        CreateNumericBox('nuTxt3', 'This is Default Value', null, null, true, 'placeholder', true, 'عنتو درست وارد کن');
+        CreateTextArea('areatxt1', 'Default Address', 'placeholder', true, 180, null);
+        DevExpress.ui.notify('test', 'error', 600);
+
 
     </script>
 

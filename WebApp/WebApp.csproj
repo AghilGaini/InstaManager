@@ -82,6 +82,7 @@
     <Content Include="Pages\UploadPost.aspx" />
     <Content Include="Pages\WebComponent\ComboBoxComponent.aspx" />
     <Content Include="Pages\WebComponent\GridViewComponent.aspx" />
+    <Content Include="Pages\WebComponent\SearchPanelComponent.aspx" />
     <Content Include="Pages\WebComponent\TextBoxComponent.aspx" />
     <Content Include="Pages\WebComponent\TreeListComponent.aspx" />
     <Content Include="Pages\WebComponent\UploadFile.aspx" />
@@ -156,6 +157,13 @@
     </Compile>
     <Compile Include="Pages\WebComponent\GridViewComponent.aspx.designer.cs">
       <DependentUpon>GridViewComponent.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\WebComponent\SearchPanelComponent.aspx.cs">
+      <DependentUpon>SearchPanelComponent.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\WebComponent\SearchPanelComponent.aspx.designer.cs">
+      <DependentUpon>SearchPanelComponent.aspx</DependentUpon>
     </Compile>
     <Compile Include="Pages\WebComponent\TextBoxComponent.aspx.cs">
       <DependentUpon>TextBoxComponent.aspx</DependentUpon>

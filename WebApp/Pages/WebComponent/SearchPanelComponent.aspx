@@ -1,9 +1,8 @@
-﻿<%@ Page Title="تری لیست" Language="C#" MasterPageFile="~/SiteMaster.Master" AutoEventWireup="true" CodeBehind="TreeListComponent.aspx.cs"
-    Inherits="WebApp.Pages.WebComponent.TreeListComponent" NeedLogin="false"
-    gref="8CBF69B8-983A-4B24-A950-F7440CFDD42D" gid="48A7015B-D8F4-4A0C-B046-D063FCBB55CD" %>
+﻿<%@ Page Title="پنل جستجو" Language="C#" MasterPageFile="~/SiteMaster.Master" AutoEventWireup="true"
+    CodeBehind="SearchPanelComponent.aspx.cs" Inherits="WebApp.Pages.WebComponent.SearchPanelComponent"
+    gref="8CBF69B8-983A-4B24-A950-F7440CFDD42D" gid="4C1494A2-A8DD-4A04-A85A-2A7CF16F7002" NeedLogin="false" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
-
 
     <link rel="stylesheet" type="text/css" href="../../Styles/dx.common.css" />
     <link rel="stylesheet" type="text/css" href="../../Styles/dx.light.css" />
@@ -11,15 +10,15 @@
 
     <script type="text/javascript">
 
-        function FillData() {
+        function FillData(cmbID) {
             $.ajax({
                 type: 'GET',
-                url: BaseApiURL + '/webcomponent/TreeList',
+                url: BaseApiURL + '/webcomponent/ComboBox',
                 contentType: "application/json; charset=utf-8",
                 dataType: "json"
             }).then(
                 function (data) {
-                    FillTreeList(data.payload);
+                    FillComboBox(data.payload, cmbID);
                 },
                 function (data) {
                     ShowError("data: " + data.d, "عدم برقراری ارتباط");
@@ -27,9 +26,8 @@
             )
         }
 
-        function FillTreeList(data) {
-            var columns = ["Name", "Family", "gid", "gref"];
-            CreateTreeList('treeList', data, 'gid', 'gref', true, true, true, true, columns);
+        function FillComboBox(data, cmbID) {
+            CreateComboBox(cmbID, data, 'ID', 'Name', 'ID', true, true, 'انتخاب', 150, 35);
         }
 
     </script>
@@ -37,25 +35,18 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="body" runat="server">
 
-    <div class="dx-viewport">
-
-        <input type="button" class="btn btn-success" value="search" onclick="FillData()" style="margin: 10px 0px;" />
-        <br />
-
-        <div class="demo-container">
-            <div id="treeList"></div>
-        </div>
-    </div>
-
+    
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="script" runat="server">
 
     <script src="../../Scripts/dx.all.js"></script>
     <script src="../../Scripts/dx.aspnet.data.js"></script>
     <script src="../../Scripts/CreateWebComponent.js"></script>
+
     <script type="text/javascript">
 
-        FillTreeList(null);
+        FillData('cmb');
+        FillData('cmb1');
 
     </script>
 

@@ -62,7 +62,7 @@
         <input type="button" class="btn btn-success" value="search" onclick="FillData()" style="margin: 10px 0px;" />
         <br />
 
-        <div class="demo-container dx-swatch-Blue-Dark-Theme">
+        <div class="demo-container">
             <div id="exportButton"></div>
             <div id="grid"></div>
         </div>
