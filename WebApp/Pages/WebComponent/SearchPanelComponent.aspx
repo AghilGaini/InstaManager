@@ -61,6 +61,22 @@
                 <div id="cmbPosition" style="width: 50%"></div>
             </div>
         </div>
+        <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+            <div style="padding: 2% 2%">
+                <div>سن</div>
+            </div>
+            <div style="padding: 2% 2%">
+                <div id="nuAge" style="width: 50%"></div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+            <div style="padding: 2% 2%">
+                <div>ادمین</div>
+            </div>
+            <div style="padding: 2% 2%">
+                <div id="chb" style="width: 50%"></div>
+            </div>
+        </div>
     </div>
 
 </asp:Content>
@@ -75,6 +91,8 @@
         CreateTextBox('nameTxt', 'نام', true, null, null, null, null);
         CreateTextBox('familyTxt', 'نام خانوادگی', true, null, null, null, null);
         CreateComboBox('cmbPosition', cmbPositionsData, 'ID', 'Name', 'ID', true, true, 'سمت', '80%', null);
+        CreateCheckBox('chb', null, null, '120%');
+        CreateNumericBox('nuAge', null, null, 1, true, 'سن', true, null,'80%',null);
 
     </script>
 
