@@ -10,15 +10,18 @@
 
     <script type="text/javascript">
 
-        function FillData(cmbID) {
+        var cmbPositionsData;
+
+        function cmbPositions() {
             $.ajax({
                 type: 'GET',
                 url: BaseApiURL + '/webcomponent/ComboBox',
                 contentType: "application/json; charset=utf-8",
-                dataType: "json"
+                dataType: "json",
+                async:false
             }).then(
                 function (data) {
-                    FillComboBox(data.payload, cmbID);
+                    cmbPositionsData =  data.payload;
                 },
                 function (data) {
                     ShowError("data: " + data.d, "عدم برقراری ارتباط");
@@ -26,16 +29,40 @@
             )
         }
 
-        function FillComboBox(data, cmbID) {
-            CreateComboBox(cmbID, data, 'ID', 'Name', 'ID', true, true, 'انتخاب', 150, 35);
-        }
+        cmbPositions();
 
     </script>
 
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="body" runat="server">
 
-    
+    <div>
+        <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+            <div style="padding: 2% 2%">
+                <div>نام</div>
+            </div>
+            <div style="padding: 2% 2%">
+                <div id="nameTxt" style="width: 80%"></div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+            <div style="padding: 2% 2%">
+                <div>نام خانوادگی</div>
+            </div>
+            <div style="padding: 2% 2%">
+                <div id="familyTxt" style="width: 80%"></div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+            <div style="padding: 2% 2%">
+                <div>سمت</div>
+            </div>
+            <div style="padding: 2% 2%">
+                <div id="cmbPosition" style="width: 50%"></div>
+            </div>
+        </div>
+    </div>
+
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="script" runat="server">
 
@@ -45,8 +72,9 @@
 
     <script type="text/javascript">
 
-        FillData('cmb');
-        FillData('cmb1');
+        CreateTextBox('nameTxt', 'نام', true, null, null, null, null);
+        CreateTextBox('familyTxt', 'نام خانوادگی', true, null, null, null, null);
+        CreateComboBox('cmbPosition', cmbPositionsData, 'ID', 'Name', 'ID', true, true, 'سمت', '80%', null);
 
     </script>
 

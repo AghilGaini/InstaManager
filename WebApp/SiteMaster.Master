@@ -10,6 +10,15 @@
     <link rel="stylesheet" href="Styles/toastr.min.css" />
     <link rel="stylesheet" href="Styles/style.css" />
 
+    <script type="text/javascript" src='<%= ResolveUrl("~") %>Scripts/jquery.min.js'></script>
+    <script type="text/javascript" src='<%= ResolveUrl("~") %>Scripts/bootstrap.min.js'></script>
+    <script type="text/javascript" src='<%= ResolveUrl("~") %>Scripts/toastr.min.js'></script>
+    <script type="text/javascript" src='<%= ResolveUrl("~") %>Scripts/myToastr.js'></script>
+    <script type="text/javascript" src='<%= ResolveUrl("~") %>Scripts/script.js'></script>
+    <script type="text/javascript" src='<%= ResolveUrl("~") %>Scripts/security.js'></script>
+    <script type="text/javascript" src='<%= ResolveUrl("~") %>Scripts/basicInfo.js'></script>
+
+
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
 </head>
@@ -69,15 +78,8 @@
         </div>
 
         <Ins:HiddenField ID="hdn" ClientInstanceName="hdn" runat="server" />
-        
+
         <div>
-            <script type="text/javascript" src='<%= ResolveUrl("~") %>Scripts/jquery.min.js'></script>
-            <script type="text/javascript" src='<%= ResolveUrl("~") %>Scripts/bootstrap.min.js'></script>
-            <script type="text/javascript" src='<%= ResolveUrl("~") %>Scripts/toastr.min.js'></script>
-            <script type="text/javascript" src='<%= ResolveUrl("~") %>Scripts/myToastr.js'></script>
-            <script type="text/javascript" src='<%= ResolveUrl("~") %>Scripts/script.js'></script>
-            <script type="text/javascript" src='<%= ResolveUrl("~") %>Scripts/security.js'></script>
-            <script type="text/javascript" src='<%= ResolveUrl("~") %>Scripts/basicInfo.js'></script>
             <asp:ContentPlaceHolder ID="script" runat="server">
             </asp:ContentPlaceHolder>
             <asp:ScriptManager ID="ScriptManager1" runat="server" ScriptMode="Release" EnablePageMethods="true">

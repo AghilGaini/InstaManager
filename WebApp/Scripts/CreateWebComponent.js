@@ -54,6 +54,7 @@ function CreateTreeList(treeListID, data, keyField, parentField, showRowLines, s
 }
 
 function CreateComboBox(comboBoxID, data, key, displayExpr, valueExpr, showClearButton, rtlEnabled, placeholder, width, height) {
+    debugger;
     $("#" + comboBoxID).dxSelectBox({
         dataSource: new DevExpress.data.ArrayStore({
             data: data,
