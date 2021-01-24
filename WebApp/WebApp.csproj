@@ -83,6 +83,7 @@
     <Content Include="Pages\WebComponent\ButtonComponent.aspx" />
     <Content Include="Pages\WebComponent\CheckBoxComponent.aspx" />
     <Content Include="Pages\WebComponent\ComboBoxComponent.aspx" />
+    <Content Include="Pages\WebComponent\ContextMenuComponent.aspx" />
     <Content Include="Pages\WebComponent\GridViewComponent.aspx" />
     <Content Include="Pages\WebComponent\SearchPanelComponent.aspx" />
     <Content Include="Pages\WebComponent\TextBoxComponent.aspx" />
@@ -166,6 +167,13 @@
     </Compile>
     <Compile Include="Pages\WebComponent\ComboBoxComponent.aspx.designer.cs">
       <DependentUpon>ComboBoxComponent.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\WebComponent\ContextMenuComponent.aspx.cs">
+      <DependentUpon>ContextMenuComponent.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\WebComponent\ContextMenuComponent.aspx.designer.cs">
+      <DependentUpon>ContextMenuComponent.aspx</DependentUpon>
     </Compile>
     <Compile Include="Pages\WebComponent\GridViewComponent.aspx.cs">
       <DependentUpon>GridViewComponent.aspx</DependentUpon>

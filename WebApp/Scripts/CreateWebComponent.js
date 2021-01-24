@@ -166,6 +166,20 @@ function CreateButton(buttonID, stylingMode, text, type, width, disabled, icon) 
     });
 }
 
+function CreateContextMenu(contextMenuID, data, target, width,onItemClickFunction) {
+    $("#" + contextMenuID).dxContextMenu({
+        dataSource: data,
+        width: width,
+        target: "#" + target,
+        onItemClick: function (e) {
+            if (!e.itemData.items) {
+                onItemClickFunction(e);
+                //DevExpress.ui.notify("The \"" + e.itemData.text + "\" item was clicked", "success", 1500);
+            }
+        }
+    });
+}
+
 function CreateToast(message, type, time, height, width) {
     DevExpress.ui.notify({
         message: message,
