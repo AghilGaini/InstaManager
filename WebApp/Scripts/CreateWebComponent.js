@@ -54,7 +54,6 @@ function CreateTreeList(treeListID, data, keyField, parentField, showRowLines, s
 }
 
 function CreateComboBox(comboBoxID, data, key, displayExpr, valueExpr, showClearButton, rtlEnabled, placeholder, width, height) {
-    debugger;
     $("#" + comboBoxID).dxSelectBox({
         dataSource: new DevExpress.data.ArrayStore({
             data: data,
@@ -74,7 +73,26 @@ function CreateComboBox(comboBoxID, data, key, displayExpr, valueExpr, showClear
     });
 }
 
-function CreateTextBox(textBoxID, placeholder, showClearButton, value, mask, maskInvalidMessage, maskRules) {
+function CreateComboBoxWithURL(comboBoxID, URL, key, displayExpr, valueExpr, showClearButton, rtlEnabled, placeholder, width, height) {
+
+    $.ajax({
+        type: 'GET',
+        url: URL,
+        contentType: "application/json; charset=utf-8",
+        dataType: "json"
+    }).then(
+        function (data) {
+            CreateComboBox(comboBoxID, data.payload, key, displayExpr, valueExpr, showClearButton, rtlEnabled, placeholder, width, height);
+        },
+        function (data) {
+            ShowError("data: " + data.d, "عدم برقراری ارتباط");
+        }
+    )
+
+
+}
+
+function CreateTextBox(textBoxID, placeholder, showClearButton, value, mask, maskInvalidMessage, maskRules, rtlEnabled) {
     $("#" + textBoxID).dxTextBox({
         placeholder: (!placeholder ? null : placeholder),
         showClearButton: showClearButton,
@@ -82,13 +100,14 @@ function CreateTextBox(textBoxID, placeholder, showClearButton, value, mask, mas
         mask: (!mask ? null : mask),
         maskInvalidMessage: (!maskInvalidMessage ? null : maskInvalidMessage),
         maskRules: (!maskRules ? null : maskRules),
+        rtlEnabled: rtlEnabled,
         onValueChanged: function (selectedItems) {
             hdn.Set(textBoxID, selectedItems.value);
         }
     });
 }
 
-function CreateNumericBox(numbericBoxID, value, format, step, showSpinButtons, placeholder, showClearButton, invalidValueMessage, width, height, max, min) {
+function CreateNumericBox(numbericBoxID, value, format, step, showSpinButtons, placeholder, showClearButton, invalidValueMessage, width, height, max, min, rtlEnabled) {
     $("#" + numbericBoxID).dxNumberBox({
         format: !format ? null : format,
         value: !value ? null : value,
@@ -101,19 +120,21 @@ function CreateNumericBox(numbericBoxID, value, format, step, showSpinButtons, p
         height: height,
         max: max,
         min: min,
+        rtlEnabled: rtlEnabled,
         onValueChanged: function (selectedItems) {
             hdn.Set(numbericBoxID, selectedItems.value);
         }
     });
 }
 
-function CreateTextArea(textAreaID, value, placeholder, autoResizeEnabled, height, weight) {
+function CreateTextArea(textAreaID, value, placeholder, autoResizeEnabled, height, weight, rtlEnabled) {
     $("#" + textAreaID).dxTextArea({
         value: !value ? null : value,
         placeholder: !placeholder ? null : placeholder,
         autoResizeEnabled: autoResizeEnabled,
         height: !height ? null : height,
         weight: !weight ? null : weight,
+        rtlEnabled: rtlEnabled,
         onValueChanged: function (selectedItems) {
             hdn.Set(textAreaID, selectedItems.value);
         }
@@ -128,6 +149,20 @@ function CreateCheckBox(CheckBoxID, value, width, height) {
         onValueChanged: function (data) {
             hdn.Set(CheckBoxID, data.value);
         }
+    });
+}
+
+function CreateButton(buttonID, stylingMode, text, type, width, disabled, icon) {
+    $("#" + buttonID).dxButton({
+        stylingMode: stylingMode,
+        text: text,
+        type: type,
+        width: width,
+        icon : icon,
+        disabled: disabled//, 
+        //onClick: function () {
+        //    onClickFunction();
+        //}
     });
 }
 

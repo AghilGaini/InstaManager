@@ -10,71 +10,62 @@
 
     <script type="text/javascript">
 
-        var cmbPositionsData;
 
-        function cmbPositions() {
-            $.ajax({
-                type: 'GET',
-                url: BaseApiURL + '/webcomponent/ComboBox',
-                contentType: "application/json; charset=utf-8",
-                dataType: "json",
-                async:false
-            }).then(
-                function (data) {
-                    cmbPositionsData =  data.payload;
-                },
-                function (data) {
-                    ShowError("data: " + data.d, "عدم برقراری ارتباط");
-                }
-            )
-        }
 
-        cmbPositions();
-
-    </script>
+</script>
 
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="body" runat="server">
 
-    <div>
-        <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
-            <div style="padding: 2% 2%">
-                <div>نام</div>
+    <div class="row SearchPanel">
+        <div class="row SearchPanelRows">
+            <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 SearchPanelColumns">
+                <div style="padding: 1% 1%">
+                    <div>نام</div>
+                </div>
+                <div style="padding: 1% 1%">
+                    <div id="nameTxt" style="width: 80%"></div>
+                </div>
             </div>
-            <div style="padding: 2% 2%">
-                <div id="nameTxt" style="width: 80%"></div>
+            <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 SearchPanelColumns">
+                <div style="padding: 1% 1%">
+                    <div>نام خانوادگی</div>
+                </div>
+                <div style="padding: 1% 1%">
+                    <div id="familyTxt" style="width: 80%"></div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 SearchPanelColumns">
+                <div style="padding: 1% 1%">
+                    <div>سمت</div>
+                </div>
+                <div style="padding: 1% 1%">
+                    <div id="cmbPosition" style="width: 50%"></div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 SearchPanelColumns">
+                <div style="padding: 1% 1%">
+                    <div>سن</div>
+                </div>
+                <div style="padding: 1% 1%">
+                    <div id="nuAge" style="width: 50%"></div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 SearchPanelColumns"></div>
+            <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 SearchPanelColumns"></div>
+            <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 SearchPanelColumns"></div>
+            <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 SearchPanelColumns">
+                <div style="padding: 1% 1%">
+                    <div>ادمین</div>
+                </div>
+                <div style="padding: 1% 1%">
+                    <div id="chb" style="width: 50%"></div>
+                </div>
             </div>
         </div>
-        <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
-            <div style="padding: 2% 2%">
-                <div>نام خانوادگی</div>
-            </div>
-            <div style="padding: 2% 2%">
-                <div id="familyTxt" style="width: 80%"></div>
-            </div>
-        </div>
-        <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
-            <div style="padding: 2% 2%">
-                <div>سمت</div>
-            </div>
-            <div style="padding: 2% 2%">
-                <div id="cmbPosition" style="width: 50%"></div>
-            </div>
-        </div>
-        <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
-            <div style="padding: 2% 2%">
-                <div>سن</div>
-            </div>
-            <div style="padding: 2% 2%">
-                <div id="nuAge" style="width: 50%"></div>
-            </div>
-        </div>
-        <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
-            <div style="padding: 2% 2%">
-                <div>ادمین</div>
-            </div>
-            <div style="padding: 2% 2%">
-                <div id="chb" style="width: 50%"></div>
+        <div class="row SearchPanelButtonColumns">
+            <div class="col-lg-12 col-md-12 col-sm-12">
+                <button type="button" class="btn btn-primary SearchPanelButton" onclick="Search()">ثبت</button>
             </div>
         </div>
     </div>
@@ -88,11 +79,23 @@
 
     <script type="text/javascript">
 
-        CreateTextBox('nameTxt', 'نام', true, null, null, null, null);
-        CreateTextBox('familyTxt', 'نام خانوادگی', true, null, null, null, null);
-        CreateComboBox('cmbPosition', cmbPositionsData, 'ID', 'Name', 'ID', true, true, 'سمت', '80%', null);
+        CreateComboBoxWithURL('cmbPosition', BaseApiURL + '/webcomponent/ComboBox', 'ID', 'Name', 'ID', true, true, 'سمت', '80%', null);
+        CreateTextBox('nameTxt', 'نام', true, null, null, null, null, true);
+        CreateTextBox('familyTxt', 'نام خانوادگی', true, null, null, null, null, true);
         CreateCheckBox('chb', null, null, '120%');
-        CreateNumericBox('nuAge', null, null, 1, true, 'سن', true, null,'80%',null,85,10);
+        CreateNumericBox('nuAge', null, null, 1, true, 'سن', true, null, '80%', null, 85, 10, true);
+
+        function Search() {
+            var Name = hdn.Get("nameTxt");
+            var Family = hdn.Get("familyTxt");
+            var Postion = hdn.Get("cmbPosition");
+            var Age = hdn.Get("nuAge");
+            var Admin = hdn.Get("chb");
+
+            ShowInfo("name : " + Name + " Family: " + Family + " position : " + Postion + " age : " + Age + " admin : " + Admin);
+
+        }
+
 
     </script>
 

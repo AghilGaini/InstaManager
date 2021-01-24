@@ -63,6 +63,7 @@
                                 <li><a gref="8CBF69B8-983A-4B24-A950-F7440CFDD42D" gid="48A7015B-D8F4-4A0C-B046-D063FCBB55CD" href='<%= ResolveUrl("~") %>Pages/WebComponent/TreeListComponent.aspx'>تری لیست</a></li>
                                 <li><a gref="8CBF69B8-983A-4B24-A950-F7440CFDD42D" gid="9383F62E-14B4-4282-BECB-FE15FC697F15" href='<%= ResolveUrl("~") %>Pages/WebComponent/TextBoxComponent.aspx'>تکست باکس</a></li>
                                 <li><a gref="8CBF69B8-983A-4B24-A950-F7440CFDD42D" gid="7A750C2A-BE4C-4376-9850-0201AEAEDE2B" href='<%= ResolveUrl("~") %>Pages/WebComponent/CheckBoxComponent.aspx'>چک باکس</a></li>
+                                <li><a gref="8CBF69B8-983A-4B24-A950-F7440CFDD42D" gid="37D4EB90-C6DE-4539-9638-AC1CF0B5684A" href='<%= ResolveUrl("~") %>Pages/WebComponent/ButtonComponent.aspx'>باتن</a></li>
                                 <li><a gref="8CBF69B8-983A-4B24-A950-F7440CFDD42D" gid="4C1494A2-A8DD-4A04-A85A-2A7CF16F7002" href='<%= ResolveUrl("~") %>Pages/WebComponent/SearchPanelComponent.aspx'>پنل جستجو</a></li>
                             </ul>
                         </li>

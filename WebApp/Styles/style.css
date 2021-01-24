@@ -21,3 +21,27 @@ body {
     font-weight: 100;
 }
 
+.SearchPanel {
+    background-color: #f0f4f7;
+    margin: 4% 0%;
+    padding: 2% 0%;
+    border-radius: 10px;
+}
+
+.SearchPanelColumns {
+    direction: rtl;
+}
+
+.SearchPanelRows{
+    margin:1%;
+}
+
+.SearchPanelButtonColumns{
+    direction:rtl;
+    margin-right:1%;
+}
+
+.SearchPanelButton {
+    width: 20%;
+}
+

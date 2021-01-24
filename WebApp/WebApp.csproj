@@ -80,6 +80,7 @@
     <Content Include="Pages\Login.aspx" />
     <Content Include="Pages\Test.aspx" />
     <Content Include="Pages\UploadPost.aspx" />
+    <Content Include="Pages\WebComponent\ButtonComponent.aspx" />
     <Content Include="Pages\WebComponent\CheckBoxComponent.aspx" />
     <Content Include="Pages\WebComponent\ComboBoxComponent.aspx" />
     <Content Include="Pages\WebComponent\GridViewComponent.aspx" />
@@ -144,6 +145,13 @@
     </Compile>
     <Compile Include="Pages\UploadPost.aspx.designer.cs">
       <DependentUpon>UploadPost.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\WebComponent\ButtonComponent.aspx.cs">
+      <DependentUpon>ButtonComponent.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\WebComponent\ButtonComponent.aspx.designer.cs">
+      <DependentUpon>ButtonComponent.aspx</DependentUpon>
     </Compile>
     <Compile Include="Pages\WebComponent\CheckBoxComponent.aspx.cs">
       <DependentUpon>CheckBoxComponent.aspx</DependentUpon>
