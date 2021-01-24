@@ -88,7 +88,7 @@ function CreateTextBox(textBoxID, placeholder, showClearButton, value, mask, mas
     });
 }
 
-function CreateNumericBox(numbericBoxID, value, format, step, showSpinButtons, placeholder, showClearButton, invalidValueMessage,width,height) {
+function CreateNumericBox(numbericBoxID, value, format, step, showSpinButtons, placeholder, showClearButton, invalidValueMessage, width, height, max, min) {
     $("#" + numbericBoxID).dxNumberBox({
         format: !format ? null : format,
         value: !value ? null : value,
@@ -99,6 +99,8 @@ function CreateNumericBox(numbericBoxID, value, format, step, showSpinButtons, p
         invalidValueMessage: !invalidValueMessage ? null : invalidValueMessage,
         width: width,
         height: height,
+        max: max,
+        min: min,
         onValueChanged: function (selectedItems) {
             hdn.Set(numbericBoxID, selectedItems.value);
         }
@@ -118,24 +120,24 @@ function CreateTextArea(textAreaID, value, placeholder, autoResizeEnabled, heigh
     });
 }
 
-function CreateCheckBox(CheckBoxID, value,width,height) {
+function CreateCheckBox(CheckBoxID, value, width, height) {
     $("#" + CheckBoxID).dxCheckBox({
         value: value,
         width: width,
         height: height,
         onValueChanged: function (data) {
-            hdn.Set(CheckBoxID,data.value);
+            hdn.Set(CheckBoxID, data.value);
         }
     });
 }
 
-function CreateToast(message, type, time, height,width) {
+function CreateToast(message, type, time, height, width) {
     DevExpress.ui.notify({
         message: message,
         type: type,
         displayTime: time,
         height: height,
-        width:width
+        width: width
     });
 }
 

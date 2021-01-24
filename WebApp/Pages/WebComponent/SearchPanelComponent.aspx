@@ -92,7 +92,7 @@
         CreateTextBox('familyTxt', 'نام خانوادگی', true, null, null, null, null);
         CreateComboBox('cmbPosition', cmbPositionsData, 'ID', 'Name', 'ID', true, true, 'سمت', '80%', null);
         CreateCheckBox('chb', null, null, '120%');
-        CreateNumericBox('nuAge', null, null, 1, true, 'سن', true, null,'80%',null);
+        CreateNumericBox('nuAge', null, null, 1, true, 'سن', true, null,'80%',null,85,10);
 
     </script>
 
