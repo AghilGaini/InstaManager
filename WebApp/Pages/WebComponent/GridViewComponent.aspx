@@ -8,6 +8,11 @@
     <link rel="stylesheet" type="text/css" href="../../Styles/dx.light.css" />
     <link rel="stylesheet" type="text/css" href="../../Styles/DevExpressTheme/Blue-Dark-Theme.css" />
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-polyfill/7.4.0/polyfill.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/exceljs/3.3.1/exceljs.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/1.3.8/FileSaver.min.js"></script>
+
+
     <script type="text/javascript">
 
         function FillData() {
@@ -48,7 +53,49 @@
             ];
             var allowedPageSizes = [5, 10, 15];
 
-            CreateGridView('grid', data, "ID", true, 5, allowedPageSizes, true, true, true, true, true, true, true, true, columns);
+            CreateGridView('grid', data, "ID", true, 5, allowedPageSizes, true, true, true, true, true, true, true, true, columns, true, Exporting, 'fileNameTest', 'workSheet');
+        }
+
+        function Exporting(e, FileName, WorkSheet) {
+            var workbook = new ExcelJS.Workbook();
+            var worksheet = workbook.addWorksheet(WorkSheet);
+
+            worksheet.columns = [{ width: 5 }, { width: 50 }, { width: 50 }, { width: 80 }];
+
+            DevExpress.excelExporter.exportDataGrid({
+                component: e.component,
+                worksheet: worksheet,
+                keepColumnWidths: false,
+                //topLeftCell: { row: 2, column: 2 },
+                customizeCell: function (options) {
+                    var gridCell = options.gridCell;
+                    var excelCell = options.excelCell;
+
+                    if (gridCell.rowType === "data") {
+                        //if (gridCell.column.dataField === "Picture") {
+                        //    excelCell.value = undefined;
+
+                        //    const image = workbook.addImage({
+                        //        //filename: gridCell.value,
+                        //        filename: "https://icon2.cleanpng.com/20180402/qye/kisspng-computer-icons-user-login-gender-5ac29ccd8f04c2.0984432615227035655858.jpg",
+                        //        extension: 'png',
+                        //    });
+
+                        //    worksheet.getRow(excelCell.row).height = 90;
+                        //    worksheet.addImage(image, {
+                        //        tl: { col: excelCell.col - 1, row: excelCell.row - 1 },
+                        //        br: { col: excelCell.col, row: excelCell.row }
+                        //    });
+                        //}
+                    }
+
+                }
+            }).then(function () {
+                workbook.xlsx.writeBuffer().then(function (buffer) {
+                    saveAs(new Blob([buffer], { type: "application/octet-stream" }), FileName + ".xlsx");
+                });
+            });
+            e.cancel = true;
         }
 
     </script>
@@ -75,10 +122,12 @@
     <script src="../../Scripts/dx.all.js"></script>
     <script src="../../Scripts/dx.aspnet.data.js"></script>
     <script src="../../Scripts/CreateWebComponent.js"></script>
+    <script src="../../Scripts/exceljs.min.js"></script>
+    <script src="../../Scripts/FileSaver.min.js"></script>
 
     <script type="text/javascript">
 
-        FillGrid(null)
+        FillGrid(null);
 
     </script>
 

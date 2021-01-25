@@ -13,23 +13,5 @@ namespace WebApp.Pages
 
     public partial class Test
     {
-
-        /// <summary>
-        /// cmbTest control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::WebComponent.ComboBox cmbTest;
-
-        /// <summary>
-        /// grdTest control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::WebComponent.GridView grdTest;
     }
 }

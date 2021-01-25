@@ -1,4 +1,4 @@
-﻿function CreateGridView(gridID, data, keyFieldName, showPageSizeSelector, pageSize, allowedPageSizes, showInfo, showColumnLines, showRowLines, showBorders, rowAlternationEnabled, allowColumnResizing, columnResizingMode, columnAutoWidth, columns) {
+﻿function CreateGridView(gridID, data, keyFieldName, showPageSizeSelector, pageSize, allowedPageSizes, showInfo, showColumnLines, showRowLines, showBorders, rowAlternationEnabled, allowColumnResizing, columnResizingMode, columnAutoWidth, columns,Isexport,onExportingFunction,excelFileName,excelWorksheet) {
     $("#" + gridID).dxDataGrid({
         dataSource: data,
         keyExpr: keyFieldName,
@@ -13,6 +13,28 @@
             allowedPageSizes: allowedPageSizes,
             showInfo: showInfo,
             infoText: 'صفحه {0} از {1} - تعداد کل {2}'
+        },
+        export: {
+            enabled: Isexport
+        },
+        onExporting: function (e) {
+            if (!onExportingFunction)
+            {
+                var workbook = new ExcelJS.Workbook();
+                var worksheet = workbook.addWorksheet('WorkSheet');
+                DevExpress.excelExporter.exportDataGrid({
+                    component: e.component,
+                    worksheet: worksheet,
+                    keepColumnWidths: false,
+                }).then(function () {
+                    workbook.xlsx.writeBuffer().then(function (buffer) {
+                        saveAs(new Blob([buffer], { type: "application/octet-stream" }), gridID + ".xlsx");
+                    });
+                });
+                e.cancel = true;
+            }
+            else
+                onExportingFunction(e, excelFileName, excelWorksheet);
         },
         showColumnLines: showColumnLines,
         showRowLines: showRowLines,
