@@ -7,12 +7,7 @@
     <link rel="stylesheet" type="text/css" href="../../Styles/dx.common.css" />
     <link rel="stylesheet" type="text/css" href="../../Styles/dx.light.css" />
     <link rel="stylesheet" type="text/css" href="../../Styles/DevExpressTheme/Blue-Dark-Theme.css" />
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-polyfill/7.4.0/polyfill.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/exceljs/3.3.1/exceljs.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/1.3.8/FileSaver.min.js"></script>
-
-
+    
     <script type="text/javascript">
 
         function FillData() {
@@ -53,10 +48,11 @@
             ];
             var allowedPageSizes = [5, 10, 15];
 
-            CreateGridView('grid', data, "ID", true, 5, allowedPageSizes, true, true, true, true, true, true, true, true, columns, true, Exporting, 'fileNameTest', 'workSheet');
+            CreateGridView('grid', data, "ID", true, 5, allowedPageSizes, true, true, true, true, true, true, true, true, columns,
+                true, ExportingExcel, 'fileNameTest', 'workSheet', true,'exportButton','خروجی PDF','اطلاعات');
         }
 
-        function Exporting(e, FileName, WorkSheet) {
+        function ExportingExcel(e, FileName, WorkSheet) {
             var workbook = new ExcelJS.Workbook();
             var worksheet = workbook.addWorksheet(WorkSheet);
 
@@ -124,8 +120,11 @@
     <script src="../../Scripts/CreateWebComponent.js"></script>
     <script src="../../Scripts/exceljs.min.js"></script>
     <script src="../../Scripts/FileSaver.min.js"></script>
-
+    <script src="../../Scripts/jspdf.plugin.autotable.min.js"></script>
+    <script src="../../Scripts/jspdf.umd.min.js"></script>
+    
     <script type="text/javascript">
+        
 
         FillGrid(null);
 

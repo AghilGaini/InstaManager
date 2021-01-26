@@ -1,4 +1,7 @@
-﻿function CreateGridView(gridID, data, keyFieldName, showPageSizeSelector, pageSize, allowedPageSizes, showInfo, showColumnLines, showRowLines, showBorders, rowAlternationEnabled, allowColumnResizing, columnResizingMode, columnAutoWidth, columns,Isexport,onExportingFunction,excelFileName,excelWorksheet) {
+﻿function CreateGridView(gridID, data, keyFieldName, showPageSizeSelector, pageSize, allowedPageSizes, showInfo,
+    showColumnLines, showRowLines, showBorders, rowAlternationEnabled, allowColumnResizing, columnResizingMode,
+    columnAutoWidth, columns, Isexport, onExportingFunction, excelFileName, excelWorksheet,
+    isExportPdf,btnPdfID,btnPdfText,fileNamePdf) {
     $("#" + gridID).dxDataGrid({
         dataSource: data,
         keyExpr: keyFieldName,
@@ -48,8 +51,12 @@
         onSelectionChanged: function (selectedItems) {
             hdn.Set(gridID, selectedItems.selectedRowsData[0]);
         }
+
     });
 
+    if (isExportPdf) {
+        CreateExportPdfButton(btnPdfID, btnPdfText, gridID, fileNamePdf);
+    }
 
 }
 
@@ -198,6 +205,24 @@ function CreateContextMenu(contextMenuID, data, target, width,onItemClickFunctio
                 onItemClickFunction(e);
                 //DevExpress.ui.notify("The \"" + e.itemData.text + "\" item was clicked", "success", 1500);
             }
+        }
+    });
+}
+
+function CreateExportPdfButton(btnID, text, gridID, PdfFileName) {
+    window.jsPDF = window.jspdf.jsPDF;
+    applyPlugin(window.jsPDF);
+    $('#' + btnID).dxButton({
+        icon: 'exportpdf',
+        text: text,
+        onClick: function () {
+            const doc = new jsPDF();
+            DevExpress.pdfExporter.exportDataGrid({
+                jsPDFDocument: doc,
+                component: $("#" + gridID).dxDataGrid("instance")
+            }).then(function () {
+                doc.save(PdfFileName + '.pdf');
+            });
         }
     });
 }
