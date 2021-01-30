@@ -304,9 +304,6 @@ function DevexpressGetValue(ID) {
         data = $("#" + ID).dxCheckBox('instance').option('value');
     }
 
-    if (data == "null")
-        data = null;
-
     return data;
 }
 
