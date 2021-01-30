@@ -67,6 +67,7 @@
                                 <li><a gref="8CBF69B8-983A-4B24-A950-F7440CFDD42D" gid="F5675DC8-4C05-4932-B3A1-E72A69D56272" href='<%= ResolveUrl("~") %>Pages/WebComponent/ContextMenuComponent.aspx'>کانتکست منو</a></li>
                                 <li><a gref="8CBF69B8-983A-4B24-A950-F7440CFDD42D" gid="0D05BE60-E6C2-4623-82C5-4E0FAC3A025E" href='<%= ResolveUrl("~") %>Pages/WebComponent/ModalComponent.aspx'>نمایش مودال</a></li>
                                 <li><a gref="8CBF69B8-983A-4B24-A950-F7440CFDD42D" gid="4C1494A2-A8DD-4A04-A85A-2A7CF16F7002" href='<%= ResolveUrl("~") %>Pages/WebComponent/SearchPanelComponent.aspx'>پنل جستجو</a></li>
+                                <li><a gref="8CBF69B8-983A-4B24-A950-F7440CFDD42D" gid="740B9F04-E590-4C1A-B5C0-1115B5832C6A" href='<%= ResolveUrl("~") %>Pages/WebComponent/SamplePage.aspx'>صفحه نمونه</a></li>
                             </ul>
                         </li>
 

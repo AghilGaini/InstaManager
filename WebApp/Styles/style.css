@@ -45,3 +45,9 @@ body {
     width: 20%;
 }
 
+.MainGrid {
+    background-color: #f0f4f7;
+    margin: 4% 0%;
+    padding: 2% 2%;
+    border-radius: 10px;
+}

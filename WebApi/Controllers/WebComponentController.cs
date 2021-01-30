@@ -10,9 +10,9 @@ namespace WebApi.Controllers
     {
 
         [HttpGet]
-        public IHttpActionResult GridView()
+        public IHttpActionResult GridView(string name,string family,int? age)
         {
-            var Res = new Models.GridViewModel().InsideList;
+            var Res = new Models.GridViewModel().GetData(name,family,age);
 
             return Ok(new
             {

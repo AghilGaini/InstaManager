@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using Utilities;
 
 namespace WebApi.Models
 {
@@ -15,6 +16,7 @@ namespace WebApi.Models
             public string Family { get; set; }
             public long ID { get; set; }
             public string Picture { get; set; }
+            public int Age { get; set; }
         }
 
         public void InitialInsideList(int number)
@@ -26,7 +28,8 @@ namespace WebApi.Models
                     Family = "Family_" + i.ToString(),
                     Name = "Name_" + i.ToString(),
                     Picture = "../../Images/DefaultAccountPic.png",
-                    ID = i
+                    ID = i,
+                    Age = i
                 });
             }
         }
@@ -40,5 +43,19 @@ namespace WebApi.Models
                 return _InsideList;
             }
         }
+
+        public List<InsideClass> GetData(string name, string family, int? age)
+        {
+            var All = this.InsideList;
+            if (family.IsNotNull())
+                All = All.Where(r => r.Family.Contains(family)).ToList();
+            if (name.IsNotNull())
+                All = All.Where(r => r.Name.Contains(name)).ToList();
+            if (age.HasValue)
+                All = All.Where(r => r.Age == age.Value).ToList();
+
+            return All;
+        }
+
     }
 }

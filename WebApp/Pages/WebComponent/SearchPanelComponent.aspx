@@ -12,7 +12,7 @@
 
 
 
-</script>
+    </script>
 
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="body" runat="server">
@@ -94,8 +94,8 @@
 
             ShowInfo("name : " + Name + " Family: " + Family + " position : " + Postion + " age : " + Age + " admin : " + Admin);
 
-        }
-
+       
+ }
 
     </script>
 

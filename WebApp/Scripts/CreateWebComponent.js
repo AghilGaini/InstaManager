@@ -21,19 +21,12 @@
             enabled: Isexport
         },
         onExporting: function (e) {
-            if (!onExportingFunction) {
-                var workbook = new ExcelJS.Workbook();
-                var worksheet = workbook.addWorksheet('WorkSheet');
-                DevExpress.excelExporter.exportDataGrid({
-                    component: e.component,
-                    worksheet: worksheet,
-                    keepColumnWidths: false,
-                }).then(function () {
-                    workbook.xlsx.writeBuffer().then(function (buffer) {
-                        saveAs(new Blob([buffer], { type: "application/octet-stream" }), gridID + ".xlsx");
-                    });
-                });
-                e.cancel = true;
+            if (CheckNull(onExportingFunction)) {
+
+                var excelName = CheckNull(excelFileName) ? gridID : excelFileName;
+                var worksheetName = CheckNull(excelWorksheet) ? gridID : excelWorksheet;
+
+                GeneralExportGridView(e, excelName, worksheetName);
             }
             else
                 onExportingFunction(e, excelFileName, excelWorksheet);
@@ -58,6 +51,31 @@
     }
 
     hdn.Set(gridID + "Type", 'dxDataGrid');
+}
+
+function CreateGridViewWithURL(gridID, keyFieldName, showPageSizeSelector, pageSize, allowedPageSizes, showInfo,
+    showColumnLines, showRowLines, showBorders, rowAlternationEnabled, allowColumnResizing, columnResizingMode,
+    columnAutoWidth, columns, Isexport, onExportingFunction, excelFileName, excelWorksheet,
+    isExportPdf, btnPdfID, btnPdfText, fileNamePdf, url) {
+
+    $.ajax({
+        type: 'GET',
+        url: url,
+        contentType: "application/json; charset=utf-8",
+        dataType: "json"
+    }).then(
+        function (data) {
+
+            CreateGridView(gridID, data.payload, keyFieldName, showPageSizeSelector, pageSize, allowedPageSizes, showInfo,
+                showColumnLines, showRowLines, showBorders, rowAlternationEnabled, allowColumnResizing, columnResizingMode,
+                columnAutoWidth, columns, Isexport, onExportingFunction, excelFileName, excelWorksheet,
+                isExportPdf, btnPdfID, btnPdfText, fileNamePdf);
+        },
+        function (data) {
+            ShowError("data: " + data.d, "عدم برقراری ارتباط");
+        }
+    )
+
 }
 
 function CreateTreeList(treeListID, data, keyField, parentField, showRowLines, showBorders, columnAutoWidth, allowColumnResizing, columns) {
@@ -286,6 +304,43 @@ function DevexpressGetValue(ID) {
         data = $("#" + ID).dxCheckBox('instance').option('value');
     }
 
+    if (data == "null")
+        data = null;
+
     return data;
+}
+
+function GeneralExportGridView(e, FileName, WorkSheet) {
+    var workbook = new ExcelJS.Workbook();
+    var worksheet = workbook.addWorksheet(WorkSheet);
+
+    //worksheet.columns = [{ width: 5 }, { width: 50 }, { width: 50 }, { width: 80 }];
+
+    DevExpress.excelExporter.exportDataGrid({
+        component: e.component,
+        worksheet: worksheet,
+        keepColumnWidths: false,
+        customizeCell: function (options) {
+            var gridCell = options.gridCell;
+            var excelCell = options.excelCell;
+
+            if (gridCell.rowType === "data") {
+            }
+
+        }
+    }).then(function () {
+        workbook.xlsx.writeBuffer().then(function (buffer) {
+            saveAs(new Blob([buffer], { type: "application/octet-stream" }), FileName + ".xlsx");
+        });
+    });
+    e.cancel = true;
+}
+
+
+
+//Other Functions
+
+function CheckNull(data) {
+    return !data;
 }
 
