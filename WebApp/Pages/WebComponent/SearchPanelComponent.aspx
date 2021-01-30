@@ -86,11 +86,11 @@
         CreateNumericBox('nuAge', null, null, 1, true, 'سن', true, null, '80%', null, 85, 10, true);
 
         function Search() {
-            var Name = hdn.Get("nameTxt");
-            var Family = hdn.Get("familyTxt");
-            var Postion = hdn.Get("cmbPosition");
-            var Age = hdn.Get("nuAge");
-            var Admin = hdn.Get("chb");
+            var Name = DevexpressGetValue('nameTxt');
+            var Family = DevexpressGetValue('familyTxt');
+            var Postion = DevexpressGetValue('cmbPosition');
+            var Age = DevexpressGetValue('nuAge');
+            var Admin = DevexpressGetValue('chb');
 
             ShowInfo("name : " + Name + " Family: " + Family + " position : " + Postion + " age : " + Age + " admin : " + Admin);
 

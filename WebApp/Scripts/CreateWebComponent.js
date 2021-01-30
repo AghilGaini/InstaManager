@@ -1,7 +1,7 @@
 ﻿function CreateGridView(gridID, data, keyFieldName, showPageSizeSelector, pageSize, allowedPageSizes, showInfo,
     showColumnLines, showRowLines, showBorders, rowAlternationEnabled, allowColumnResizing, columnResizingMode,
     columnAutoWidth, columns, Isexport, onExportingFunction, excelFileName, excelWorksheet,
-    isExportPdf,btnPdfID,btnPdfText,fileNamePdf) {
+    isExportPdf, btnPdfID, btnPdfText, fileNamePdf) {
     $("#" + gridID).dxDataGrid({
         dataSource: data,
         keyExpr: keyFieldName,
@@ -21,8 +21,7 @@
             enabled: Isexport
         },
         onExporting: function (e) {
-            if (!onExportingFunction)
-            {
+            if (!onExportingFunction) {
                 var workbook = new ExcelJS.Workbook();
                 var worksheet = workbook.addWorksheet('WorkSheet');
                 DevExpress.excelExporter.exportDataGrid({
@@ -58,6 +57,7 @@
         CreateExportPdfButton(btnPdfID, btnPdfText, gridID, fileNamePdf);
     }
 
+    hdn.Set(gridID + "Type", 'dxDataGrid');
 }
 
 function CreateTreeList(treeListID, data, keyField, parentField, showRowLines, showBorders, columnAutoWidth, allowColumnResizing, columns) {
@@ -80,6 +80,9 @@ function CreateTreeList(treeListID, data, keyField, parentField, showRowLines, s
             hdn.Set(treeListID, selectedItems.selectedRowsData[0]);
         }
     });
+
+    hdn.Set(treeListID + "Type", 'dxTreeList');
+
 }
 
 function CreateComboBox(comboBoxID, data, key, displayExpr, valueExpr, showClearButton, rtlEnabled, placeholder, width, height) {
@@ -100,6 +103,9 @@ function CreateComboBox(comboBoxID, data, key, displayExpr, valueExpr, showClear
             hdn.Set(comboBoxID, selectedItems.value);
         }
     });
+
+    hdn.Set(comboBoxID + "Type", 'dxSelectBox');
+
 }
 
 function CreateComboBoxWithURL(comboBoxID, URL, key, displayExpr, valueExpr, showClearButton, rtlEnabled, placeholder, width, height) {
@@ -117,8 +123,6 @@ function CreateComboBoxWithURL(comboBoxID, URL, key, displayExpr, valueExpr, sho
             ShowError("data: " + data.d, "عدم برقراری ارتباط");
         }
     )
-
-
 }
 
 function CreateTextBox(textBoxID, placeholder, showClearButton, value, mask, maskInvalidMessage, maskRules, rtlEnabled) {
@@ -134,6 +138,9 @@ function CreateTextBox(textBoxID, placeholder, showClearButton, value, mask, mas
             hdn.Set(textBoxID, selectedItems.value);
         }
     });
+
+    hdn.Set(textBoxID + "Type", 'dxTextBox');
+
 }
 
 function CreateNumericBox(numbericBoxID, value, format, step, showSpinButtons, placeholder, showClearButton, invalidValueMessage, width, height, max, min, rtlEnabled) {
@@ -154,6 +161,9 @@ function CreateNumericBox(numbericBoxID, value, format, step, showSpinButtons, p
             hdn.Set(numbericBoxID, selectedItems.value);
         }
     });
+
+    hdn.Set(numbericBoxID + "Type", 'dxNumberBox');
+
 }
 
 function CreateTextArea(textAreaID, value, placeholder, autoResizeEnabled, height, weight, rtlEnabled) {
@@ -168,6 +178,9 @@ function CreateTextArea(textAreaID, value, placeholder, autoResizeEnabled, heigh
             hdn.Set(textAreaID, selectedItems.value);
         }
     });
+
+    hdn.Set(textAreaID + "Type", 'dxTextArea');
+
 }
 
 function CreateCheckBox(CheckBoxID, value, width, height) {
@@ -179,6 +192,9 @@ function CreateCheckBox(CheckBoxID, value, width, height) {
             hdn.Set(CheckBoxID, data.value);
         }
     });
+
+    hdn.Set(CheckBoxID + "Type", 'dxCheckBox');
+
 }
 
 function CreateButton(buttonID, stylingMode, text, type, width, disabled, icon) {
@@ -187,15 +203,18 @@ function CreateButton(buttonID, stylingMode, text, type, width, disabled, icon) 
         text: text,
         type: type,
         width: width,
-        icon : icon,
+        icon: icon,
         disabled: disabled//, 
         //onClick: function () {
         //    onClickFunction();
         //}
     });
+
+    hdn.Set(buttonID + "Type", 'dxButton');
+
 }
 
-function CreateContextMenu(contextMenuID, data, target, width,onItemClickFunction) {
+function CreateContextMenu(contextMenuID, data, target, width, onItemClickFunction) {
     $("#" + contextMenuID).dxContextMenu({
         dataSource: data,
         width: width,
@@ -207,6 +226,9 @@ function CreateContextMenu(contextMenuID, data, target, width,onItemClickFunctio
             }
         }
     });
+
+    hdn.Set(contextMenuID + "Type", 'dxContextMenu');
+
 }
 
 function CreateExportPdfButton(btnID, text, gridID, PdfFileName) {
@@ -237,4 +259,33 @@ function CreateToast(message, type, time, height, width) {
     });
 }
 
+function DevexpressGetValue(ID) {
+    var dxType = hdn.Get(ID + "Type");
+
+    var data = null;
+
+    if (dxType == 'dxDataGrid') {
+
+    }
+    else if (dxType == 'dxTreeList') {
+
+    }
+    else if (dxType == 'dxSelectBox') {
+        data = $("#" + ID).dxSelectBox('instance').option('value');
+    }
+    else if (dxType == 'dxTextBox') {
+        data = $("#" + ID).dxTextBox('instance').option('value');
+    }
+    else if (dxType == 'dxNumberBox') {
+        data = $("#" + ID).dxNumberBox('instance').option('value');
+    }
+    else if (dxType == 'dxTextArea') {
+        data = $("#" + ID).dxTextArea('instance').option('value');
+    }
+    else if (dxType == 'dxCheckBox') {
+        data = $("#" + ID).dxCheckBox('instance').option('value');
+    }
+
+    return data;
+}
 
