@@ -1,4 +1,5 @@
-﻿function CreateGridView(gridID, data, keyFieldName, showPageSizeSelector, pageSize, allowedPageSizes, showInfo,
+﻿//Create Components
+function CreateGridView(gridID, data, keyFieldName, showPageSizeSelector, pageSize, allowedPageSizes, showInfo,
     showColumnLines, showRowLines, showBorders, rowAlternationEnabled, allowColumnResizing, columnResizingMode,
     columnAutoWidth, columns, Isexport, onExportingFunction, excelFileName, excelWorksheet,
     isExportPdf, btnPdfID, btnPdfText, fileNamePdf, actionSelectBoxID) {
@@ -82,6 +83,32 @@ function CreateGridViewWithURL(gridID, keyFieldName, showPageSizeSelector, pageS
         }
     )
 
+}
+
+function GeneralExportGridView(e, FileName, WorkSheet) {
+    var workbook = new ExcelJS.Workbook();
+    var worksheet = workbook.addWorksheet(WorkSheet);
+
+    //worksheet.columns = [{ width: 5 }, { width: 50 }, { width: 50 }, { width: 80 }];
+
+    DevExpress.excelExporter.exportDataGrid({
+        component: e.component,
+        worksheet: worksheet,
+        keepColumnWidths: false,
+        customizeCell: function (options) {
+            var gridCell = options.gridCell;
+            var excelCell = options.excelCell;
+
+            if (gridCell.rowType === "data") {
+            }
+
+        }
+    }).then(function () {
+        workbook.xlsx.writeBuffer().then(function (buffer) {
+            saveAs(new Blob([buffer], { type: "application/octet-stream" }), FileName + ".xlsx");
+        });
+    });
+    e.cancel = true;
 }
 
 function CreateTreeList(treeListID, data, keyField, parentField, showRowLines, showBorders, columnAutoWidth, allowColumnResizing, columns) {
@@ -284,6 +311,7 @@ function CreateToast(message, type, time, height, width) {
     });
 }
 
+//General Functions
 function DevexpressGetValue(ID) {
     var dxType = hdn.Get(ID + "Type");
 
@@ -340,34 +368,7 @@ function DevexpressDisable(ID, status) {
     }
 }
 
-function GeneralExportGridView(e, FileName, WorkSheet) {
-    var workbook = new ExcelJS.Workbook();
-    var worksheet = workbook.addWorksheet(WorkSheet);
-
-    //worksheet.columns = [{ width: 5 }, { width: 50 }, { width: 50 }, { width: 80 }];
-
-    DevExpress.excelExporter.exportDataGrid({
-        component: e.component,
-        worksheet: worksheet,
-        keepColumnWidths: false,
-        customizeCell: function (options) {
-            var gridCell = options.gridCell;
-            var excelCell = options.excelCell;
-
-            if (gridCell.rowType === "data") {
-            }
-
-        }
-    }).then(function () {
-        workbook.xlsx.writeBuffer().then(function (buffer) {
-            saveAs(new Blob([buffer], { type: "application/octet-stream" }), FileName + ".xlsx");
-        });
-    });
-    e.cancel = true;
-}
-
 //Other Functions
-
 function CheckNull(data) {
     return !data;
 }
