@@ -1,7 +1,7 @@
 ﻿function CreateGridView(gridID, data, keyFieldName, showPageSizeSelector, pageSize, allowedPageSizes, showInfo,
     showColumnLines, showRowLines, showBorders, rowAlternationEnabled, allowColumnResizing, columnResizingMode,
     columnAutoWidth, columns, Isexport, onExportingFunction, excelFileName, excelWorksheet,
-    isExportPdf, btnPdfID, btnPdfText, fileNamePdf) {
+    isExportPdf, btnPdfID, btnPdfText, fileNamePdf, actionSelectBoxID) {
     $("#" + gridID).dxDataGrid({
         dataSource: data,
         keyExpr: keyFieldName,
@@ -42,6 +42,12 @@
         columns: columns,
         onSelectionChanged: function (selectedItems) {
             hdn.Set(gridID, selectedItems.selectedRowsData[0]);
+        },
+        onRowClick: function (e) {
+            if (CheckNull(actionSelectBoxID))
+                DevexpressDisable('cmbActions', false);
+            else
+                DevexpressDisable(actionSelectBoxID, false);
         }
 
     });
@@ -56,7 +62,7 @@
 function CreateGridViewWithURL(gridID, keyFieldName, showPageSizeSelector, pageSize, allowedPageSizes, showInfo,
     showColumnLines, showRowLines, showBorders, rowAlternationEnabled, allowColumnResizing, columnResizingMode,
     columnAutoWidth, columns, Isexport, onExportingFunction, excelFileName, excelWorksheet,
-    isExportPdf, btnPdfID, btnPdfText, fileNamePdf, url) {
+    isExportPdf, btnPdfID, btnPdfText, fileNamePdf, url, actionSelectBoxID) {
 
     $.ajax({
         type: 'GET',
@@ -69,7 +75,7 @@ function CreateGridViewWithURL(gridID, keyFieldName, showPageSizeSelector, pageS
             CreateGridView(gridID, data.payload, keyFieldName, showPageSizeSelector, pageSize, allowedPageSizes, showInfo,
                 showColumnLines, showRowLines, showBorders, rowAlternationEnabled, allowColumnResizing, columnResizingMode,
                 columnAutoWidth, columns, Isexport, onExportingFunction, excelFileName, excelWorksheet,
-                isExportPdf, btnPdfID, btnPdfText, fileNamePdf);
+                isExportPdf, btnPdfID, btnPdfText, fileNamePdf, actionSelectBoxID);
         },
         function (data) {
             ShowError("data: " + data.d, "عدم برقراری ارتباط");
@@ -103,7 +109,7 @@ function CreateTreeList(treeListID, data, keyField, parentField, showRowLines, s
 
 }
 
-function CreateComboBox(comboBoxID, data, key, displayExpr, valueExpr, showClearButton, rtlEnabled, placeholder, width, height) {
+function CreateComboBox(comboBoxID, data, key, displayExpr, valueExpr, showClearButton, rtlEnabled, placeholder, width, height, disabled) {
     $("#" + comboBoxID).dxSelectBox({
         dataSource: new DevExpress.data.ArrayStore({
             data: data,
@@ -117,6 +123,7 @@ function CreateComboBox(comboBoxID, data, key, displayExpr, valueExpr, showClear
         height: height,
         placeholder: placeholder == null ? "انتخاب" : placeholder,
         noDataText: "داده ای برای نمایش وجود ندارد",
+        disabled: disabled,
         onValueChanged: function (selectedItems) {
             hdn.Set(comboBoxID, selectedItems.value);
         }
@@ -126,7 +133,7 @@ function CreateComboBox(comboBoxID, data, key, displayExpr, valueExpr, showClear
 
 }
 
-function CreateComboBoxWithURL(comboBoxID, URL, key, displayExpr, valueExpr, showClearButton, rtlEnabled, placeholder, width, height) {
+function CreateComboBoxWithURL(comboBoxID, URL, key, displayExpr, valueExpr, showClearButton, rtlEnabled, placeholder, width, height, disabled) {
 
     $.ajax({
         type: 'GET',
@@ -135,7 +142,7 @@ function CreateComboBoxWithURL(comboBoxID, URL, key, displayExpr, valueExpr, sho
         dataType: "json"
     }).then(
         function (data) {
-            CreateComboBox(comboBoxID, data.payload, key, displayExpr, valueExpr, showClearButton, rtlEnabled, placeholder, width, height);
+            CreateComboBox(comboBoxID, data.payload, key, displayExpr, valueExpr, showClearButton, rtlEnabled, placeholder, width, height, disabled);
         },
         function (data) {
             ShowError("data: " + data.d, "عدم برقراری ارتباط");
@@ -307,6 +314,32 @@ function DevexpressGetValue(ID) {
     return data;
 }
 
+function DevexpressDisable(ID, status) {
+    var dxType = hdn.Get(ID + "Type");
+
+    if (dxType == 'dxDataGrid') {
+        $("#" + ID).dxDataGrid("option", "disabled", status);
+    }
+    else if (dxType == 'dxTreeList') {
+        $("#" + ID).dxTreeList("option", "disabled", status);
+    }
+    else if (dxType == 'dxSelectBox') {
+        $("#" + ID).dxSelectBox("option", "disabled", status);
+    }
+    else if (dxType == 'dxTextBox') {
+        $("#" + ID).dxTextBox("option", "disabled", status);
+    }
+    else if (dxType == 'dxNumberBox') {
+        $("#" + ID).dxNumberBox("option", "disabled", status);
+    }
+    else if (dxType == 'dxTextArea') {
+        $("#" + ID).dxTextArea("option", "disabled", status);
+    }
+    else if (dxType == 'dxCheckBox') {
+        $("#" + ID).dxCheckBox("option", "disabled", status);
+    }
+}
+
 function GeneralExportGridView(e, FileName, WorkSheet) {
     var workbook = new ExcelJS.Workbook();
     var worksheet = workbook.addWorksheet(WorkSheet);
@@ -332,8 +365,6 @@ function GeneralExportGridView(e, FileName, WorkSheet) {
     });
     e.cancel = true;
 }
-
-
 
 //Other Functions
 

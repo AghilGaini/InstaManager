@@ -23,7 +23,7 @@ body {
 
 .SearchPanel {
     background-color: #f0f4f7;
-    margin: 4% 0%;
+    margin: 1% 0% 1% 0%;
     padding: 2% 0%;
     border-radius: 10px;
 }
@@ -47,7 +47,15 @@ body {
 
 .MainGrid {
     background-color: #f0f4f7;
-    margin: 4% 0%;
+    margin: 1% 0% 1% 0%;
     padding: 2% 2%;
     border-radius: 10px;
+}
+
+.ActionPanel {
+    background-color: #f0f4f7;
+    margin: 1% 0% 1% 0%;
+    padding: 2% 2%;
+    border-radius: 10px;
+    direction: rtl;
 }

@@ -10,7 +10,7 @@
 
     <script type="text/javascript">
 
-        function CreateGrid(firstTime,url) {
+        function CreateGrid(firstTime, url) {
             var columns = [
                 { dataField: "ID", caption: "شناسه" },
                 { dataField: "Name", caption: "نام" },
@@ -33,11 +33,11 @@
 
             if (firstTime == true) {
                 CreateGridView('grid', null, "ID", true, 5, allowedPageSizes, true, true, true, true, true, true, true, true, columns,
-                    true, ExportingExcel, 'fileNameTest', 'workSheet', true, 'exportButton', 'خروجی PDF', 'اطلاعات');
+                    true, ExportingExcel, 'fileNameTest', 'workSheet', true, 'exportButton', 'خروجی PDF', 'اطلاعات', 'cmbActions');
             }
             else {
                 CreateGridViewWithURL('grid', "ID", true, 5, allowedPageSizes, true, true, true, true, true, true, true, true, columns,
-                    true, null, 'fileNameTest', 'workSheet', true, 'exportButton', 'خروجی PDF', 'اطلاعات', url);
+                    true, null, 'fileNameTest', 'workSheet', true, 'exportButton', 'خروجی PDF', 'اطلاعات', url,'cmbActions');
             }
         }
 
@@ -68,16 +68,17 @@
         }
 
         function Search() {
-            debugger;
+            DevexpressDisable('cmbActions', true);
+
             var name = DevexpressGetValue('nameTxt');
             var family = DevexpressGetValue('familyTxt');
             var age = DevexpressGetValue('nuAge');
 
             var args = 'name=' + name + '&family=' + family + '&age=' + age;
 
-            var url = BaseApiURL + '/webcomponent/gridview?' + args; 
+            var url = BaseApiURL + '/webcomponent/gridview?' + args;
 
-            CreateGrid(false,url);
+            CreateGrid(false, url);
         }
 
     </script>
@@ -139,6 +140,14 @@
         </div>
     </div>
 
+    <div class="ActionPanel">
+        <div>
+            <div style="width:65%">
+                <div id="cmbActions" style="width:50%;"></div>
+            </div>
+        </div>
+    </div>
+
     <div class="MainGrid">
         <div id="exportButton"></div>
         <div id="grid"></div>
@@ -158,6 +167,7 @@
     <script type="text/javascript">
 
         CreateComboBoxWithURL('cmbPosition', BaseApiURL + '/webcomponent/ComboBox', 'ID', 'Name', 'ID', true, true, 'سمت', '80%', null);
+        CreateComboBoxWithURL('cmbActions', BaseApiURL + '/webcomponent/ComboBox', 'ID', 'Name', 'ID', true, true, 'عملیات', '80%', null,true);
         CreateTextBox('nameTxt', 'نام', true, null, null, null, null, true);
         CreateTextBox('familyTxt', 'نام خانوادگی', true, null, null, null, null, true);
         CreateCheckBox('chb', null, null, '120%');
