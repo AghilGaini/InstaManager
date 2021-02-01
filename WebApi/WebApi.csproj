@@ -162,7 +162,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Actions.cs" />
     <Compile Include="Models\ComboBox.cs" />
+    <Compile Include="Models\Entries\PositionsModel.cs" />
     <Compile Include="Models\GridViewModel.cs" />
     <Compile Include="Models\TreeListModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

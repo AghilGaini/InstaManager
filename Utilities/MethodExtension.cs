@@ -136,6 +136,28 @@ namespace Utilities
                 return null;
             }
         }
+        public static Guid? ToNullableGuid(this string s)
+        {
+            try
+            {
+                return Guid.Parse(s);
+            }
+            catch
+            {
+                return null;
+            }
+        }
+        public static Guid ToGuid(this string s)
+        {
+            try
+            {
+                return Guid.Parse(s);
+            }
+            catch
+            {
+                return Guid.Empty;
+            }
+        }
         public static bool IsNotNull(this object o)
         {
             try

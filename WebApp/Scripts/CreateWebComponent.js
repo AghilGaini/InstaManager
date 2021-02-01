@@ -136,7 +136,7 @@ function CreateTreeList(treeListID, data, keyField, parentField, showRowLines, s
 
 }
 
-function CreateComboBox(comboBoxID, data, key, displayExpr, valueExpr, showClearButton, rtlEnabled, placeholder, width, height, disabled) {
+function CreateComboBox(comboBoxID, data, key, displayExpr, valueExpr, showClearButton, rtlEnabled, placeholder, width, height, disabled,onChangeFunction) {
     $("#" + comboBoxID).dxSelectBox({
         dataSource: new DevExpress.data.ArrayStore({
             data: data,
@@ -151,8 +151,9 @@ function CreateComboBox(comboBoxID, data, key, displayExpr, valueExpr, showClear
         placeholder: placeholder == null ? "انتخاب" : placeholder,
         noDataText: "داده ای برای نمایش وجود ندارد",
         disabled: disabled,
-        onValueChanged: function (selectedItems) {
-            hdn.Set(comboBoxID, selectedItems.value);
+        onValueChanged: function (selectedItem) {
+            hdn.Set(comboBoxID, selectedItem.value);
+            onChangeFunction(selectedItem.value);
         }
     });
 
@@ -160,7 +161,7 @@ function CreateComboBox(comboBoxID, data, key, displayExpr, valueExpr, showClear
 
 }
 
-function CreateComboBoxWithURL(comboBoxID, URL, key, displayExpr, valueExpr, showClearButton, rtlEnabled, placeholder, width, height, disabled) {
+function CreateComboBoxWithURL(comboBoxID, URL, key, displayExpr, valueExpr, showClearButton, rtlEnabled, placeholder, width, height, disabled, onChangeFunction) {
 
     $.ajax({
         type: 'GET',
@@ -169,7 +170,7 @@ function CreateComboBoxWithURL(comboBoxID, URL, key, displayExpr, valueExpr, sho
         dataType: "json"
     }).then(
         function (data) {
-            CreateComboBox(comboBoxID, data.payload, key, displayExpr, valueExpr, showClearButton, rtlEnabled, placeholder, width, height, disabled);
+            CreateComboBox(comboBoxID, data.payload, key, displayExpr, valueExpr, showClearButton, rtlEnabled, placeholder, width, height, disabled, onChangeFunction);
         },
         function (data) {
             ShowError("data: " + data.d, "عدم برقراری ارتباط");
@@ -337,6 +338,34 @@ function DevexpressGetValue(ID) {
     }
     else if (dxType == 'dxCheckBox') {
         data = $("#" + ID).dxCheckBox('instance').option('value');
+    }
+
+    return data;
+}
+
+function DevexpressSetValue(ID,data) {
+    var dxType = hdn.Get(ID + "Type");
+
+    if (dxType == 'dxDataGrid') {
+
+    }
+    else if (dxType == 'dxTreeList') {
+
+    }
+    else if (dxType == 'dxSelectBox') {
+        data = $("#" + ID).dxSelectBox('instance').option('value', data);
+    }
+    else if (dxType == 'dxTextBox') {
+        data = $("#" + ID).dxTextBox('instance').option('value', data);
+    }
+    else if (dxType == 'dxNumberBox') {
+        data = $("#" + ID).dxNumberBox('instance').option('value', data);
+    }
+    else if (dxType == 'dxTextArea') {
+        data = $("#" + ID).dxTextArea('instance').option('value', data);
+    }
+    else if (dxType == 'dxCheckBox') {
+        data = $("#" + ID).dxCheckBox('instance').option('value', data);
     }
 
     return data;
