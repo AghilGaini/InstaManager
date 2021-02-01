@@ -44,9 +44,9 @@
                     <ul class="nav navbar-nav navbar-right">
 
                         <li class="dropdown">
-                            <a class="dropdown-toggle" data-toggle="dropdown" href="#" gid="B815D05D-76F2-491C-AC75-3DB80C0371ED">مدیریت پست<span class="caret"></span></a>
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#" gid="B815D05D-76F2-491C-AC75-3DB80C0371ED" title="مدیریت پست">مدیریت پست<span class="caret"></span></a>
                             <ul class="dropdown-menu">
-                                <li><a gref="B815D05D-76F2-491C-AC75-3DB80C0371ED" gid="652696C3-CF52-444C-B731-3787D0E0EFC7" href='<%= ResolveUrl("~") %>Pages/UploadPost.aspx'>آپلود پست</a></li>
+                                <li><a gref="B815D05D-76F2-491C-AC75-3DB80C0371ED" gid="652696C3-CF52-444C-B731-3787D0E0EFC7" href='<%= ResolveUrl("~") %>Pages/UploadPost.aspx' title="مدیریت پست">آپلود پست</a></li>
                             </ul>
                         </li>
 
@@ -55,19 +55,19 @@
                     <ul class="nav navbar-nav navbar-right">
 
                         <li class="dropdown">
-                            <a class="dropdown-toggle" data-toggle="dropdown" href="#" gid="8CBF69B8-983A-4B24-A950-F7440CFDD42D">وب کامپوننت<span class="caret"></span></a>
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#" gid="8CBF69B8-983A-4B24-A950-F7440CFDD42D" title="وب کامپوننت">وب کامپوننت<span class="caret"></span></a>
                             <ul class="dropdown-menu">
-                                <li><a gref="8CBF69B8-983A-4B24-A950-F7440CFDD42D" gid="15F25352-1A63-4333-BD9F-D8581CBCA7B0" href='<%= ResolveUrl("~") %>Pages/WebComponent/GridViewComponent.aspx'>گرید ویو</a></li>
-                                <li><a gref="8CBF69B8-983A-4B24-A950-F7440CFDD42D" gid="082D4178-0A06-4A98-B129-5DAF324241F9" href='<%= ResolveUrl("~") %>Pages/WebComponent/UploadFile.aspx'>آپلود فایل</a></li>
-                                <li><a gref="8CBF69B8-983A-4B24-A950-F7440CFDD42D" gid="94FF4C66-86F7-45B4-A690-4DF10BB9D169" href='<%= ResolveUrl("~") %>Pages/WebComponent/ComboBoxComponent.aspx'>کمبو باکس</a></li>
-                                <li><a gref="8CBF69B8-983A-4B24-A950-F7440CFDD42D" gid="48A7015B-D8F4-4A0C-B046-D063FCBB55CD" href='<%= ResolveUrl("~") %>Pages/WebComponent/TreeListComponent.aspx'>تری لیست</a></li>
-                                <li><a gref="8CBF69B8-983A-4B24-A950-F7440CFDD42D" gid="9383F62E-14B4-4282-BECB-FE15FC697F15" href='<%= ResolveUrl("~") %>Pages/WebComponent/TextBoxComponent.aspx'>تکست باکس</a></li>
-                                <li><a gref="8CBF69B8-983A-4B24-A950-F7440CFDD42D" gid="7A750C2A-BE4C-4376-9850-0201AEAEDE2B" href='<%= ResolveUrl("~") %>Pages/WebComponent/CheckBoxComponent.aspx'>چک باکس</a></li>
-                                <li><a gref="8CBF69B8-983A-4B24-A950-F7440CFDD42D" gid="37D4EB90-C6DE-4539-9638-AC1CF0B5684A" href='<%= ResolveUrl("~") %>Pages/WebComponent/ButtonComponent.aspx'>باتن</a></li>
-                                <li><a gref="8CBF69B8-983A-4B24-A950-F7440CFDD42D" gid="F5675DC8-4C05-4932-B3A1-E72A69D56272" href='<%= ResolveUrl("~") %>Pages/WebComponent/ContextMenuComponent.aspx'>کانتکست منو</a></li>
-                                <li><a gref="8CBF69B8-983A-4B24-A950-F7440CFDD42D" gid="0D05BE60-E6C2-4623-82C5-4E0FAC3A025E" href='<%= ResolveUrl("~") %>Pages/WebComponent/ModalComponent.aspx'>نمایش مودال</a></li>
-                                <li><a gref="8CBF69B8-983A-4B24-A950-F7440CFDD42D" gid="4C1494A2-A8DD-4A04-A85A-2A7CF16F7002" href='<%= ResolveUrl("~") %>Pages/WebComponent/SearchPanelComponent.aspx'>پنل جستجو</a></li>
-                                <li><a gref="8CBF69B8-983A-4B24-A950-F7440CFDD42D" gid="740B9F04-E590-4C1A-B5C0-1115B5832C6A" href='<%= ResolveUrl("~") %>Pages/WebComponent/SamplePage.aspx'>صفحه نمونه</a></li>
+                                <li><a gref="8CBF69B8-983A-4B24-A950-F7440CFDD42D" gid="15F25352-1A63-4333-BD9F-D8581CBCA7B0" href='<%= ResolveUrl("~") %>Pages/WebComponent/GridViewComponent.aspx' title="گرید ویو" >گرید ویو</a></li>
+                                <li><a gref="8CBF69B8-983A-4B24-A950-F7440CFDD42D" gid="082D4178-0A06-4A98-B129-5DAF324241F9" href='<%= ResolveUrl("~") %>Pages/WebComponent/UploadFile.aspx' title="آپلود فایل" >آپلود فایل</a></li>
+                                <li><a gref="8CBF69B8-983A-4B24-A950-F7440CFDD42D" gid="94FF4C66-86F7-45B4-A690-4DF10BB9D169" href='<%= ResolveUrl("~") %>Pages/WebComponent/ComboBoxComponent.aspx' title="کمبو باکس" >کمبو باکس</a></li>
+                                <li><a gref="8CBF69B8-983A-4B24-A950-F7440CFDD42D" gid="48A7015B-D8F4-4A0C-B046-D063FCBB55CD" href='<%= ResolveUrl("~") %>Pages/WebComponent/TreeListComponent.aspx' title="تری لیست" >تری لیست</a></li>
+                                <li><a gref="8CBF69B8-983A-4B24-A950-F7440CFDD42D" gid="9383F62E-14B4-4282-BECB-FE15FC697F15" href='<%= ResolveUrl("~") %>Pages/WebComponent/TextBoxComponent.aspx' title="تسکت باکس">تکست باکس</a></li>
+                                <li><a gref="8CBF69B8-983A-4B24-A950-F7440CFDD42D" gid="7A750C2A-BE4C-4376-9850-0201AEAEDE2B" href='<%= ResolveUrl("~") %>Pages/WebComponent/CheckBoxComponent.aspx' title="چک باکس">چک باکس</a></li>
+                                <li><a gref="8CBF69B8-983A-4B24-A950-F7440CFDD42D" gid="37D4EB90-C6DE-4539-9638-AC1CF0B5684A" href='<%= ResolveUrl("~") %>Pages/WebComponent/ButtonComponent.aspx' title="باتن">باتن</a></li>
+                                <li><a gref="8CBF69B8-983A-4B24-A950-F7440CFDD42D" gid="F5675DC8-4C05-4932-B3A1-E72A69D56272" href='<%= ResolveUrl("~") %>Pages/WebComponent/ContextMenuComponent.aspx' title="کانتکست منو">کانتکست منو</a></li>
+                                <li><a gref="8CBF69B8-983A-4B24-A950-F7440CFDD42D" gid="0D05BE60-E6C2-4623-82C5-4E0FAC3A025E" href='<%= ResolveUrl("~") %>Pages/WebComponent/ModalComponent.aspx' title="نمایش مودال">نمایش مودال</a></li>
+                                <li><a gref="8CBF69B8-983A-4B24-A950-F7440CFDD42D" gid="4C1494A2-A8DD-4A04-A85A-2A7CF16F7002" href='<%= ResolveUrl("~") %>Pages/WebComponent/SearchPanelComponent.aspx' title="پنل جستجو">پنل جستجو</a></li>
+                                <li><a gref="8CBF69B8-983A-4B24-A950-F7440CFDD42D" gid="740B9F04-E590-4C1A-B5C0-1115B5832C6A" href='<%= ResolveUrl("~") %>Pages/WebComponent/SamplePage.aspx' title="صفحه نمونه">صفحه نمونه</a></li>
                             </ul>
                         </li>
 
