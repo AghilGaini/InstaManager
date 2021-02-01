@@ -9,8 +9,8 @@ function GetAllElemnts() {
         if ($(all[i]).attr('gid').length != 0) {
             var current = {};
             current.gid = $(all[i]).attr('gid');
-            current.gref = $(all[i]).attr('gref') == "undefined" ? null : $(all[i]).attr('gref');
-            current.title = $(all[i]).attr('title') == "undefined" ? null : $(all[i]).attr('title');
+            current.gref = $(all[i]).attr('gref') == undefined ? null : $(all[i]).attr('gref');
+            current.title = $(all[i]).attr('title') == undefined ? null : $(all[i]).attr('title');
 
             items[i] = current;
         }
