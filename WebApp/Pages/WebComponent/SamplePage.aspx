@@ -314,6 +314,7 @@
                 data: entity
             }).then(
                 function (data) {
+                    ClearSelection('grid');
                     ShowSuccess('عملیات با موفقیت انحام شد', 'عملیات موفق');
                     $("#editInfo").modal('hide');
                     Search();
