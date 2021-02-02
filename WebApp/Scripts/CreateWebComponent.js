@@ -23,10 +23,8 @@ function CreateGridView(gridID, data, keyFieldName, showPageSizeSelector, pageSi
         },
         onExporting: function (e) {
             if (CheckNull(onExportingFunction)) {
-
                 var excelName = CheckNull(excelFileName) ? gridID : excelFileName;
                 var worksheetName = CheckNull(excelWorksheet) ? gridID : excelWorksheet;
-
                 GeneralExportGridView(e, excelName, worksheetName);
             }
             else
@@ -367,8 +365,6 @@ function DevexpressSetValue(ID,data) {
     else if (dxType == 'dxCheckBox') {
         data = $("#" + ID).dxCheckBox('instance').option('value', data);
     }
-
-    return data;
 }
 
 function DevexpressDisable(ID, status) {
@@ -394,6 +390,33 @@ function DevexpressDisable(ID, status) {
     }
     else if (dxType == 'dxCheckBox') {
         $("#" + ID).dxCheckBox("option", "disabled", status);
+    }
+}
+
+function ClearSelection(ID) {
+    var dxType = hdn.Get(ID + "Type");
+
+    if (dxType == 'dxDataGrid') {
+        $("#" + ID).dxDataGrid('clearSelection');
+    }
+    else if (dxType == 'dxTreeList') {
+        $("#" + ID).dxTreeList('clearSelection');
+    }
+    else if (dxType == 'dxSelectBox') {
+        $("#" + ID).dxSelectBox('clearSelection');
+    }
+    else if (dxType == 'dxTextBox') {
+        $("#" + ID).dxSelectBox('clearSelection');
+        data = $("#" + ID).dxTextBox('instance').option('value', data);
+    }
+    else if (dxType == 'dxNumberBox') {
+        $("#" + ID).dxNumberBox('clearSelection');
+    }
+    else if (dxType == 'dxTextArea') {
+        $("#" + ID).dxTextArea('clearSelection');
+    }
+    else if (dxType == 'dxCheckBox') {
+        $("#" + ID).dxCheckBox('clearSelection');
     }
 }
 

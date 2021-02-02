@@ -256,10 +256,10 @@
         function Search() {
             DevexpressSetValue('cmbActions', null);
             DevexpressDisable('cmbActions', true);
-
-            var name = DevexpressGetValue('nameTxt');
-            var family = DevexpressGetValue('familyTxt');
-            var age = DevexpressGetValue('nuAge');
+            debugger;
+            var name = CheckNull(DevexpressGetValue('nameTxt')) == true ? "" : DevexpressGetValue('nameTxt');
+            var family = CheckNull(DevexpressGetValue('familyTxt')) == true ? "" : DevexpressGetValue('familyTxt');
+            var age = CheckNull(DevexpressGetValue('nuAge')) == true ? "" : DevexpressGetValue('nuAge');
 
             var args = 'name=' + name + '&family=' + family + '&age=' + age;
 
@@ -291,7 +291,7 @@
             DevexpressSetValue('moAgenu', hdn.Get('grid').Age);
 
 
-            $("#editInfo").modal()
+            $("#editInfo").modal();
         }
 
         function SaveEdit() {
@@ -315,6 +315,8 @@
             }).then(
                 function (data) {
                     ShowSuccess('عملیات با موفقیت انحام شد', 'عملیات موفق');
+                    $("#editInfo").modal('hide');
+                    Search();
                 },
                 function (data) {
                     ShowError("data: " + data.d, "عدم برقراری ارتباط");
