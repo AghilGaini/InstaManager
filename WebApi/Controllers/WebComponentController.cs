@@ -5,6 +5,10 @@ using System.Web;
 using System.Web.Http;
 using WebApi.Models;
 using Utilities;
+using System.Threading.Tasks;
+using System.Net.Http;
+using System.Net;
+using System.IO;
 
 namespace WebApi.Controllers
 {
@@ -66,7 +70,7 @@ namespace WebApi.Controllers
             {
                 isNew = true;
                 lastID = new Models.GridViewModel().InsideList.Max(r => r.ID);
-                Info = new GridViewModel.InsideClass() { ID = lastID+1 };
+                Info = new GridViewModel.InsideClass() { ID = lastID + 1 };
             }
 
             Info.Name = model.Name;
@@ -103,5 +107,50 @@ namespace WebApi.Controllers
             });
         }
 
+        [HttpPost]
+        public async Task UploadProfilePic(HttpRequestMessage Request)
+        {
+            if (!Request.Content.IsMimeMultipartContent())
+            {
+                throw new HttpResponseException(HttpStatusCode.UnsupportedMediaType);
+            }
+
+            var path = "D:\\UploadTest";
+
+            var provider = new MultipartFormDataStreamProvider(path);
+
+            if (!Directory.Exists(path))
+                Directory.CreateDirectory(path);
+
+            await Request.Content.ReadAsMultipartAsync(provider);
+
+            foreach (MultipartFileData fileData in provider.FileData)
+            {
+                string fileName = "";
+                if (string.IsNullOrEmpty(fileData.Headers.ContentDisposition.FileName))
+                {
+                    fileName = Guid.NewGuid().ToString();
+                }
+                fileName = fileData.Headers.ContentDisposition.FileName;
+                if (fileName.StartsWith("\"") && fileName.EndsWith("\""))
+                {
+                    fileName = fileName.Trim('"');
+                }
+                if (fileName.Contains(@"/") || fileName.Contains(@"\"))
+                {
+                    fileName = Path.GetFileName(fileName);
+                }
+
+                var filePath = Path.Combine(path, fileName);
+                var fileInfo = new FileInfo(filePath);
+
+                if (!Directory.Exists(fileInfo.Directory.FullName))
+                {
+                    Directory.CreateDirectory(fileInfo.Directory.FullName);
+                }
+
+                File.Move(fileData.LocalFileName, filePath);
+            }
+        }
     }
 }
