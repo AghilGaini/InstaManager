@@ -21,13 +21,14 @@ namespace WebApi.Models
 
         public void InitialInsideList(int number)
         {
+            var Pic = "../../Images/DefaultAccountPic.png";
             for (int i = 0; i < number; i++)
             {
                 _InsideList.Add(new InsideClass()
                 {
                     Family = "Family_" + i.ToString(),
                     Name = "Name_" + i.ToString(),
-                    Picture = "../../Images/DefaultAccountPic.png",
+                    Picture = i==1 ? string.Format("{0}/{1}/profiles/1/dx2.jpg", Constants.AppInfo.ServerAddress, Constants.AppInfo.VirtualFileName) :Pic,
                     ID = i,
                     Age = i
                 });

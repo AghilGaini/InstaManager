@@ -110,12 +110,16 @@ namespace WebApi.Controllers
         [HttpPost]
         public async Task UploadProfilePic(HttpRequestMessage Request)
         {
+            var ID = HttpContext.Current.Request.Params["ID"].ToLong();
+            if (ID == 0)
+                throw new Exception("ID IsInvalid");
+
             if (!Request.Content.IsMimeMultipartContent())
             {
                 throw new HttpResponseException(HttpStatusCode.UnsupportedMediaType);
             }
 
-            var path = "D:\\UploadTest";
+            var path = string.Format("{0}//{1}", Constants.UploadProfilePic.BasePath, ID.ToString());
 
             var provider = new MultipartFormDataStreamProvider(path);
 

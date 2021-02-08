@@ -9,77 +9,30 @@
 
     <script type="text/javascript">
 
-        function FillData() {
-            $.ajax({
-                type: 'GET',
-                url: BaseApiURL + '/webcomponent/gridview',
-                contentType: "application/json; charset=utf-8",
-                dataType: "json"
-            }).then(
-                function (data) {
-                    FillGrid(data.payload);
-                },
-                function (data) {
-                    ShowError("data: " + data.d, "عدم برقراری ارتباط");
-                }
-            )
-        }
-
-        function Exporting(e, FileName,WorkSheet) {
-            var workbook = new ExcelJS.Workbook();
-            var worksheet = workbook.addWorksheet(WorkSheet);
-
-            worksheet.columns = [{ width: 5 }, { width: 50 }, { width: 50 }, { width: 80 }];
-
-            DevExpress.excelExporter.exportDataGrid({
-                component: e.component,
-                worksheet: worksheet,
-                keepColumnWidths: false,
-                //topLeftCell: { row: 2, column: 2 },
-                customizeCell: function (options) {
-                    var gridCell = options.gridCell;
-                    var excelCell = options.excelCell;
-                }
-            }).then(function () {
-                workbook.xlsx.writeBuffer().then(function (buffer) {
-                    saveAs(new Blob([buffer], { type: "application/octet-stream" }), FileName + ".xlsx");
-                });
-            });
-            e.cancel = true;
-        }
-
-        function FillGrid(data) {
-            var columns = [
-                { dataField: "ID", caption: "شناسه" },
-                { dataField: "Name", caption: "نام" },
-                { dataField: "Family", caption: "نام خانوادگی" },
-                {
-                    dataField: "Picture",
-                    caption: "تصویر",
-                    width: 80,
-                    height: 50,
-                    allowFiltering: false,
-                    allowSorting: false,
-                    cellTemplate: function (container, options) {
-                        $("<div>")
-                            .append($("<img>", { "src": options.value, "width": "50", "height": "50" }))
-                            .appendTo(container);
-                    }
-                }
-            ];
-            var allowedPageSizes = [5, 10, 15];
-
-            CreateGridView('grid', data, "ID", true, 5, allowedPageSizes, true, true, true, true, true, true, true, true, columns, true, Exporting, 'fileNameTest', 'workSheet');
-        }
-
-    </script>
+</script>
 
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="body" runat="server">
 
-    <div class="demo-container">
-        <div id="exportButton"></div>
-        <div id="grid"></div>
+    <div class="well well-lg">
+
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 ">
+                <textarea class="form-control" rows="5" placeholder="متن پست" id="txtPostCaption"></textarea>
+            </div>
+        </div>
+        <br />
+
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 ">
+                <input type="text" class="form-control" id="txtPostMentions" placeholder="تگ ها" />
+            </div>
+        </div>
+        <br />
+        <input type="file" id="fileUpload" accept=".jpg,.gif,.png,.jpeg" />
+        <br />
+        <button class="btn btn-primary" id="btnUpload">Upload</button>
+
     </div>
 
 </asp:Content>
@@ -92,7 +45,47 @@
     <script src="../Scripts/FileSaver.min.js"></script>
 
     <script type="text/javascript">
-        FillGrid(null);
+
+        $("#btnUpload").click(function () {
+            UploadFile();
+        });
+
+        function UploadFile() {
+            debugger;
+            var fileUpload = $("#fileUpload").get(0);
+            if (fileUpload == 'undefined')
+                return;
+
+            var files = fileUpload.files;
+            if (files.length == 0)
+                return;
+
+            var fileData = new FormData();
+            fileData.append("ID", "1");
+            for (var i = 0; i < files.length; i++) {
+
+                //if (files[i].type != 'image/jpeg')
+                //    continue;
+
+                fileData.append(files[i].name, files[i]);
+            }
+
+            $.ajax({
+                type: "POST",
+                url: BaseApiURL + "/WebComponent/UploadProfilePic",
+                contentType: false,
+                processData: false,
+                data: fileData,
+                success: function (result) {
+                    ShowSuccess("this is ok");
+                },
+                error: function (xhr, status, p3, p4) {
+                    ShowError("عدم برقراری ازتباط");
+                }
+            });
+            
+        }
+
     </script>
 
 </asp:Content>

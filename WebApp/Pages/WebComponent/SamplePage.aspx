@@ -23,6 +23,7 @@
                     allowFiltering: false,
                     allowSorting: false,
                     cellTemplate: function (container, options) {
+                        debugger;
                         $("<div>")
                             .append($("<img>", { "src": options.value, "width": "50", "height": "50" }))
                             .appendTo(container);

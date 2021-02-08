@@ -50,10 +50,11 @@
                 return;
 
             var fileData = new FormData();
+            fileData.append("testKey", "value");
             for (var i = 0; i < files.length; i++) {
 
-                if (files[i].type != 'image/jpeg')
-                    continue;
+                //if (files[i].type != 'image/jpeg')
+                //    continue;
 
                 fileData.append(files[i].name, files[i]);
             }
