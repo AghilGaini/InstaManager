@@ -11,25 +11,16 @@
 
     <script type="text/javascript">
 
-        function FillData() {
-            $.ajax({
-                type: 'GET',
-                url: BaseApiURL + '/webcomponent/TreeList',
-                contentType: "application/json; charset=utf-8",
-                dataType: "json"
-            }).then(
-                function (data) {
-                    FillTreeList(data.payload);
-                },
-                function (data) {
-                    ShowError("data: " + data.d, "عدم برقراری ارتباط");
-                }
-            )
-        }
-
-        function FillTreeList(data) {
+        function FillTreeList(firstTime, url) {
             var columns = ["Name", "Family", "gid", "gref"];
-            CreateTreeList('treeList', data, 'gid', 'gref', true, true, true, true, columns);
+            debugger;
+            if (firstTime == true) {
+                CreateTreeList('treeList', null, 'gid', 'gref', true, true, true, true, columns, "multiple");
+            }
+            else {
+                CreateTreeListWithURL('treeList', url, 'gid', 'gref', true, true, true, true, columns, "multiple");
+            }
+
         }
 
     </script>
@@ -39,7 +30,7 @@
 
     <div class="dx-viewport">
 
-        <input type="button" class="btn btn-success" value="search" onclick="FillData()" style="margin: 10px 0px;" />
+        <input type="button" class="btn btn-success" value="search" onclick="Search();" style="margin: 10px 0px;" />
         <br />
 
         <div class="demo-container">
@@ -55,7 +46,14 @@
     <script src="../../Scripts/CreateWebComponent.js"></script>
     <script type="text/javascript">
 
-        FillTreeList(null);
+        FillTreeList(true, null);
+
+        function Search() {
+            var url = BaseApiURL + '/webcomponent/TreeList';
+
+            FillTreeList(false, url);
+        }
+
 
     </script>
 

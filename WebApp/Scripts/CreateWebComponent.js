@@ -109,12 +109,13 @@ function GeneralExportGridView(e, FileName, WorkSheet) {
     e.cancel = true;
 }
 
-function CreateTreeList(treeListID, data, keyField, parentField, showRowLines, showBorders, columnAutoWidth, allowColumnResizing, columns) {
+function CreateTreeList(treeListID, data, keyField, parentField, showRowLines, showBorders, columnAutoWidth, allowColumnResizing, columns, selectionMode) {
+    debugger;
     $("#" + treeListID).dxTreeList({
         dataSource: data,
         rootValue: -1,
         selection: {
-            mode: "single"
+            mode: selectionMode //single or multiple 
         },
         keyExpr: keyField,
         parentIdExpr: parentField,
@@ -132,6 +133,22 @@ function CreateTreeList(treeListID, data, keyField, parentField, showRowLines, s
 
     hdn.Set(treeListID + "Type", 'dxTreeList');
 
+}
+
+function CreateTreeListWithURL(treeListID, URL, keyField, parentField, showRowLines, showBorders, columnAutoWidth, allowColumnResizing, columns, selectionMode) {
+    $.ajax({
+        type: 'GET',
+        url: URL,
+        contentType: "application/json; charset=utf-8",
+        dataType: "json"
+    }).then(
+        function (data) {
+            CreateTreeList(treeListID, data.payload, keyField, parentField, showRowLines, showBorders, columnAutoWidth, allowColumnResizing, columns, selectionMode);
+        },
+        function (data) {
+            ShowError("data: " + data.d, "عدم برقراری ارتباط");
+        }
+    )
 }
 
 function CreateComboBox(comboBoxID, data, key, displayExpr, valueExpr, showClearButton, rtlEnabled, placeholder, width, height, disabled,onChangeFunction) {
