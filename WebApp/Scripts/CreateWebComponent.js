@@ -109,11 +109,10 @@ function GeneralExportGridView(e, FileName, WorkSheet) {
     e.cancel = true;
 }
 
-function CreateTreeList(treeListID, data, keyField, parentField, showRowLines, showBorders, columnAutoWidth, allowColumnResizing, columns, selectionMode) {
-    debugger;
+function CreateTreeList(treeListID, data, keyField, parentField, showRowLines, showBorders, columnAutoWidth, allowColumnResizing, columns, selectionMode,rootValue) {
     $("#" + treeListID).dxTreeList({
         dataSource: data,
-        rootValue: -1,
+        rootValue: rootValue,
         selection: {
             mode: selectionMode //single or multiple 
         },
@@ -121,13 +120,12 @@ function CreateTreeList(treeListID, data, keyField, parentField, showRowLines, s
         parentIdExpr: parentField,
         noDataText: "داده ای برای نمایش وجود ندارد",
         columns: columns,
-        expandedRowKeys: [1],
         showRowLines: showRowLines,
         showBorders: showBorders,
         columnAutoWidth: columnAutoWidth,
         allowColumnResizing: allowColumnResizing,
         onSelectionChanged: function (selectedItems) {
-            hdn.Set(treeListID, selectedItems.selectedRowsData[0]);
+            hdn.Set(treeListID, selectedItems.selectedRowsData);
         }
     });
 
@@ -135,7 +133,7 @@ function CreateTreeList(treeListID, data, keyField, parentField, showRowLines, s
 
 }
 
-function CreateTreeListWithURL(treeListID, URL, keyField, parentField, showRowLines, showBorders, columnAutoWidth, allowColumnResizing, columns, selectionMode) {
+function CreateTreeListWithURL(treeListID, URL, keyField, parentField, showRowLines, showBorders, columnAutoWidth, allowColumnResizing, columns, selectionMode, rootValue) {
     $.ajax({
         type: 'GET',
         url: URL,
@@ -143,7 +141,7 @@ function CreateTreeListWithURL(treeListID, URL, keyField, parentField, showRowLi
         dataType: "json"
     }).then(
         function (data) {
-            CreateTreeList(treeListID, data.payload, keyField, parentField, showRowLines, showBorders, columnAutoWidth, allowColumnResizing, columns, selectionMode);
+            CreateTreeList(treeListID, data.payload, keyField, parentField, showRowLines, showBorders, columnAutoWidth, allowColumnResizing, columns, selectionMode, rootValue);
         },
         function (data) {
             ShowError("data: " + data.d, "عدم برقراری ارتباط");
@@ -337,7 +335,7 @@ function DevexpressGetValue(ID) {
 
     }
     else if (dxType == 'dxTreeList') {
-
+        data = $("#" + ID).dxTreeList('instance').getSelectedRowsData();
     }
     else if (dxType == 'dxSelectBox') {
         data = $("#" + ID).dxSelectBox('instance').option('value');

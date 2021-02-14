@@ -12,13 +12,12 @@
     <script type="text/javascript">
 
         function FillTreeList(firstTime, url) {
-            var columns = ["Name", "Family", "gid", "gref"];
-            debugger;
+            var columns = ["title"];
             if (firstTime == true) {
-                CreateTreeList('treeList', null, 'gid', 'gref', true, true, true, true, columns, "multiple");
+                CreateTreeList('treeList', null, 'gid', 'gref', true, true, true, true, columns, "multiple",null);
             }
             else {
-                CreateTreeListWithURL('treeList', url, 'gid', 'gref', true, true, true, true, columns, "multiple");
+                CreateTreeListWithURL('treeList', url, 'gid', 'gref', true, true, true, true, columns, "multiple", null);
             }
 
         }
@@ -49,7 +48,7 @@
         FillTreeList(true, null);
 
         function Search() {
-            var url = BaseApiURL + '/webcomponent/TreeList';
+            var url = BaseApiURL + '/webcomponent/PrivilegesList';
 
             FillTreeList(false, url);
         }

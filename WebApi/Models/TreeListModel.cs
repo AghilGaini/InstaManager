@@ -38,7 +38,7 @@ namespace WebApi.Models
                     Family = "Family_" + i.ToString(),
                     Name = "Name_" + i.ToString(),
                     gid = i,
-                    gref = i-10
+                    gref = i - 10
                 });
             }
 
@@ -52,7 +52,6 @@ namespace WebApi.Models
                     gref = i - 10
                 });
             }
-
 
         }
 

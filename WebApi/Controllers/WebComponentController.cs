@@ -107,6 +107,20 @@ namespace WebApi.Controllers
             });
         }
 
+        [HttpGet]
+        public IHttpActionResult PrivilegesList()
+        {
+            var Res = new Models.PrivilegeModel().InsideList;
+
+            return Ok(new
+            {
+                code = 200,
+                message = "success",
+                count = Res.Count,
+                payload = Res
+            });
+        }
+
         [HttpPost]
         public async Task UploadProfilePic(HttpRequestMessage Request)
         {
