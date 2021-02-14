@@ -257,7 +257,7 @@
         function Search() {
             DevexpressSetValue('cmbActions', null);
             DevexpressDisable('cmbActions', true);
-            debugger;
+
             var name = CheckNull(DevexpressGetValue('nameTxt')) == true ? "" : DevexpressGetValue('nameTxt');
             var family = CheckNull(DevexpressGetValue('familyTxt')) == true ? "" : DevexpressGetValue('familyTxt');
             var age = CheckNull(DevexpressGetValue('nuAge')) == true ? "" : DevexpressGetValue('nuAge');

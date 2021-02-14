@@ -109,7 +109,7 @@ function GeneralExportGridView(e, FileName, WorkSheet) {
     e.cancel = true;
 }
 
-function CreateTreeList(treeListID, data, keyField, parentField, showRowLines, showBorders, columnAutoWidth, allowColumnResizing, columns, selectionMode,rootValue) {
+function CreateTreeList(treeListID, data, keyField, parentField, showRowLines, showBorders, columnAutoWidth, allowColumnResizing, columns, selectionMode, rootValue) {
     $("#" + treeListID).dxTreeList({
         dataSource: data,
         rootValue: rootValue,
@@ -149,7 +149,7 @@ function CreateTreeListWithURL(treeListID, URL, keyField, parentField, showRowLi
     )
 }
 
-function CreateComboBox(comboBoxID, data, key, displayExpr, valueExpr, showClearButton, rtlEnabled, placeholder, width, height, disabled,onChangeFunction) {
+function CreateComboBox(comboBoxID, data, key, displayExpr, valueExpr, showClearButton, rtlEnabled, placeholder, width, height, disabled, onChangeFunction) {
     $("#" + comboBoxID).dxSelectBox({
         dataSource: new DevExpress.data.ArrayStore({
             data: data,
@@ -356,29 +356,29 @@ function DevexpressGetValue(ID) {
     return data;
 }
 
-function DevexpressSetValue(ID,data) {
+function DevexpressSetValue(ID, data) {
     var dxType = hdn.Get(ID + "Type");
 
     if (dxType == 'dxDataGrid') {
 
     }
     else if (dxType == 'dxTreeList') {
-
+        $("#" + ID).dxTreeList('instance').selectRows(data, false);;
     }
     else if (dxType == 'dxSelectBox') {
-        data = $("#" + ID).dxSelectBox('instance').option('value', data);
+        $("#" + ID).dxSelectBox('instance').option('value', data);
     }
     else if (dxType == 'dxTextBox') {
-        data = $("#" + ID).dxTextBox('instance').option('value', data);
+        $("#" + ID).dxTextBox('instance').option('value', data);
     }
     else if (dxType == 'dxNumberBox') {
-        data = $("#" + ID).dxNumberBox('instance').option('value', data);
+        $("#" + ID).dxNumberBox('instance').option('value', data);
     }
     else if (dxType == 'dxTextArea') {
-        data = $("#" + ID).dxTextArea('instance').option('value', data);
+        $("#" + ID).dxTextArea('instance').option('value', data);
     }
     else if (dxType == 'dxCheckBox') {
-        data = $("#" + ID).dxCheckBox('instance').option('value', data);
+        $("#" + ID).dxCheckBox('instance').option('value', data);
     }
 }
 

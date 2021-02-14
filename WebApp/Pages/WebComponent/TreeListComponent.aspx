@@ -19,7 +19,6 @@
             else {
                 CreateTreeListWithURL('treeList', url, 'gid', 'gref', true, true, true, true, columns, "multiple", null);
             }
-
         }
 
     </script>
@@ -52,7 +51,6 @@
 
             FillTreeList(false, url);
         }
-
 
     </script>
 

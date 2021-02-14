@@ -78,6 +78,7 @@
     <Content Include="Default.aspx" />
     <Content Include="Images\DefaultAccountPic.png" />
     <Content Include="Pages\Login.aspx" />
+    <Content Include="Pages\Security\Roles.aspx" />
     <Content Include="Pages\Test.aspx" />
     <Content Include="Pages\UploadPost.aspx" />
     <Content Include="Pages\WebComponent\ButtonComponent.aspx" />
@@ -138,6 +139,13 @@
     </Compile>
     <Compile Include="Pages\Login.aspx.designer.cs">
       <DependentUpon>Login.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Security\Roles.aspx.cs">
+      <DependentUpon>Roles.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\Security\Roles.aspx.designer.cs">
+      <DependentUpon>Roles.aspx</DependentUpon>
     </Compile>
     <Compile Include="Pages\Test.aspx.cs">
       <DependentUpon>Test.aspx</DependentUpon>

@@ -121,6 +121,20 @@ namespace WebApi.Controllers
             });
         }
 
+        [HttpGet]
+        public IHttpActionResult RoleList()
+        {
+            var Res = new Models.RolesModel().InsideList;
+
+            return Ok(new
+            {
+                code = 200,
+                message = "success",
+                count = Res.Count,
+                payload = Res
+            });
+        }
+
         [HttpPost]
         public async Task UploadProfilePic(HttpRequestMessage Request)
         {
