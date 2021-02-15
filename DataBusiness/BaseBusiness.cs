@@ -36,4 +36,8 @@ namespace DataBusiness
     {
         public override string _ConnectionStringName => "InstaCR";
     }
+    public class AgPanelBase<T> : BaseBusiness<T>
+    {
+        public override string _ConnectionStringName => "AgPanel";
+    }
 }

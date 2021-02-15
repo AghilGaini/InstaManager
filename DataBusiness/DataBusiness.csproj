@@ -41,6 +41,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AgPanel\Sec\Tables\PrivilegeTable.cs" />
+    <Compile Include="AgPanel\Sec\Tables\RolePrivilegeTable.cs" />
+    <Compile Include="AgPanel\Sec\Tables\RoleTable.cs" />
+    <Compile Include="AgPanel\Sec\Views\RolePrivilegeView.cs" />
+    <Compile Include="AgPanel\StoreProcedure\StoreProcedure.cs" />
     <Compile Include="BaseBusiness.cs" />
     <Compile Include="FacadeBusiness.cs" />
     <Compile Include="InstaCR\robot\ActionQueueTable.cs" />
@@ -52,6 +57,11 @@
       <Project>{bcb6b21e-1fa4-41a6-9f21-94b3c3c967c1}</Project>
       <Name>DataLayer</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Utilities\Utilities.csproj">
+      <Project>{802bdcff-d4b7-49df-a0e9-48151a3e6014}</Project>
+      <Name>Utilities</Name>
+    </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

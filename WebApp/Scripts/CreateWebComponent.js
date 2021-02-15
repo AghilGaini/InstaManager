@@ -382,6 +382,31 @@ function DevexpressSetValue(ID, data) {
     }
 }
 
+function DevexpressSetValueWithURL(ID, URL, payloadField) {
+
+    $.ajax({
+        type: 'GET',
+        url: URL,
+        contentType: "application/json; charset=utf-8",
+        dataType: "json"
+    }).then(
+        function (data) {
+            debugger;
+            var a = {};
+            if (CheckNull(payloadField) != true) {
+                a = data.payload.map(function (item) { return item[payloadField]; });
+            }
+            else {
+                a = data.payload;
+            }
+            DevexpressSetValue(ID, a);
+        },
+        function (data) {
+            ShowError("data: " + data.d, "عدم برقراری ارتباط");
+        }
+    )
+}
+
 function DevexpressDisable(ID, status) {
     var dxType = hdn.Get(ID + "Type");
 

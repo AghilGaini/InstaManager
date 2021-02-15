@@ -4,16 +4,12 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 
-    <link rel="stylesheet" type="text/css" href="../../Styles/dx.common.css" />
-    <link rel="stylesheet" type="text/css" href="../../Styles/dx.light.css" />
-    <link rel="stylesheet" type="text/css" href="../../Styles/DevExpressTheme/Blue-Dark-Theme.css" />
-
     <script type="text/javascript">
 
         function CreateGrid_Roles(firstTime, url) {
             var columns = [
                 { dataField: "ID", caption: "شناسه" },
-                { dataField: "title", caption: "عنوان" }
+                { dataField: "FaTitle", caption: "عنوان" }
             ];
             var allowedPageSizes = [5, 10, 15];
 
@@ -54,12 +50,13 @@
         }
 
         function Fill_moPrivilegeTreeList(firstTime, url) {
-            var columns = ["title"];
+            var columns = [{ dataField: "FaTitle", caption: "عنوان" }];
+            debugger;
             if (firstTime == true) {
-                CreateTreeList('moPrivilegeTreeList', null, 'gid', 'gref', true, true, true, true, columns, "multiple", null);
+                CreateTreeList('moPrivilegeTreeList', null, 'Gid', 'Gref', true, true, true, true, columns, "multiple", null);
             }
             else {
-                CreateTreeListWithURL('moPrivilegeTreeList', url, 'gid', 'gref', true, true, true, true, columns, "multiple", null);
+                CreateTreeListWithURL('moPrivilegeTreeList', url, 'Gid', 'Gref', true, true, true, true, columns, "multiple", null);
             }
         }
 
@@ -94,6 +91,14 @@
         </div>
     </div>
 
+    <div class="ActionPanel">
+        <div class="row SearchPanelButtonColumns">
+            <div>
+                <button type="button" class="btn btn-primary" onclick="New()">جدید</button>
+            </div>
+        </div>
+    </div>
+
     <div class="MainGrid">
         <div id="exportButton"></div>
         <div id="grdRoles"></div>
@@ -120,7 +125,7 @@
                                     <div id="moTitleTxt" style="width: 80%"></div>
                                 </div>
                             </div>
-                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 SearchPanelColumns">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 SearchPanelColumns" style="direction: ltr">
                                 <div style="padding: 1% 1%">
                                     <div id="moPrivilegeTreeList"></div>
                                 </div>
@@ -146,14 +151,7 @@
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="script" runat="server">
 
-    <script src="../../Scripts/dx.all.js"></script>
-    <script src="../../Scripts/dx.aspnet.data.js"></script>
-    <script src="../../Scripts/CreateWebComponent.js"></script>
-    <script src="../../Scripts/exceljs.min.js"></script>
-    <script src="../../Scripts/FileSaver.min.js"></script>
-    <script src="../../Scripts/jspdf.plugin.autotable.min.js"></script>
-    <script src="../../Scripts/jspdf.umd.min.js"></script>
-
+    
     <script type="text/javascript">
 
         //#region inital Devexpress components 
@@ -196,7 +194,7 @@
         //#region initial modal components
 
         CreateTextBox('moTitleTxt', 'عنوان', true, null, null, null, null, true);
-        Fill_moPrivilegeTreeList(true);
+        Fill_moPrivilegeTreeList(false, BaseApiURL + '/security/privileges');
 
         //#endregion 
 
@@ -204,24 +202,42 @@
 
         function ShowEditInfoModal() {
 
-            var privilegesUrl = BaseApiURL + '/webcomponent/PrivilegesList';
+            if (hdn.Get("grdRoles") == undefined)
+                ShowError("موردی انتخاب نشده است", "خطا");
+
+            hdn.Set('roleID', hdn.Get("grdRoles").ID);
             debugger;
-            DevexpressSetValue('moTitleTxt', hdn.Get('grdRoles').title);
-            Fill_moPrivilegeTreeList(false, privilegesUrl);
+            DevexpressSetValue('moTitleTxt', hdn.Get('grdRoles').FaTitle);
+            DevexpressSetValueWithURL('moPrivilegeTreeList', BaseApiURL + '/security/roleprivileges?roleid=' + hdn.Get('roleID'), 'Gid')
+
+            $("#editInfo").modal();
+        }
+
+        function New() {
+            hdn.Set('roleID', 0);
+            ClearSelection('moPrivilegeTreeList');
+            DevexpressSetValue('moTitleTxt', null);
 
             $("#editInfo").modal();
         }
 
         function SaveEdit() {
+            debugger;
+            if (CheckNull(DevexpressGetValue("moTitleTxt")) == true)
+                ShowError("عنوان نقش الزامی است",);
+            var selectedPrivileges = DevexpressGetValue('moPrivilegeTreeList');
             var entity = {};
-            entity.Name = DevexpressGetValue('moNameTxt');
-            entity.Family = DevexpressGetValue('moFamilyTxt');
-            entity.Age = DevexpressGetValue('moAgenu');
-            entity.ID = hdn.Get('grid').ID;
+            entity.roleID = hdn.Get('roleID');
+            entity.roleTitle = DevexpressGetValue("moTitleTxt");
+            entity.privilegeID = [];
+
+            for (i = 0; i < selectedPrivileges.length; i++) {
+                entity.privilegeID[i] = selectedPrivileges[i].ID;
+            }
 
             entity = JSON.stringify(entity);
 
-            var URL = BaseApiURL + '/WebComponent/ComboBox';
+            var URL = BaseApiURL + '/security/RolePrivileges';
 
             $.ajax({
                 type: 'POST',
@@ -231,7 +247,8 @@
                 data: entity
             }).then(
                 function (data) {
-                    ClearSelection('grid');
+                    debugger;
+                    ClearSelection('grdRoles');
                     ShowSuccess('عملیات با موفقیت انحام شد', 'عملیات موفق');
                     $("#editInfo").modal('hide');
                     Search();
@@ -244,7 +261,6 @@
         }
 
         //#endregion
-
 
         //#endregion
 

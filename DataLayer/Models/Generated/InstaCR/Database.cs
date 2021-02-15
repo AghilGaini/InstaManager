@@ -853,6 +853,8 @@ namespace DataLayer.Models.Generated.InstaCR
 			
 				public static string Status = @"Status";
 			
+				public static string Priority = @"Priority";
+			
 		}
 
 
@@ -878,6 +880,12 @@ namespace DataLayer.Models.Generated.InstaCR
 
 
 		[Column] public int Status { get; set; }
+
+
+
+
+
+		[Column] public int Priority { get; set; }
 
 
 
