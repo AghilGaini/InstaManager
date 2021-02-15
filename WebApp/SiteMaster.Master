@@ -69,6 +69,7 @@
                             <a class="dropdown-toggle" data-toggle="dropdown" href="#" gid="A4C194D1-B103-43DC-8379-ED5A6F40A000" title="امنیت">امنیت<span class="caret"></span></a>
                             <ul class="dropdown-menu">
                                 <li><a gref="A4C194D1-B103-43DC-8379-ED5A6F40A000" gid="7BF8CE13-251E-49AA-87E4-2D48F5D8B388" href='<%= ResolveUrl("~") %>Pages/Security/Roles.aspx' title="نقش ها">نقش ها</a></li>
+                                <li><a gref="A4C194D1-B103-43DC-8379-ED5A6F40A000" gid="5C200EA9-8266-4084-9180-8CFA40FE5A83" href='<%= ResolveUrl("~") %>Pages/Security/Users.aspx' title="کاربران">کاربران</a></li>
                             </ul>
                         </li>
 

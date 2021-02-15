@@ -14,6 +14,7 @@ namespace WebApi.Controllers
 {
     public class SecurityController : System.Web.Http.ApiController
     {
+        #region Role
 
         [HttpGet]
         public IHttpActionResult Roles(string title)
@@ -122,5 +123,64 @@ namespace WebApi.Controllers
             });
 
         }
+
+        #endregion
+
+        #region User
+
+        [HttpGet]
+        public IHttpActionResult Users(string username)
+        {
+            var q = DataBusiness.FacadeAgPanelBusiness.GetUserTable().GetAll();
+            if (username.IsNotNull())
+                q.And(DataLayer.Models.Generated.AgPanel.User.Columns.UserName, DataLayer.Filter.Like, username);
+            q.OrderBy(DataLayer.Models.Generated.AgPanel.User.Columns.ID, "DESC");
+
+            var Res = DataBusiness.FacadeAgPanelBusiness.GetUserTable().Fetch(q);
+
+            return Ok(new
+            {
+                code = 200,
+                message = "success",
+                count = Res.Count,
+                payload = Res
+            });
+
+        }
+
+        [HttpPost]
+        public IHttpActionResult Users(Models.Security.UsersModel model)
+        {
+            if (model.username.IsNull())
+                throw new Exception("نام کاربری نمیتواند خالی باشد");
+
+            var user = DataBusiness.FacadeAgPanelBusiness.GetUserTable().GetByID(model.ID);
+            if (user.IsNull())
+            {
+                if (model.password.IsNull())
+                    throw new Exception("رمز عبور وارد نشده است");
+                if (DataBusiness.FacadeAgPanelBusiness.GetUserTable().IsDuplicateUsername(model.username.ToLower()))
+                    throw new Exception("نام کاربری وارد شده تکراری میباشد");
+
+                user = new DataLayer.Models.Generated.AgPanel.User();
+                user.UserName = model.username.ToLower();
+                user.Password = model.password;
+            }
+            user.Password = model.password.IsNotNull() ? model.password : user.Password;
+            user.IsActive = model.isActive;
+            user.Save();
+
+            return Ok(new
+            {
+                code = 200,
+                message = "success",
+                count = 0,
+                payload = new List<int> { }
+            });
+
+        }
+
+        #endregion
+
     }
 }

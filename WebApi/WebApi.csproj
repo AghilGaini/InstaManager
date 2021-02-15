@@ -171,6 +171,7 @@
     <Compile Include="Models\RolesModel.cs" />
     <Compile Include="Models\Security\RolePrivilegeModel.cs" />
     <Compile Include="Models\Security\RolesModel.cs" />
+    <Compile Include="Models\Security\UsersModel.cs" />
     <Compile Include="Models\TreeListModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
