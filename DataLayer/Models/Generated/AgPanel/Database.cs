@@ -365,6 +365,57 @@ namespace DataLayer.Models.Generated.AgPanel
 
     
 
+	[TableName("[sec].[UserRole]")]
+
+
+
+	[PrimaryKey("ID")]
+
+
+
+
+	[ExplicitColumns]
+
+    public partial class UserRole : AgPanelDB.Record<UserRole>  
+    {
+
+	
+
+		public static class Columns
+		{	
+			
+				public static string ID = @"ID";
+			
+				public static string UserID = @"UserID";
+			
+				public static string RoleID = @"RoleID";
+			
+		}
+
+
+
+
+
+		[Column] public long ID { get; set; }
+
+
+
+
+
+		[Column] public long UserID { get; set; }
+
+
+
+
+
+		[Column] public long RoleID { get; set; }
+
+
+
+	}
+
+    
+
 	[TableName("[sec].[VwRolePrivilege]")]
 
 

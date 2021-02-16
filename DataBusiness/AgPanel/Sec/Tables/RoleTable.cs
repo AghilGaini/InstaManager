@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using DataLayer.Models.Generated.AgPanel;
+using Utilities;
 
 namespace DataBusiness.AgPanel.Sec.Tables
 {
@@ -15,6 +16,17 @@ namespace DataBusiness.AgPanel.Sec.Tables
             q.And(Role.Columns.ID, roleID);
 
             return this.Fetch(q).FirstOrDefault();
+        }
+
+        public List<Role> GetByIDs(List<long> roleIDs)
+        {
+            if (roleIDs.IsNull() || roleIDs.Count == 0)
+                return new List<Role>();
+
+            var q = this.GetAll();
+            q.And(Role.Columns.ID, DataLayer.Filter.In, roleIDs);
+
+            return this.Fetch(q);
         }
     }
 }

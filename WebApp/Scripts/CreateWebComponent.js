@@ -2,12 +2,16 @@
 function CreateGridView(gridID, data, keyFieldName, showPageSizeSelector, pageSize, allowedPageSizes, showInfo,
     showColumnLines, showRowLines, showBorders, rowAlternationEnabled, allowColumnResizing, columnResizingMode,
     columnAutoWidth, columns, Isexport, onExportingFunction, excelFileName, excelWorksheet,
-    isExportPdf, btnPdfID, btnPdfText, fileNamePdf, actionSelectBoxID) {
+    isExportPdf, btnPdfID, btnPdfText, fileNamePdf, actionSelectBoxID, selectionMode) {
+
+    if (CheckNull(selectionMode) == true)
+        selectionMode = 'single';
+
     $("#" + gridID).dxDataGrid({
         dataSource: data,
         keyExpr: keyFieldName,
         selection: {
-            mode: "single"
+            mode: selectionMode
         },
         paging: {
             pageSize: pageSize
@@ -43,9 +47,7 @@ function CreateGridView(gridID, data, keyFieldName, showPageSizeSelector, pageSi
             hdn.Set(gridID, selectedItems.selectedRowsData[0]);
         },
         onRowClick: function (e) {
-            if (CheckNull(actionSelectBoxID))
-                DevexpressDisable('cmbActions', false);
-            else
+            if (CheckNull(actionSelectBoxID) == false)
                 DevexpressDisable(actionSelectBoxID, false);
         }
 
@@ -61,7 +63,7 @@ function CreateGridView(gridID, data, keyFieldName, showPageSizeSelector, pageSi
 function CreateGridViewWithURL(gridID, keyFieldName, showPageSizeSelector, pageSize, allowedPageSizes, showInfo,
     showColumnLines, showRowLines, showBorders, rowAlternationEnabled, allowColumnResizing, columnResizingMode,
     columnAutoWidth, columns, Isexport, onExportingFunction, excelFileName, excelWorksheet,
-    isExportPdf, btnPdfID, btnPdfText, fileNamePdf, url, actionSelectBoxID) {
+    isExportPdf, btnPdfID, btnPdfText, fileNamePdf, url, actionSelectBoxID, selectionMode) {
 
     $.ajax({
         type: 'GET',
@@ -74,7 +76,7 @@ function CreateGridViewWithURL(gridID, keyFieldName, showPageSizeSelector, pageS
             CreateGridView(gridID, data.payload, keyFieldName, showPageSizeSelector, pageSize, allowedPageSizes, showInfo,
                 showColumnLines, showRowLines, showBorders, rowAlternationEnabled, allowColumnResizing, columnResizingMode,
                 columnAutoWidth, columns, Isexport, onExportingFunction, excelFileName, excelWorksheet,
-                isExportPdf, btnPdfID, btnPdfText, fileNamePdf, actionSelectBoxID);
+                isExportPdf, btnPdfID, btnPdfText, fileNamePdf, actionSelectBoxID, selectionMode);
         },
         function (data) {
             ShowError("data: " + data.d, "عدم برقراری ارتباط");
@@ -191,7 +193,7 @@ function CreateComboBoxWithURL(comboBoxID, URL, key, displayExpr, valueExpr, sho
     )
 }
 
-function CreateTextBox(textBoxID, placeholder, showClearButton, value, mask, maskInvalidMessage, maskRules, rtlEnabled) {
+function CreateTextBox(textBoxID, placeholder, showClearButton, value, mask, maskInvalidMessage, maskRules, rtlEnabled, mode) {
     $("#" + textBoxID).dxTextBox({
         placeholder: (!placeholder ? null : placeholder),
         showClearButton: showClearButton,
@@ -200,6 +202,7 @@ function CreateTextBox(textBoxID, placeholder, showClearButton, value, mask, mas
         maskInvalidMessage: (!maskInvalidMessage ? null : maskInvalidMessage),
         maskRules: (!maskRules ? null : maskRules),
         rtlEnabled: rtlEnabled,
+        mode: mode,
         onValueChanged: function (selectedItems) {
             hdn.Set(textBoxID, selectedItems.value);
         }
@@ -332,7 +335,7 @@ function DevexpressGetValue(ID) {
     var data = null;
 
     if (dxType == 'dxDataGrid') {
-
+        data = $("#" + ID).dxDataGrid('instance').getSelectedRowsData();
     }
     else if (dxType == 'dxTreeList') {
         data = $("#" + ID).dxTreeList('instance').getSelectedRowsData();
@@ -360,7 +363,7 @@ function DevexpressSetValue(ID, data) {
     var dxType = hdn.Get(ID + "Type");
 
     if (dxType == 'dxDataGrid') {
-
+        $("#" + ID).dxDataGrid('instance').selectRows(data, false);;
     }
     else if (dxType == 'dxTreeList') {
         $("#" + ID).dxTreeList('instance').selectRows(data, false);;

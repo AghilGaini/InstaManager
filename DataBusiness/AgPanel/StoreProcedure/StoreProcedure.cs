@@ -12,5 +12,9 @@ namespace DataBusiness.AgPanel.StoreProcedure
         {
             var Res = new PetaPoco.Database(this._ConnectionStringName).Execute(" ;EXEC sec.sp_DeleteOldRolePrivileges @@roleID=@0", roleID);
         }
+        public void SP_DeleteOldUserRoles(long userID)
+        {
+            var Res = new PetaPoco.Database(this._ConnectionStringName).Execute(" ;EXEC sec.SP_DeleteOldUserRoles @@userID=@0", userID);
+        }
     }
 }

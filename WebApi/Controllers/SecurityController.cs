@@ -154,6 +154,7 @@ namespace WebApi.Controllers
             if (model.username.IsNull())
                 throw new Exception("نام کاربری نمیتواند خالی باشد");
 
+            bool isNewUser = false;
             var user = DataBusiness.FacadeAgPanelBusiness.GetUserTable().GetByID(model.ID);
             if (user.IsNull())
             {
@@ -161,7 +162,7 @@ namespace WebApi.Controllers
                     throw new Exception("رمز عبور وارد نشده است");
                 if (DataBusiness.FacadeAgPanelBusiness.GetUserTable().IsDuplicateUsername(model.username.ToLower()))
                     throw new Exception("نام کاربری وارد شده تکراری میباشد");
-
+                isNewUser = true;
                 user = new DataLayer.Models.Generated.AgPanel.User();
                 user.UserName = model.username.ToLower();
                 user.Password = model.password;
@@ -170,12 +171,44 @@ namespace WebApi.Controllers
             user.IsActive = model.isActive;
             user.Save();
 
+
+            if (!isNewUser)
+                DataBusiness.FacadeAgPanelBusiness.GetStoreProcedure().SP_DeleteOldUserRoles(user.ID);
+
+            var roles = DataBusiness.FacadeAgPanelBusiness.GetRoleTable().GetByIDs(model.roleIDs);
+            var userRoles = new List<DataLayer.Models.Generated.AgPanel.UserRole>();
+
+            foreach (var item in roles)
+            {
+                var newUserRole = new DataLayer.Models.Generated.AgPanel.UserRole()
+                {
+                    RoleID = item.ID,
+                    UserID = user.ID
+                };
+                newUserRole.Save();
+            }
+
             return Ok(new
             {
                 code = 200,
                 message = "success",
                 count = 0,
                 payload = new List<int> { }
+            });
+
+        }
+
+        [HttpGet]
+        public IHttpActionResult UserRoles(long userID)
+        {
+            var Res = DataBusiness.FacadeAgPanelBusiness.GetUserRoleTable().GetByUserID(userID);
+
+            return Ok(new
+            {
+                code = 200,
+                message = "success",
+                count = Res.Count,
+                payload = Res
             });
 
         }

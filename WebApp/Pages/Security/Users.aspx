@@ -48,6 +48,23 @@
             e.cancel = true;
         }
 
+        function CreateGrid_moRoleGridView(firstTime, url) {
+            debugger;
+            var columns = [
+                { dataField: "FaTitle", caption: "عنوان" }
+            ];
+            var allowedPageSizes = [5, 10, 15];
+
+            if (firstTime == true) {
+                CreateGridView('moRoleGridView', null, "ID", true, 5, allowedPageSizes, true, true, true, true, true, true, true, true, columns,
+                    true, ExportingExcel, 'نقش ها', 'workSheet', true, 'moRoleGridViewExportButton', 'خروجی PDF', 'نقش ها', null, 'multiple');
+            }
+            else {
+                CreateGridViewWithURL('moRoleGridView', "ID", true, 5, allowedPageSizes, true, true, true, true, true, true, true, true, columns,
+                    true, ExportingExcel, 'نقش ها', 'workSheet', true, 'moRoleGridViewExportButton', 'خروجی PDF', 'نقش ها', url, null, 'multiple');
+            }
+        }
+
     </script>
 
 </asp:Content>
@@ -82,7 +99,7 @@
     <div class="ActionPanel">
         <div class="row SearchPanelButtonColumns">
             <div>
-                <button type="button" class="btn btn-primary" onclick="New()">جدید</button>
+                <button type="button" class="btn btn-primary" onclick="ShowNew()">جدید</button>
             </div>
         </div>
     </div>
@@ -129,10 +146,16 @@
                                     <div id="moIsActiveChb" style="width: 80%"></div>
                                 </div>
                             </div>
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 SearchPanelColumns" style="direction: ltr">
+                                <div style="padding: 1% 1%">
+                                    <div id="moRoleGridViewExportButton"></div>
+                                    <div id="moRoleGridView"></div>
+                                </div>
+                            </div>
                         </div>
                         <div class="row SearchPanelButtonColumns">
                             <div class="col-lg-12 col-md-12 col-sm-12">
-                                <button type="button" class="btn btn-primary SearchPanelButton" onclick="SaveEdit()">ذخیره</button>
+                                <button type="button" class="btn btn-primary SearchPanelButton" onclick="NewEditSave()">ذخیره</button>
                             </div>
                         </div>
                     </div>
@@ -192,17 +215,37 @@
         //#region initial modal components
 
         CreateTextBox('moUsernameTxt', 'نام کاربری', true, null, null, null, null, true);
-        CreateTextBox('moPasswordTxt', 'رمز عبور', true, null, null, null, null, true);
+        CreateTextBox('moPasswordTxt', 'رمز عبور', true, null, null, null, null, true, 'password');
         CreateCheckBox('moIsActiveChb', null, null, null);
+        CreateGrid_moRoleGridView(false, BaseApiURL + '/security/roles?title=');
 
-        //#endregion 
+        //#endregion
 
         //#region functions
 
-        function ShowEditInfoModal() {
+        function NewEditCheck(NewEdit) {
+            if (NewEdit == "New") {
+                if (CheckNull(DevexpressGetValue("moUsernameTxt")) == true ||
+                    CheckNull(DevexpressGetValue("moPasswordTxt")) == true) {
+                    ShowError("همه موارد الزامی وارد نشده است",);
+                    return false;
+                }
+            }
+            else {
+                if (hdn.Get("mainGrd") == undefined) {
+                    ShowError("موردی انتخاب نشده است", "خطا");
+                    return false;
+                }
+            }
 
-            if (hdn.Get("mainGrd") == undefined)
+            return true;
+        }
+
+        function ShowEditInfoModal() {
+            if (hdn.Get("mainGrd") == undefined) {
                 ShowError("موردی انتخاب نشده است", "خطا");
+                return false;
+            }
 
             hdn.Set('userID', hdn.Get("mainGrd").ID);
             debugger;
@@ -210,43 +253,38 @@
             DevexpressSetValue('moPasswordTxt', null);
             DevexpressSetValue('moIsActiveChb', hdn.Get('mainGrd').IsActive);
             DevexpressDisable('moUsernameTxt', true);
+            DevexpressSetValueWithURL('moRoleGridView', BaseApiURL + '/security/UserRoles?userid=' + hdn.Get('userID'), 'RoleID')
+
+            hdn.Set('NewEdit', 'Edit');
 
             $("#editInfo").modal();
         }
 
-        function New() {
-
-            if (CheckNull(DevexpressGetValue("moUsernameTxt")) == true ||
-                CheckNull(DevexpressGetValue("moPasswordTxt")) == true) {
-
-                ShowError("همه موارد الزامی وارد نشده است",);
-                return;
-            }
+        function ShowNew() {
 
             hdn.Set('userID', 0);
             DevexpressSetValue('moUsernameTxt', null);
             DevexpressSetValue('moPasswordTxt', null);
             DevexpressSetValue('moIsActiveChb', null);
             DevexpressDisable('moUsernameTxt', false);
+            //ClearSelection('moRoleGridView');
 
+            hdn.Set('NewEdit', 'New');
 
             $("#editInfo").modal();
         }
 
-        function SaveEdit() {
-            debugger;
-            if (CheckNull(DevexpressGetValue("moUsernameTxt")) == true) {
-                ShowError("همه موارد الزامی وارد نشده است",);
+        function NewEditSave() {
+
+            if (NewEditCheck(hdn.Get('NewEdit')) == false)
                 return;
-            }
 
             var entity = {};
             entity.ID = hdn.Get('userID');
             entity.username = DevexpressGetValue("moUsernameTxt").toLowerCase();
             entity.password = DevexpressGetValue("moPasswordTxt");
             entity.isActive = DevexpressGetValue("moIsActiveChb");
-
-
+            entity.roleIDs = DevexpressGetValue('moRoleGridView').map(function (item) { return item['ID'] });
             entity = JSON.stringify(entity);
 
             var URL = BaseApiURL + '/security/Users';
@@ -259,7 +297,6 @@
                 data: entity
             }).then(
                 function (data) {
-                    debugger;
                     ClearSelection('mainGrd');
                     ShowSuccess('عملیات با موفقیت انحام شد', 'عملیات موفق');
                     $("#editInfo").modal('hide');
