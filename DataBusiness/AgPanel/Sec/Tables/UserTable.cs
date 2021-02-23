@@ -24,5 +24,13 @@ namespace DataBusiness.AgPanel.Sec.Tables
 
             return this.Fetch(q).Any();
         }
+
+        public User GetByUsername(string userName)
+        {
+            var q = this.GetAll(1);
+            q.And(User.Columns.UserName, userName.ToLower());
+
+            return this.Fetch(q).FirstOrDefault();
+        }
     }
 }

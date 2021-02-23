@@ -30,7 +30,7 @@ namespace WebApp.Pages
                 if (values.Password.IsNull() || values.UserName.IsNull())
                     throw new Exception("EnterRequierdValues");
 
-                var UserInfo = DataBusiness.FacadeInstaManagerBusiness.GetUserTable().GetByUserName(values.UserName);
+                var UserInfo = DataBusiness.FacadeAgPanelBusiness.GetUserTable().GetByUsername(values.UserName);
                 if (UserInfo.IsNull())
                     throw new Exception("UserNotFound");
 
@@ -39,7 +39,7 @@ namespace WebApp.Pages
 
                 CurrentUser = UserInfo;
 
-                return new string[2] { "1", "Success" };
+                return new string[2] { "1", UserInfo.ID.ToString() };
             }
             catch (Exception ex)
             {

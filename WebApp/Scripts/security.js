@@ -15,7 +15,53 @@ function GetAllElemnts() {
     }
 }
 
+function SetCookie(cname, cvalue, exdays, exhours, exminutes) {
+
+    var exmiliseconds = (exdays * 24 * 60 * 60 * 1000) + (exhours * 60 * 60 * 1000) + (exminutes * 60 * 1000);
+
+    var d = new Date();
+    d.setTime(d.getTime() + exmiliseconds);
+    var expires = "expires=" + d.toUTCString();
+    document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+}
+
+function GetCookie(cname) {
+    var name = cname + "=";
+    var ca = document.cookie.split(';');
+    for (var i = 0; i < ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0) == ' ') {
+            c = c.substring(1);
+        }
+        if (c.indexOf(name) == 0) {
+            return c.substring(name.length, c.length);
+        }
+    }
+    return "";
+}
+
+function CheckCookie(cname) {
+    var user = GetCookie(cname);
+    if (user != "") {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+function GetCurrentPage() {
+    var path = window.location.pathname;
+    var page = path.split("/").pop();
+    return page;
+}
+
 $(document).ready(function () {
+
+    debugger;
+    if (CheckCookie("username") == false && GetCurrentPage() != "Login.aspx") {
+        window.location.href = "/" + WebAppName + "/Pages/Login.aspx";
+    }
+
     GetAllElemnts();
 });
 

@@ -28,7 +28,9 @@
                 (
                     function (data) {
                         if (data.d[0] == "1") {
-                            window.location = "../Default.aspx";
+                            debugger;
+                            SetCookie("username", data.d[1], 0, 0, 1);
+                            window.location.href = "/" + WebAppName + "/Default.aspx";
                         }
                         else if (data.d[0] == "0") {
                             ShowError("", data.d[1]);
@@ -81,6 +83,9 @@
         <script type="text/javascript" src='<%= ResolveUrl("~") %>Scripts/toastr.min.js'></script>
         <script type="text/javascript" src='<%= ResolveUrl("~") %>Scripts/script.js'></script>
         <script type="text/javascript" src='<%= ResolveUrl("~") %>Scripts/security.js'></script>
+        <script type="text/javascript" src='<%= ResolveUrl("~") %>Scripts/myToastr.js'></script>
+        <script type="text/javascript" src='<%= ResolveUrl("~") %>Scripts/basicInfo.js'></script>
+
     </div>
 </body>
 </html>

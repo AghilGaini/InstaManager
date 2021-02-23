@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using DataLayer.Models.Generated.InstaManager;
 using Utilities;
 
 namespace WebApp.Classes
@@ -45,14 +44,14 @@ namespace WebApp.Classes
         public Guid? Gref { get; set; }
         public Guid Gid { get; set; }
 
-        public static User CurrentUser
+        public static DataLayer.Models.Generated.AgPanel.User CurrentUser
         {
             get
             {
-                if (HttpContext.Current.Session.IsNull() || HttpContext.Current.Session["USER_ID"].IsNull() )
+                if (HttpContext.Current.Session.IsNull() || HttpContext.Current.Session["USER_ID"].IsNull())
                     return null;
                 var ID = HttpContext.Current.Session["USER_ID"].ToLong();
-                return DataBusiness.FacadeInstaManagerBusiness.GetUserTable().GetByID(ID);
+                return DataBusiness.FacadeAgPanelBusiness.GetUserTable().GetByID(ID);
             }
             set
             {
@@ -65,7 +64,7 @@ namespace WebApp.Classes
 
         protected override void OnPreLoad(EventArgs e)
         {
-            if(NeedLogin && CurrentUser.IsNull())
+            if (NeedLogin && CurrentUser.IsNull())
             {
                 HttpContext.Current.Response.Redirect("~/Pages/Login.aspx");
                 return;
