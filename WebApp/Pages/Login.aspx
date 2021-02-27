@@ -11,7 +11,21 @@
     <link rel="stylesheet" href="~/Styles/style.css" />
     <link rel="stylesheet" href="~/Styles/LoginPanel.css" />
 
+    <script type="text/javascript" src='<%= ResolveUrl("~") %>Scripts/jquery.min.js'></script>
+    <script type="text/javascript" src='<%= ResolveUrl("~") %>Scripts/bootstrap.min.js'></script>
+    <script type="text/javascript" src='<%= ResolveUrl("~") %>Scripts/toastr.min.js'></script>
+    <script type="text/javascript" src='<%= ResolveUrl("~") %>Scripts/script.js'></script>
+    <script type="text/javascript" src='<%= ResolveUrl("~") %>Scripts/security.js'></script>
+    <script type="text/javascript" src='<%= ResolveUrl("~") %>Scripts/myToastr.js'></script>
+    <script type="text/javascript" src='<%= ResolveUrl("~") %>Scripts/basicInfo.js'></script>
+
+
     <script type="text/javascript">
+
+        $(document).ready(function () {
+            SetCookie('username', null, 0, 0, 0);
+        });
+
 
         function CheckLogin() {
             var entity = {};
@@ -29,8 +43,12 @@
                     function (data) {
                         if (data.d[0] == "1") {
                             debugger;
-                            SetCookie("username", data.d[1], 0, 0, 1);
-                            window.location.href = "/" + WebAppName + "/Default.aspx";
+                            SetCookie("username", data.d[1], 0, 0, 15);
+                            var lastPage = GetCookie("lastPath");
+                            if (lastPage != "")
+                                window.location.href = lastPage;
+                            else
+                                window.location.href = "/" + WebAppName + "/Default.aspx";
                         }
                         else if (data.d[0] == "0") {
                             ShowError("", data.d[1]);
@@ -78,14 +96,6 @@
 
     </form>
     <div>
-        <script type="text/javascript" src='<%= ResolveUrl("~") %>Scripts/jquery.min.js'></script>
-        <script type="text/javascript" src='<%= ResolveUrl("~") %>Scripts/bootstrap.min.js'></script>
-        <script type="text/javascript" src='<%= ResolveUrl("~") %>Scripts/toastr.min.js'></script>
-        <script type="text/javascript" src='<%= ResolveUrl("~") %>Scripts/script.js'></script>
-        <script type="text/javascript" src='<%= ResolveUrl("~") %>Scripts/security.js'></script>
-        <script type="text/javascript" src='<%= ResolveUrl("~") %>Scripts/myToastr.js'></script>
-        <script type="text/javascript" src='<%= ResolveUrl("~") %>Scripts/basicInfo.js'></script>
-
     </div>
 </body>
 </html>

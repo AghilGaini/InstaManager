@@ -57,10 +57,12 @@ function GetCurrentPage() {
 
 $(document).ready(function () {
 
-    debugger;
     if (CheckCookie("username") == false && GetCurrentPage() != "Login.aspx") {
         window.location.href = "/" + WebAppName + "/Pages/Login.aspx";
     }
+
+    if (GetCurrentPage() != "Login.aspx")
+        SetCookie("lastPath", window.location.href, 0, 0, 15);
 
     GetAllElemnts();
 });
