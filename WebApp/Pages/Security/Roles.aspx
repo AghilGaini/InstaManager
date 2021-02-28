@@ -6,6 +6,8 @@
 
     <script type="text/javascript">
 
+        SetCurrentPage("نقش ها");
+
         function CreateGrid_Roles(firstTime, url) {
             var columns = [
                 { dataField: "ID", caption: "شناسه" },
@@ -151,7 +153,6 @@
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="script" runat="server">
 
-    
     <script type="text/javascript">
 
         //#region inital Devexpress components 
