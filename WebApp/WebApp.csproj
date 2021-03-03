@@ -93,6 +93,7 @@
     <Content Include="Pages\WebComponent\TextBoxComponent.aspx" />
     <Content Include="Pages\WebComponent\TreeListComponent.aspx" />
     <Content Include="Pages\WebComponent\UploadFile.aspx" />
+    <Content Include="Scripts\basePageScript.js" />
     <Content Include="Scripts\CreateWebComponent.js" />
     <Content Include="Scripts\basicInfo.js" />
     <Content Include="Scripts\bootstrap.min.js" />
