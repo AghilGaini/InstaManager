@@ -13,6 +13,10 @@ function AfterPageLoad() {
         else
             SetCurrentPageTitle(GetCurrentPage().split(".")[0]);
     }
+
+    if ($("#panelName").html() == "") {
+        $("#panelName").html(PanelName);
+    }
 }
 
 window.onload = function () {

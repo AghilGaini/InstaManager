@@ -50,7 +50,9 @@
                 <div class="collapse navbar-collapse" id="myNavbar">
 
                     <ul class="nav navbar-nav navbar-right">
-                        <li><a href='<%= ResolveUrl("~") %>Default.aspx'>مدیریت اینستاگرام</a></li>
+                        <li><a href='<%= ResolveUrl("~") %>Default.aspx'>
+                            <div id="panelName"></div>
+                        </a></li>
                     </ul>
 
                     <ul class="nav navbar-nav navbar-right">
