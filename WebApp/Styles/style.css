@@ -32,13 +32,13 @@ body {
     direction: rtl;
 }
 
-.SearchPanelRows{
-    margin:1%;
+.SearchPanelRows {
+    margin: 1%;
 }
 
-.SearchPanelButtonColumns{
-    direction:rtl;
-    margin-right:1%;
+.SearchPanelButtonColumns {
+    direction: rtl;
+    margin-right: 1%;
 }
 
 .SearchPanelButton {
@@ -58,4 +58,9 @@ body {
     padding: 2% 2%;
     border-radius: 10px;
     direction: rtl;
+}
+
+.PageTitle {
+    font-family: 'Samim', 'Arial Narrow', Arial, sans-serif;
+    padding: 1% 1%;
 }

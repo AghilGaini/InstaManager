@@ -39,7 +39,7 @@ namespace WebApp.Pages
 
                 CurrentUser = UserInfo;
 
-                return new string[2] { "1", UserInfo.ID.ToString() };
+                return new string[2] { "1", UserInfo.UserName.ToString() };
             }
             catch (Exception ex)
             {

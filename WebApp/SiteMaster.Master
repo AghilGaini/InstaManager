@@ -105,8 +105,8 @@
 
         <div class="container">
 
-            <div>
-                <h1 id="currentPage" dir="rtl"></h1>
+            <div class="PageTitle">
+                <h3 id="pageTitle" dir="rtl"></h3>
             </div>
 
             <asp:ContentPlaceHolder ID="body" runat="server">

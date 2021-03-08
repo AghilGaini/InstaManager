@@ -1,13 +1,13 @@
 ﻿//Base Functions
 function SetCurrentPageTitle(page) {
     debugger;
-    $("#currentPage").html(page);
+    $("#pageTitle").html(page);
 }
 
 //---------------------
 
 function AfterPageLoad() {
-    if ($("#currentPage").html() == "") {
+    if ($("#pageTitle").html() == "") {
         if (document.title != "")
             SetCurrentPageTitle(document.title);
         else
@@ -15,7 +15,7 @@ function AfterPageLoad() {
     }
 
     if ($("#panelName").html() == "") {
-        $("#panelName").html(PanelName);
+        $("#panelName").html("(" + GetCookie("username") + ") " + PanelName);
     }
 }
 
@@ -23,6 +23,3 @@ window.onload = function () {
     AfterPageLoad();
 }
 
-$(document).ready(function () {
-
-});

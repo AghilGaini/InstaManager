@@ -66,3 +66,25 @@ This set of Fonts are used in this project under the license: (.....)
 		 url('woff/IRANSansWeb.woff') format('woff'),  /* FF3.6+, IE9, Chrome6+, Saf5.1+*/
 		 url('ttf/IRANSansWeb.ttf') format('truetype');
 }
+
+@font-face {
+	font-family: Samim;
+	font-style: normal;
+	font-weight: normal;
+	src: url('eot/Samim.eot');
+	src: url('eot/Samim.eot?#iefix') format('embedded-opentype'), /* IE6-8 */
+	url('woff2/Samim.woff2') format('woff2'), /* FF39+,Chrome36+, Opera24+*/
+	url('woff/Samim.woff') format('woff'), /* FF3.6+, IE9, Chrome6+, Saf5.1+*/
+	url('ttf/Samim.ttf') format('truetype');
+}
+@font-face {
+	font-family: Samim-Bold;
+	font-style: normal;
+	font-weight: normal;
+	src: url('eot/Samim-Bold.eot');
+	src: url('eot/Samim-Bold.eot?#iefix') format('embedded-opentype'), /* IE6-8 */
+	url('woff2/Samim-Bold.woff2') format('woff2'), /* FF39+,Chrome36+, Opera24+*/
+	url('woff/Samim-Bold.woff') format('woff'), /* FF3.6+, IE9, Chrome6+, Saf5.1+*/
+	url('ttf/Samim-Bold.ttf') format('truetype');
+}
+
