@@ -206,6 +206,30 @@ namespace Utilities
 
             }
         }
+        public static string EncodeToBase64(this string s)
+        {
+            try
+            {
+                var plainTextBytes = System.Text.Encoding.UTF8.GetBytes(s);
+                return System.Convert.ToBase64String(plainTextBytes);
+            }
+            catch
+            {
+                return string.Empty;
+            }
+        }
+        public static string DecodeFromBase64(this string s)
+        {
+            try
+            {
+                var base64EncodedBytes = System.Convert.FromBase64String(s);
+                return System.Text.Encoding.UTF8.GetString(base64EncodedBytes);
+            }
+            catch
+            {
+                return string.Empty;
+            }
+        }
         public static string ToSHA256(this string s)
         {
             using (SHA256 sha256Hash = SHA256.Create())
@@ -220,6 +244,12 @@ namespace Utilities
                 return builder.ToString();
             }
         }
+        public static string ToHMACSHA256(this string s, string key)
+        {
+            HMACSHA256 hmac = new HMACSHA256(System.Text.Encoding.UTF8.GetBytes(key));
+            var res = hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(s));
+            return Convert.ToBase64String(res);
+        }
         public static string ToJson(this object o)
         {
             try
@@ -232,5 +262,34 @@ namespace Utilities
             }
         }
         //ToDO : FromJson
+    }
+    public static class Token
+    {
+        //TODO : read secretKey from database
+        public static string secretKey { get; set; } = "biusbdsdiugkigvidshoiu";
+
+        public static string GenerateToken(this string claim)
+        {
+
+            var payload64 = claim.EncodeToBase64();
+            var hmac64 = (string.Format("{0}.{1}", payload64, secretKey)).ToHMACSHA256(secretKey).EncodeToBase64();
+            var token = string.Format("{0}.{1}", payload64, hmac64);
+            return token;
+        }
+        public static bool IsValidToken(this string token)
+        {
+            var tokenValues = token.Split('.');
+            if (tokenValues.Count() != 2)
+                return false;
+
+            var payload64 = tokenValues[0];
+            var hmac64 = tokenValues[1];
+
+            var computeHMAC = (string.Format("{0}.{1}", payload64, secretKey)).ToHMACSHA256(secretKey).EncodeToBase64();
+            if (computeHMAC == hmac64)
+                return true;
+            else
+                return false;
+        }
     }
 }

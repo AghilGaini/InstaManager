@@ -64,11 +64,11 @@ namespace WebApp.Classes
 
         protected override void OnPreLoad(EventArgs e)
         {
-            if (NeedLogin && CurrentUser.IsNull())
-            {
-                HttpContext.Current.Response.Redirect("~/Pages/Login.aspx");
-                return;
-            }
+            //if (NeedLogin && CurrentUser.IsNull())
+            //{
+            //    HttpContext.Current.Response.Redirect("~/Pages/Login.aspx");
+            //    return;
+            //}
 
             //ToDO : Complete To Check privilege
             //if (NeedLogin && !IsDefault /*&& !Business.FacadeAutomation.GetVwUserPrivilegeRoleBusiness().HasPrivilege(CurrentUser, this.gid)*/)

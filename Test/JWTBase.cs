@@ -9,8 +9,7 @@ using System.Threading.Tasks;
 
 namespace Test
 {
-    //Example Site : https://medium.com/@mmoshikoo/jwt-authentication-using-c-54e0c71f21b0#:~:text=JWT%20is%20JSON%20Web%20Token,it%20is%20issued%20by%20you.
-
+    
     public interface IAuthService
     {
         string SecretKey { get; set; }
@@ -120,5 +119,7 @@ namespace Test
             }
 
         }
+
     }
+
 }

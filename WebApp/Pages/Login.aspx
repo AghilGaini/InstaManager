@@ -23,35 +23,60 @@
     <script type="text/javascript">
 
         $(document).ready(function () {
-            SetCookie('username', null, 0, 0, 0);
+
+            if (GetCookie("userinfo") != "") {
+                debugger;
+                $.ajax({
+                    type: 'POST',
+                    url: BaseApiURL + '/Security/Logout?token=' + GetCookie("userinfo"),
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json"
+                }).then
+                    (
+                        function (data) {
+                            if (data.code == "200") {
+                                SetCookie('username', null, 0, 0, 0);
+                                SetCookie('userinfo', null, 0, 0, 0);
+                            }
+                            else {
+                                ShowError("", data.message);
+                            }
+                        }, function (data) {
+                            ShowError("", "عدم برقراری ارتباط");
+                        }
+                    )
+
+            }
         });
 
 
         function CheckLogin() {
             var entity = {};
-            entity.Username = $("#txtUsername").val();
-            entity.Password = $("#txtPassword").val();
+            entity.username = $("#txtUsername").val();
+            entity.password = $("#txtPassword").val();
             entity = JSON.stringify(entity);
+
             $.ajax({
                 type: 'POST',
-                url: '<%= ResolveUrl("~") %>Pages/Login.aspx/CheckLogin',
-                data: JSON.stringify({ info: entity }),
+                url: BaseApiURL + '/Security/Login',
+                data: entity,
                 contentType: "application/json; charset=utf-8",
                 dataType: "json"
             }).then
                 (
                     function (data) {
-                        if (data.d[0] == "1") {
-                            debugger;
-                            SetCookie("username", data.d[1], 0, 0, 15);
+                        debugger;
+                        if (data.code == "200") {
+                            SetCookie("username", JSON.parse(entity).username, 0, 0, 15);
+                            SetCookie("userinfo", data.payload[0], 0, 0, 15);
                             var lastPage = GetCookie("lastPath");
                             if (lastPage != "")
                                 window.location.href = lastPage;
                             else
                                 window.location.href = "/" + WebAppName + "/Default.aspx";
                         }
-                        else if (data.d[0] == "0") {
-                            ShowError("", data.d[1]);
+                        else {
+                            ShowError("", data.message);
                         }
                     }, function (data) {
                         ShowError("", "عدم برقراری ارتباط");

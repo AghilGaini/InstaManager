@@ -169,6 +169,7 @@
     <Compile Include="Models\GridViewModel.cs" />
     <Compile Include="Models\PrivilegeModel.cs" />
     <Compile Include="Models\RolesModel.cs" />
+    <Compile Include="Models\Security\LoginModel.cs" />
     <Compile Include="Models\Security\RolePrivilegeModel.cs" />
     <Compile Include="Models\Security\RolesModel.cs" />
     <Compile Include="Models\Security\UsersModel.cs" />

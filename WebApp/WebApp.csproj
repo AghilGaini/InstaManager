@@ -286,6 +286,14 @@
     <Content Include="Styles\icons\dxiconsmaterial.ttf" />
     <Content Include="Styles\icons\dxiconsmaterial.woff" />
     <Content Include="Styles\icons\dxiconsmaterial.woff2" />
+    <Content Include="Styles\Fonts\eot\Samim-Bold.eot" />
+    <Content Include="Styles\Fonts\eot\Samim.eot" />
+    <Content Include="Styles\Fonts\ttf\Samim-Bold.ttf" />
+    <Content Include="Styles\Fonts\ttf\Samim.ttf" />
+    <Content Include="Styles\Fonts\woff\Samim-Bold.woff" />
+    <Content Include="Styles\Fonts\woff\Samim.woff" />
+    <Content Include="Styles\Fonts\woff2\Samim-Bold.woff2" />
+    <Content Include="Styles\Fonts\woff2\Samim.woff2" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

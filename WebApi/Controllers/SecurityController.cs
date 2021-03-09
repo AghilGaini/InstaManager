@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Net.Http;
 using System.Net;
 using System.IO;
+using WebApi.Models.Security;
 
 namespace WebApi.Controllers
 {
@@ -215,5 +216,79 @@ namespace WebApi.Controllers
 
         #endregion
 
+        #region Account
+
+        //Generate Token
+        [HttpGet]
+        public IHttpActionResult GenerateToken(string claim)
+        {
+            var Token = claim.GenerateToken();
+
+            var Res = new List<string> { Token };
+
+            return Ok(new
+            {
+                code = 200,
+                message = "success",
+                count = 1,
+                payload = Res
+            });
+
+        }
+
+        //Check Login
+        [HttpPost]
+        public IHttpActionResult Login(LoginModel model)
+        {
+            if (model.password.IsNull() || model.username.IsNull())
+                throw new Exception("EnterRequierdValues");
+
+            var UserInfo = DataBusiness.FacadeAgPanelBusiness.GetUserTable().GetByUsername(model.username);
+            if (UserInfo.IsNull())
+                throw new Exception("UserNotFound");
+
+            if (UserInfo.Password != model.password)
+                throw new Exception("WrongPassword");
+
+            var claim = new { name = model.username, id = UserInfo.ID, issuedat = DateTime.Now }.ToJson();
+
+            var Token = claim.GenerateToken();
+
+            var Res = new List<string> { Token };
+
+            return Ok(new
+            {
+                code = 200,
+                message = "success",
+                count = 1,
+                payload = Res
+            });
+
+        }
+
+        //Logout and Delete token 
+        [HttpPost]
+        public IHttpActionResult Logout(string token)
+        {
+            if (!token.IsValidToken())
+                throw new Exception("Invalid Token sent");
+
+
+
+            //TODO : Delete Token From Database
+
+            var Res = new List<string> { };
+
+            return Ok(new
+            {
+                code = 200,
+                message = "success",
+                count = 1,
+                payload = Res
+            });
+
+        }
+
+        #endregion
     }
 }
