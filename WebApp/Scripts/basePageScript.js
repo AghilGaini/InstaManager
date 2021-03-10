@@ -1,6 +1,5 @@
 ﻿//Base Functions
 function SetCurrentPageTitle(page) {
-    debugger;
     $("#pageTitle").html(page);
 }
 
