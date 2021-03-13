@@ -49,11 +49,11 @@
             }
         });
 
-
         function CheckLogin() {
             var entity = {};
             entity.username = $("#txtUsername").val();
             entity.password = $("#txtPassword").val();
+            entity.info = GetConnectionInfo();
             entity = JSON.stringify(entity);
 
             $.ajax({

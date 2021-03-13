@@ -55,6 +55,26 @@ function GetCurrentPage() {
     return page;
 }
 
+function GetConnectionInfo() {
+    var entity = {};
+    entity.referrer = document.referrer;
+    entity.browserName = navigator.appName;
+    entity.browserEngine = navigator.product;
+    entity.browserVersion1a = navigator.appVersion;
+    entity.browserVersion1b = navigator.userAgent;
+    entity.browserLanguage = navigator.languag;
+    entity.javaEnabled = navigator.javaEnabled();
+    entity.cookieEnabled = navigator.cookieEnabled;
+    entity.screenWidth = screen.width;
+    entity.screenHeight = screen.height;
+    entity.innerHeight = innerHeight;
+    entity.innerWidth = innerWidth;
+
+    entity = JSON.stringify(entity);
+
+    return entity;
+}
+
 $(document).ready(function () {
 
     if (CheckCookie("userinfo") == false && GetCurrentPage() != "Login.aspx") {

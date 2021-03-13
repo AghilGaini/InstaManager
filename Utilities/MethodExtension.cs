@@ -261,7 +261,17 @@ namespace Utilities
                 throw;
             }
         }
-        //ToDO : FromJson
+        public static T FromJson<T>(this object o)
+        {
+            try
+            {
+                return JsonConvert.DeserializeObject<T>(o as string);
+            }
+            catch
+            {
+                throw;
+            }
+        }
     }
     public static class Token
     {
@@ -290,6 +300,24 @@ namespace Utilities
                 return true;
             else
                 return false;
+        }
+        public static TokenParameters TokenValues(this string token)
+        {
+            if (!token.IsValidToken())
+                throw new Exception("Invalid Token");
+
+            var tokenValues = token.Split('.');
+            var Payload64 = tokenValues[0];
+            var payload = (Payload64.DecodeFromBase64()).FromJson<TokenParameters>();
+
+            return payload;
+        }
+
+        public class TokenParameters
+        {
+            public string name { get; set; }
+            public long userid { get; set; }
+            public DateTime issuedate { get; set; }
         }
     }
 }

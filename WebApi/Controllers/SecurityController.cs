@@ -10,6 +10,7 @@ using System.Net.Http;
 using System.Net;
 using System.IO;
 using WebApi.Models.Security;
+using WebApi.Classes;
 
 namespace WebApi.Controllers
 {
@@ -218,24 +219,6 @@ namespace WebApi.Controllers
 
         #region Account
 
-        //Generate Token
-        [HttpGet]
-        public IHttpActionResult GenerateToken(string claim)
-        {
-            var Token = claim.GenerateToken();
-
-            var Res = new List<string> { Token };
-
-            return Ok(new
-            {
-                code = 200,
-                message = "success",
-                count = 1,
-                payload = Res
-            });
-
-        }
-
         //Check Login
         [HttpPost]
         public IHttpActionResult Login(LoginModel model)
@@ -250,11 +233,36 @@ namespace WebApi.Controllers
             if (UserInfo.Password != model.password)
                 throw new Exception("WrongPassword");
 
-            var claim = new { name = model.username, id = UserInfo.ID, issuedat = DateTime.Now }.ToJson();
+            var info = model.info.FromJson<Info>();
+            var NewSession = new DataLayer.Models.Generated.AgPanel.Session()
+            {
+                ActivateOn = DateTime.Now,
+                browserEngine = info.browserEngine,
+                browserLanguage = info.browserLanguage,
+                BrowserName = info.browserName,
+                browserVersion1a = info.browserVersion1a,
+                browserVersion1b = info.browserVersion1b,
+                cookieEnabled = info.cookieEnabled,
+                DeActivateOn = null,
+                javaEnabled = info.javaEnabled,
+                Referrer = info.referrer,
+                screenHeight = info.screenHeight,
+                screenWidth = info.screenWidth,
+                InnerHeight = info.innerHeight,
+                InnerWidth = info.innerWidth,
+                UserID = UserInfo.ID,
+                IsActive = true,
+                IP = BaseFunctions.GetIP()
+            };
 
-            var Token = claim.GenerateToken();
+            var claim = new { name = model.username, userid = UserInfo.ID, issuedate = DateTime.Now }.ToJson();
 
-            var Res = new List<string> { Token };
+            var token = claim.GenerateToken();
+
+            NewSession.Token = token;
+            NewSession.Save();
+
+            var Res = new List<string> { token };
 
             return Ok(new
             {
@@ -273,9 +281,19 @@ namespace WebApi.Controllers
             if (!token.IsValidToken())
                 throw new Exception("Invalid Token sent");
 
+            var tokenValues = token.TokenValues();
 
+            var userInfo = DataBusiness.FacadeAgPanelBusiness.GetUserTable().GetByID(tokenValues.userid);
+            if (userInfo.IsNull())
+                throw new Exception("UserNotFound");
 
-            //TODO : Delete Token From Database
+            var session = DataBusiness.FacadeAgPanelBusiness.GetSessoinTable().GetByUserIDAndToken(userInfo.ID, token);
+            if (session.IsNull())
+                throw new Exception("SessionNotFound");
+
+            session.DeActivateOn = DateTime.Now;
+            session.IsActive = false;
+            session.Save();
 
             var Res = new List<string> { };
 

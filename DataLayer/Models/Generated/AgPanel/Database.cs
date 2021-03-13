@@ -306,6 +306,185 @@ namespace DataLayer.Models.Generated.AgPanel
 
     
 
+	[TableName("[sec].[Session]")]
+
+
+
+	[PrimaryKey("ID")]
+
+
+
+
+	[ExplicitColumns]
+
+    public partial class Session : AgPanelDB.Record<Session>  
+    {
+
+	
+
+		public static class Columns
+		{	
+			
+				public static string ID = @"ID";
+			
+				public static string UserID = @"UserID";
+			
+				public static string Referrer = @"Referrer";
+			
+				public static string BrowserName = @"BrowserName";
+			
+				public static string browserEngine = @"browserEngine";
+			
+				public static string browserVersion1a = @"browserVersion1a";
+			
+				public static string browserVersion1b = @"browserVersion1b";
+			
+				public static string browserLanguage = @"browserLanguage";
+			
+				public static string javaEnabled = @"javaEnabled";
+			
+				public static string cookieEnabled = @"cookieEnabled";
+			
+				public static string screenWidth = @"screenWidth";
+			
+				public static string screenHeight = @"screenHeight";
+			
+				public static string ActivateOn = @"ActivateOn";
+			
+				public static string DeActivateOn = @"DeActivateOn";
+			
+				public static string IP = @"IP";
+			
+				public static string Token = @"Token";
+			
+				public static string IsActive = @"IsActive";
+			
+				public static string InnerHeight = @"InnerHeight";
+			
+				public static string InnerWidth = @"InnerWidth";
+			
+		}
+
+
+
+
+
+		[Column] public long ID { get; set; }
+
+
+
+
+
+		[Column] public long? UserID { get; set; }
+
+
+
+
+
+		[Column] public string Referrer { get; set; }
+
+
+
+
+
+		[Column] public string BrowserName { get; set; }
+
+
+
+
+
+		[Column] public string browserEngine { get; set; }
+
+
+
+
+
+		[Column] public string browserVersion1a { get; set; }
+
+
+
+
+
+		[Column] public string browserVersion1b { get; set; }
+
+
+
+
+
+		[Column] public string browserLanguage { get; set; }
+
+
+
+
+
+		[Column] public bool? javaEnabled { get; set; }
+
+
+
+
+
+		[Column] public bool? cookieEnabled { get; set; }
+
+
+
+
+
+		[Column] public int? screenWidth { get; set; }
+
+
+
+
+
+		[Column] public int? screenHeight { get; set; }
+
+
+
+
+
+		[Column] public DateTime? ActivateOn { get; set; }
+
+
+
+
+
+		[Column] public DateTime? DeActivateOn { get; set; }
+
+
+
+
+
+		[Column] public string IP { get; set; }
+
+
+
+
+
+		[Column] public string Token { get; set; }
+
+
+
+
+
+		[Column] public bool? IsActive { get; set; }
+
+
+
+
+
+		[Column] public int? InnerHeight { get; set; }
+
+
+
+
+
+		[Column] public int? InnerWidth { get; set; }
+
+
+
+	}
+
+    
+
 	[TableName("[sec].[User]")]
 
 
@@ -488,6 +667,69 @@ namespace DataLayer.Models.Generated.AgPanel
 
 
 		[Column] public string PrivilegeFaTitle { get; set; }
+
+
+
+	}
+
+    
+
+	[TableName("[sec].[VwUserRolePrivilege]")]
+
+
+
+
+	[ExplicitColumns]
+
+    public partial class VwUserRolePrivilege : AgPanelDB.Record<VwUserRolePrivilege>  
+    {
+
+	
+
+		public static class Columns
+		{	
+			
+				public static string RoleID = @"RoleID";
+			
+				public static string PrivilegeID = @"PrivilegeID";
+			
+				public static string Gref = @"Gref";
+			
+				public static string Gid = @"Gid";
+			
+				public static string UserID = @"UserID";
+			
+		}
+
+
+
+
+
+		[Column] public long RoleID { get; set; }
+
+
+
+
+
+		[Column] public long PrivilegeID { get; set; }
+
+
+
+
+
+		[Column] public string Gref { get; set; }
+
+
+
+
+
+		[Column] public string Gid { get; set; }
+
+
+
+
+
+		[Column] public long UserID { get; set; }
 
 
 

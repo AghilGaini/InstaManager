@@ -50,6 +50,11 @@ namespace DataBusiness
             return new AgPanel.Sec.Tables.UserRoleTable();
         }
 
+        public static DataBusiness.AgPanel.Sec.Tables.SessoinTable GetSessoinTable()
+        {
+            return new AgPanel.Sec.Tables.SessoinTable();
+        }
+
         #endregion
 
         #region Views

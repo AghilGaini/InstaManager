@@ -44,6 +44,7 @@
     <Compile Include="AgPanel\Sec\Tables\PrivilegeTable.cs" />
     <Compile Include="AgPanel\Sec\Tables\RolePrivilegeTable.cs" />
     <Compile Include="AgPanel\Sec\Tables\RoleTable.cs" />
+    <Compile Include="AgPanel\Sec\Tables\SessoinTable.cs" />
     <Compile Include="AgPanel\Sec\Tables\UserRoleTable.cs" />
     <Compile Include="AgPanel\Sec\Tables\UserTable.cs" />
     <Compile Include="AgPanel\Sec\Views\RolePrivilegeView.cs" />
