@@ -65,7 +65,6 @@
             }).then
                 (
                     function (data) {
-                        debugger;
                         if (data.code == "200") {
                             SetCookie("username", JSON.parse(entity).username, 0, 0, 15);
                             SetCookie("userinfo", data.payload[0], 0, 0, 15);

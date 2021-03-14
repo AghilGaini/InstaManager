@@ -75,6 +75,7 @@ function GetConnectionInfo() {
     return entity;
 }
 
+
 $(document).ready(function () {
 
     if (CheckCookie("userinfo") == false && GetCurrentPage() != "Login.aspx") {
